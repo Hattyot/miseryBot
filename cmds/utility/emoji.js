@@ -19,6 +19,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "emoji",
+    cat: "Utility",
     description: "Get the image of an emoji",
     usage: `emoji [emoji]`,
     examples: [`emoji :owo:`]
@@ -26,7 +27,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Utility"
+    aliases: []
   };

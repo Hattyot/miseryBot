@@ -71,6 +71,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "makeEmbed",
+    cat: "Dev",
+    description: "Send new embed in <#524064741543641108>",
+    usage: "makeEmbed [option]",
+    examples: ["makeEmbed roles1"]
 };
 
 module.exports.conf = {

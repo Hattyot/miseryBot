@@ -30,6 +30,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "roleinfo",
+    cat: "Info",
     description: "Get info about a role",
     usage: `roleinfo [role]`,
     examples: [`roleinfo Muted`, `roleinfo 469146366078222337`]
@@ -37,7 +38,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Info"
+    aliases: []
 };

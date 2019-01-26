@@ -20,8 +20,6 @@ module.exports.run = async (bot, message, args) => {
                     "third": `${guild.channels.get(data[data.length - 3].channel_ID).name} - ${data[data.length - 3].messageAmount} messages` //last - 2
                 };
                 let total = _.reduce(data, (memo, reading) => {return memo + reading.messageAmount;}, 0);
-                let id = data2[data2.length - 1].channel_ID
-                console.log(id, guild.channels.get(`${id}`))
                 let mostActiveVC = `${guild.channels.get(data2[0].channel_ID).name} - ${ms(data2[0].timeSpent)}`;
                 let leastActiveVC =  `${guild.channels.get(data2[data2.length - 1].channel_ID).name} - ${ms(data2[data2.length - 1].timeSpent)}`;
                 let totalVC = _.reduce(data2, (memo, reading) => {return memo + reading.timeSpent;}, 0);
@@ -45,6 +43,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "requestdata",
+    cat: "Dev",
+    description: "Request data report",
+    usage: "requestdata",
+    examples: ["requestdata"]
 };
 
 module.exports.conf = {

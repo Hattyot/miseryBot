@@ -8,6 +8,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "avatar",
+    cat: "Utility",
     description: "Get the avatar of a user",
     usage: `avatar (user)`,
     examples: [`avatar`, `avatar @Hattyot`]
@@ -16,6 +17,4 @@ module.exports.help = {
 module.exports.conf = {
     enabled: true,
     aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Utility"
   };

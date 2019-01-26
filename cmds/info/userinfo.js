@@ -57,6 +57,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "userinfo",
+    cat: "Info",
     description: "Get userinfo about yourself or another user",
     usage: `userinfo (user)`,
     examples: [`userinfo`, `userinfo @Hattyot`]
@@ -64,7 +65,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Info"
-  };
+    aliases: []
+};

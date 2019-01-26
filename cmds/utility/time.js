@@ -14,10 +14,13 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "time",
+    cat: "Utility",
+    description: "Get the current time of any place on earth",
+    usage: "time [location]",
+    examples: ["time New York"]
 };
 
 module.exports.conf = {
     enabled: true,
     aliases: [],
-    cat: "Utility"
 };

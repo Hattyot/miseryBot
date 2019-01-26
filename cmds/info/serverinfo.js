@@ -44,6 +44,7 @@ module.exports.run = async (bot, message) => {
 
 module.exports.help = {
     name: "serverinfo",
+    cat: "Info",
     description: "Get info about the server",
     usage: `serverinfo`,
     examples: [`serverinfo`]
@@ -51,7 +52,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Info"
+    aliases: []
 };

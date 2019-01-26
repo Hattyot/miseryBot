@@ -86,6 +86,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "editEmbed",
+    cat: "Dev",
+    description: "Edit embeds in <#524064741543641108>",
+    usage: "editEmbed [option]",
+    examples: ["editEmbed rules"]
 };
 
 module.exports.conf = {

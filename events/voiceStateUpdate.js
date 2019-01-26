@@ -9,20 +9,24 @@ module.exports = async (bot, oldMember, newMember) => {
                 connectDate: Date.now()
             });
             newVoiceChannelConnected.save()
-                .then(r => console.log(r))
                 .catch(e => console.log(e))
+
         }else {
             voiceChannelConnected.find({user_ID: newMember.id}, (err, data) => {
                 if(data.length > 0) {
                     let currentDate = Date.now();
-                    let connectDate = Math.floor(data[0].connectDate);
-                    let timeSpent = currentDate - connectDate;
-                    console.log(data);
+                    let connectDate = data[0].connectDate;
+                    let timeSpentInVC = currentDate - connectDate;
 
-                    voiceChannelData.findOneAndUpdate({"channel_ID": `${oldMember.voiceChannelID}`}, {$inc:{timeSpent: timeSpent}})
+                    voiceChannelData.findOneAndUpdate({"channel_ID": oldMember.voiceChannelID}, {$inc: {timeSpent: timeSpentInVC}}, {new:true}, (err) => {
+                        if(err) console.log(err)
+                        voiceChannelConnected.deleteMany( { user_ID: oldMember.id }, (err) => {
+                            if(err) console.log(err)
+                        })
+                    })
                 }
             });
-            voiceChannelConnected.findOneAndDelete({user_ID: newMember.id})
+
         }
     }
 };

@@ -14,6 +14,7 @@ module.exports.run = async (bot, message) => {
 
 module.exports.help = {
     name: "randomcolor",
+    cat: "Utility",
     description: "Get a random hex color",
     usage: `randomcolor`,
     examples: [`randomcolor`]
@@ -22,6 +23,4 @@ module.exports.help = {
   module.exports.conf = {
     enabled: true,
     aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Utility"
   };

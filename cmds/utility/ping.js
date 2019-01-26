@@ -5,6 +5,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "ping",
+    cat: "Utility",
     description: "Pings the bot",
     usage: `ping`,
     examples: [`ping`]
@@ -13,6 +14,4 @@ module.exports.help = {
 module.exports.conf = {
     enabled: true,
     aliases: [],
-    cooldown: "3 Seconds",
-    cat: "Utility"
   };

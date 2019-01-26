@@ -25,7 +25,10 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "magik",
-    category: "Fun"
+    cat: "Fun",
+    description: "Give some magik to an image",
+    usage: "magik [url]",
+    examples: ["magik https://i.imgur.com/ohDKCIO.jpg", "magik @Hattyot"]
 };
 
 module.exports.conf = {
