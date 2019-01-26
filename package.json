@@ -1,0 +1,20 @@
+{
+  "name": "misery-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hatty",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "jimp": "^0.6.0",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.6",
+    "relevant-urban": "^2.0.0",
+    "request": "^2.88.0",
+    "underscore-node": "^0.1.2"
+  }
+}
