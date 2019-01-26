@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 bot.commands = new Discord.Collection();
 bot.config = require("./data/data.json");
 bot.icons = {};
+bot.vcConnected = {};
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect("mongodb://0I1n83q42L:tdAF9o68x1x8@ds213255.mlab.com:13255/heroku_6ml2f2jr", {
     useNewUrlParser: true
 });
 
@@ -44,6 +45,6 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-bot.login(process.env.BOT_TOKEN);
+bot.login("NTEwNDMyODAxODg4MjcyMzg3.Dy4OVg.dJlo4x4P-_XKkHbMZpleG7EORyQ");
 
 module.exports = bot;

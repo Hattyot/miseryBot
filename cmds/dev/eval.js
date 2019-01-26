@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args) => {
-    if(message.author.id !== bot.config.ownerId) return
+    if(message.author.id !== "436228721033216009") return
     try {
         const code = args.join(" ")
         let evaled = eval(code)

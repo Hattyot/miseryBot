@@ -13,9 +13,7 @@ module.exports = async (bot, message) => {
             cmd.run(bot, message, args);
         }
     }
-
-    //Data Collection
-
+    
     channelData.findOneAndUpdate({"channel_ID": `${message.channel.id}`}, {$inc:{messageAmount: 1}}, {new: true}, (err, data) => {
         if(err) console.log(err);
         console.log(data);
