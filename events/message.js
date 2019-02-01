@@ -1,5 +1,6 @@
 const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
+const embedMaker = require("../modules/embed.js");
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") return;
     if(message.author.bot) return;
@@ -64,12 +65,26 @@ module.exports = async (bot, message) => {
 
             function levelUpCheck(totalXPNextLevel, newXP) {
                 if(totalXPNextLevel <= newXP) {
-                    level.findOneAndUpdate({user_ID: message.author.id, guild_ID: message.guild.id}, {$inc: {level: 1}}, (err, data) => {
+                    level.findOneAndUpdate({user_ID: message.author.id, guild_ID: message.guild.id}, {$inc: {level: 1}}, {new: true}, (err, data) => {
                         if(err) return console.log(err)
+                        let currentLevel = data.level
+                        let rewardText = `<@${message.author.id}> You've leveled up to Level **${currentLevel + 1}!**`
+                        let levelChannel = message.guild.channels.get(bot.config[message.guild.id].lvlChannel)
+                        if(bot.config[message.guild.id].levelRoles[currentLevel]) {
+                            rewardText += ` And you have been given the <@&${roleReward.roleID}> role`
+                            message.member.addRole(roleReward.roleID)
+                            let embed = embedMaker.embed(message, rewardText)
+
+                            if(levelChannel) {
+                                return levelChannel.send(embed)
+                            }else {
+                                return message.channel.send(embed)
+                            }
+
+                        }
                     });
                 }
             }
-
 
         })
     }
