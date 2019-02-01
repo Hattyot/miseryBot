@@ -1,4 +1,5 @@
 const level = require("../../modules/data.js").level
+const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
 const RC = require('reaction-core')
 const handler = new RC.Handler()
