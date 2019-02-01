@@ -14,8 +14,8 @@ module.exports.run = async (bot, message, args) => {
                 pageNum++
                 leaderboard[pageNum] = []
             }
-            let user = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
-            leaderboard[pageNum].push(`**#${i + 1}** - ${user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
+            let member = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
+            leaderboard[pageNum].push(`**#${i + 1}** - ${member.user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
         }
         let menu = embedMaker.embed(message, leaderboard[userPageNum].join("\n"), {author: "Leaderboard", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum}`})
         let menuButtons = [
