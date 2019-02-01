@@ -14,6 +14,7 @@
     "jimp": "^0.6.0",
     "moment": "^2.23.0",
     "mongoose": "^5.4.6",
+    "reaction-core": "^2.2.0",
     "relevant-urban": "^2.0.0",
     "request": "^2.88.0",
     "underscore-node": "^0.1.2"
