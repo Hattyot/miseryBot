@@ -7,6 +7,13 @@ levelSchema = mongoose.Schema({
     level: Number
 });
 
+moneySchema = mongoose.Schema({
+    user_ID: String,
+    onHand: Number,
+    inBank: Number
+});
+
 module.exports = {
-    level: mongoose.model("level", levelSchema)
+    level: mongoose.model("level", levelSchema),
+    money: mongoose.model("money", moneySchema),
 };
