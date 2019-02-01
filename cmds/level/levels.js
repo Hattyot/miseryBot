@@ -28,8 +28,8 @@ module.exports.run = async (bot, message, args) => {
                         pageNum++
                         leaderboard[pageNum] = []
                     }
-                    let user = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
-                    leaderboard[pageNum].push(`**#${i + 1}** - ${user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
+                    let member = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
+                    leaderboard[pageNum].push(`**#${i + 1}** - ${member.user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
                 }
                 return {
                     leaderboard: leaderboard,
@@ -67,7 +67,7 @@ module.exports.run = async (bot, message, args) => {
                 },
             ]
             let leaderBoardMenu = new RC.Menu(menu, menuButtons)
-            handler.addMenus(auctionHouseMenu)
+            handler.addMenus(leaderBoardMenu)
         }))
     })
     bot.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user))
