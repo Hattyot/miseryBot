@@ -12,7 +12,8 @@ module.exports.run = async (bot, message, args) => {
                 pageNum++
                 leaderboard[pageNum] = []
             }
-            leaderboard[pageNum].push(`**#${i + 1}** - <@${data[i].user_ID}> - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
+            let user = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
+            leaderboard[pageNum].push(`**#${i + 1}** - ${user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
         }
         embedMaker.message(message, leaderboard[userPageNum].join("\n"), {author: "Leaderboard", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum}`})
     })
