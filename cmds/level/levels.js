@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
         let pageNum = 1
         let leaderboard = {}
         leaderboard[pageNum] = []
-        for(let i = 0; i < rows.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             if(i === perPage * pageNum) {
                 pageNum++
                 leaderboard[pageNum] = []
