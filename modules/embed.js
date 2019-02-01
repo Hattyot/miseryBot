@@ -19,7 +19,6 @@ module.exports = {
             } else {
                 embed.setAuthor(options.author)
             }
-
         }
         if (options.edit) {
             message.edit(embed).then(m => {
@@ -50,6 +49,16 @@ module.exports = {
 
         if (options.thumbnail) embed.setThumbnail(options.thumbnail);
         if (options.color) embed.setColor(options.color);
+        if (options.title) embed.setTitle(options.title);
+        if (options.footer) embed.setFooter(options.footer);
+        if (options.author) {
+            if (options.aIcon) {
+                embed.setAuthor(options.author, options.aIcon)
+            } else {
+                embed.setAuthor(options.author)
+            }
+        }
+        if (option
         return embed
     },
     command: (message, param) => {
