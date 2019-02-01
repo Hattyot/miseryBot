@@ -8,8 +8,8 @@ module.exports.run = async (bot, message, args) => {
 
     if(amount.toLowerCase() === "all") {
         money.findOne({user_ID: message.author.id}, (err, data) => {
-            let bank = data.inBank;
-            money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: bank}, $set: {onHand: 0}}, (err, data) => {
+            let hand = data.onHand;
+            money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: hand}, $set: {onHand: 0}}, (err, data) => {
                 if(err) return console.log(err)
             });
             return embedMaker.message(message, `Deposited **${currency}${hand}**`)
@@ -26,11 +26,11 @@ module.exports.run = async (bot, message, args) => {
             }else if(handToBank < 0) {
                 return embedMaker.message(message, `You can't deposit negative money...`)
             }else {
-                money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: -bankToHand, inBank: bankToHand}}, (err, data) => {
+                money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: -handToBank, inBank: handToBank}}, (err, data) => {
                     if(err) return console.log(err)
                 });
 
-                return embedMaker.message(message, `Deposited **${currency}${bankToHand}**`)
+                return embedMaker.message(message, `Deposited **${currency}${handToBank}**`)
             }
         })
     }
