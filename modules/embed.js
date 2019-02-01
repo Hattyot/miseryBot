@@ -58,7 +58,6 @@ module.exports = {
                 embed.setAuthor(options.author)
             }
         }
-        if (option
         return embed
     },
     command: (message, param) => {
