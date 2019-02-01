@@ -70,9 +70,10 @@ module.exports = async (bot, message) => {
                         let currentLevel = data.level
                         let rewardText = `<@${message.author.id}> You've leveled up to Level **${currentLevel + 1}!**`
                         let levelChannel = message.guild.channels.get(bot.config[message.guild.id].lvlChannel)
+                        let roleID = bot.config[message.guild.id].levelRoles[currentLevel]
                         if(bot.config[message.guild.id].levelRoles[currentLevel]) {
-                            rewardText += ` And you have been given the <@&${roleReward.roleID}> role`
-                            message.member.addRole(roleReward.roleID)
+                            rewardText += ` And you have been given the <@&${roleID}> role`
+                            message.member.addRole(roleID)
                             let embed = embedMaker.embed(message, rewardText)
 
                             if(levelChannel) {
