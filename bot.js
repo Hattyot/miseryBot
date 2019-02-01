@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 bot.commands = new Discord.Collection();
 bot.config = require("./data/data.json");
 bot.icons = {};
-bot.vcConnected = {};
+bot.blackjackLimiter = {};
+bot.cooldownTimes = {};
 
 mongoose.connect("mongodb://0I1n83q42L:tdAF9o68x1x8@ds213255.mlab.com:13255/heroku_6ml2f2jr", {
     useNewUrlParser: true
