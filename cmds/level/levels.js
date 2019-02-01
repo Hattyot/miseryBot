@@ -19,19 +19,6 @@ module.exports.run = async (bot, message, args) => {
         }
         let menu = embedMaker.embed(message, leaderboard[userPageNum].join("\n"), {author: "Leaderboard", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum}`})
         let menuButtons = [
-
-            {
-                emoji: '➡',
-                run: (user, _m) => {
-                    if(user.id !== message.author.id) return
-                    let embed = _m.embeds[0]
-                    let newPageNum = Math.round(embed.footer.text.match(/ \d/)[0]) + 1
-                    let newEmbed = new Discord.RichEmbed(embed)
-                        .setFooter(`Page ${newPageNum}/${pageNum}`)
-                        .setDescription(leaderboard[newPageNum])
-                    return _m.edit(newEmbed)
-                }
-            },
             {
                 emoji: '⬅',
                 run: (user, _m) => {
@@ -45,6 +32,18 @@ module.exports.run = async (bot, message, args) => {
                     return _m.edit(newEmbed)
                 }
             },
+            {
+                emoji: '➡',
+                run: (user, _m) => {
+                    if(user.id !== message.author.id) return
+                    let embed = _m.embeds[0]
+                    let newPageNum = Math.round(embed.footer.text.match(/ \d/)[0]) + 1
+                    let newEmbed = new Discord.RichEmbed(embed)
+                        .setFooter(`Page ${newPageNum}/${pageNum}`)
+                        .setDescription(leaderboard[newPageNum])
+                    return _m.edit(newEmbed)
+                }
+            }
         ]
         let leaderBoardMenu = new RC.Menu(menu, menuButtons)
         handler.addMenus(leaderBoardMenu)
