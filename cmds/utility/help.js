@@ -37,9 +37,12 @@ module.exports.run = async (bot, message, args) => {
             .setColor(bot.config.embedColor);
 
         for(j = 0; j < categories.length; j++) {
-            if(categories[j] === "Dev") continue
-            let cmds = commands.filter(c => c.help.cat === categories[j])
-            let cmdNames = cmds.map(c => `\`${c.help.name}\``)
+            if(categories[j] === "Dev") continue;
+            if(message.guild.id !== "540846100332937240") {
+                if(categories[j].substring(0, 4) === "KKK ") continue
+            }
+            let cmds = commands.filter(c => c.help.cat === categories[j]);
+            let cmdNames = cmds.map(c => `\`${c.help.name}\``);
             helpEmbed.addField(`>${categories[j]}`, cmdNames.join(" **|** "))
         }
         message.channel.send(helpEmbed)

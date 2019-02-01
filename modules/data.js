@@ -1,22 +1,12 @@
 const mongoose = require("mongoose");
 
-channelDataSchema = mongoose.Schema({
-    channel_ID: String,
-    messageAmount: Number
-});
-
-voiceChannelDataSchema = mongoose.Schema({
-    channel_ID: String,
-    timeSpent: Number
-});
-
-voiceChannelConnectedSchema = mongoose.Schema({
+levelSchema = mongoose.Schema({
+    guild_ID: String,
     user_ID: String,
-    connectDate: Number
+    xp: Number,
+    level: Number
 });
 
 module.exports = {
-    channelData: mongoose.model("channelData", channelDataSchema),
-    voiceChannelData: mongoose.model("voiceChannelData", voiceChannelDataSchema),
-    voiceChannelConnected: mongoose.model("voiceChannelConnected", voiceChannelConnectedSchema)
+    level: mongoose.model("level", levelSchema)
 };
