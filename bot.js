@@ -4,6 +4,7 @@ const bot = new Discord.Client({disableEveryone: true});
 const mongoose = require("mongoose");
 
 bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection()
 bot.config = require("./data/data.json");
 bot.icons = {};
 bot.blackjackLimiter = {};
