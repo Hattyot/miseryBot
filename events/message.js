@@ -7,10 +7,10 @@ module.exports = async (bot, message) => {
     let messageArray = message.content.split(" ");
     let command = messageArray[0];
     let args = messageArray.slice(1);
-    let cmd = bot.commands.get(command.slice(bot.config.prefix.length));
+    let cmd = bot.commands.get(command.slice(bot.config[message.guild.id].prefix.length));
 
     if(cmd) {
-        if(message.content.startsWith(bot.config.prefix)) {
+        if(message.content.startsWith(bot.config[message.guild.id].prefix)) {
             cmd.run(bot, message, args);
         }
     }

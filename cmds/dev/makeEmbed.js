@@ -55,7 +55,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor("#9B59B6");
         message.channel.send(newEmbed);
     }
-    if(message.author.id === bot.config.ownerID) {
+    if(message.author.id === bot.config[message.guild.id].ownerID) {
         if(args[0] === "rules") {
             rules()
         }else if(args[0] === "info") {

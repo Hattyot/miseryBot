@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
         let json = JSON.parse(body);
     
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setImage(json.message);
         message.channel.send(embed)
     })

@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args) => {
                     .addField("Total time spent in voice channels", `${ms(totalVC, {long: true})}`, false)
                     .addField("Most Used Voice Channel", `1. ${mostActiveVC}`, true)
                     .addField("Least Used Voice Channel", `1. ${leastActiveVC}`, true)
-                    .setColor(bot.config.embedColor)
+                    .setColor(bot.config[message.guild.id].embedColor)
                     .setFooter("Will probably include more data later or just scrap it");
                 message.channel.send(embed)
             }).sort({timeSpent: -1});

@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
     if(!member) member = message.member;
 
     money.findOne({user_ID: member.user.id}, (err, data) => {
-        let currency = bot.config.currency;
+        let currency = bot.config[message.guild.id].currency;
         let hand = data.onHand;
         let bank = data.inBank;
         let total = hand + bank;
@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             .addField("On Hand", `${currency}${hand}`, true)
             .addField("In Bank", `${currency}${bank}`, true)
             .addField("Total", `${currency}${total}`, true)
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setTimestamp();
         message.channel.send(embed)
     });

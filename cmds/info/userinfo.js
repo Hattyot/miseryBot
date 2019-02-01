@@ -49,7 +49,7 @@ module.exports.run = async (bot, message, args) => {
         .addField("Registered", `${registered}`)
         .addField(`Roles [${parseInt(rolenum)}]`, `${roles}`)
         .addField(`Permissions`, `${perms.join(", ") || "None"}`)
-        .setColor(bot.config.embedColor)
+        .setColor(bot.config[message.guild.id].embedColor)
         .setTimestamp()
         .setFooter(`ID: ${user.id}`);
     return message.channel.send(embed)

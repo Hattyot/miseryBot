@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message);
 
     let amount = args[0];
-    let currency = bot.config.currency;
+    let currency = bot.config[message.guild.id].currency;
 
     if(amount.toLowerCase() === "all") {
         money.findOne({user_ID: message.author.id}, (err, data) => {

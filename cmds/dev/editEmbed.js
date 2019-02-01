@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
             message.edit(newEmbed);
         })
     }
-    if(message.author.id === bot.config.ownerID) {
+    if(message.author.id === bot.config[message.guild.id].ownerID) {
         if(args[0] === "rules") {
             rules()
         }else if(args[0] === "info") {

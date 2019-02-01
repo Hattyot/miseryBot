@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message)
 
     let bet = Math.floor(args[0])
-    let currency = bot.config.currency
+    let currency = bot.config[message.guild.id].currency
 
     if(!bet) return embedMaker.command(message, "[bet]")
     if(bet < 50) return embedMaker.message(message, `:x: Bet can't be smaller that ${currency}50`)
@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
                 .setDescription("type `hit` or `stand`")
                 .addField("Your Hand", "** **", true)
                 .addField("Dealer's Hand", "** **", true)
-                .setColor(bot.config.embedColor)
+                .setColor(bot.config[message.guild.id].embedColor)
             message.channel.send(embed).then(_message => {
                 let blackjackID = _message.id
                 let blackjackAuthorID = message.author.id
@@ -96,7 +96,7 @@ module.exports.run = async (bot, message, args) => {
                             .setDescription(`${result} ${money}`)
                             .addField("Your Hand", `${oldEmbed.fields[0].value}`, true)
                             .addField("Dealer's Hand", `${oldEmbed.fields[1].value}`, true)
-                            .setColor(bot.config.embedColor)
+                            .setColor(bot.config[message.guild.id].embedColor)
                         return _message.edit(embed)
                     })
                 }
@@ -120,7 +120,7 @@ module.exports.run = async (bot, message, args) => {
                                 .setDescription("type `hit` or `stand`"+double)
                                 .addField("Your Hand", `${handString.join(" ")}\n\nValue: ${calculateTotal(hand)}`, true)
                                 .addField("Dealer's Hand", `${oldEmbed.fields[1].value}`, true)
-                                .setColor(bot.config.embedColor)
+                                .setColor(bot.config[message.guild.id].embedColor)
                             _message.edit(embed).then(_message => {
                                 callback(_message)
                             })
@@ -131,7 +131,7 @@ module.exports.run = async (bot, message, args) => {
                                 .setDescription("type `hit` or `stand`"+double)
                                 .addField("Your Hand", `${oldEmbed.fields[0].value}`, true)
                                 .addField("Dealer's Hand", `${handString.join(" ")}\n\nValue: ${calculateTotal(hand)}`, true)
-                                .setColor(bot.config.embedColor)
+                                .setColor(bot.config[message.guild.id].embedColor)
                             _message.edit(embed).then(_message => {
                                 callback(_message)
                             })

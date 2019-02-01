@@ -1,7 +1,15 @@
 {
-	"prefix": "%",
-	"ownerID": "%",
-	"embedColor": "#9B59B6",
-	"ownerID": "436228721033216009",
-	"currency": "$"
+	"522979850651435008": {
+		"prefix": "%",
+		"embedColor": "#9B59B6",
+		"ownerID": "436228721033216009",
+		"currency": "$"
+	},
+	"540846100332937240": {
+		"prefix": "%",
+		"embedColor": "#9B59B6",
+		"ownerID": "436228721033216009",
+		"currency": "$"
+	}
+
 }

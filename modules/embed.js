@@ -4,7 +4,7 @@ module.exports = {
     message: (message, text, options, callback) => {
         options = options || {};
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(`${text}`)
             .setTimestamp();
@@ -34,7 +34,7 @@ module.exports = {
     },
     image: (message, link) => {
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setImage(link)
             .setTimestamp()
             .setFooter(`${message.author.tag}`, message.author.displayAvatarURL);
@@ -43,7 +43,7 @@ module.exports = {
     embed: (message, text, options) => {
         options = options || {};
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(`${text}`)
             .setTimestamp();
@@ -54,36 +54,36 @@ module.exports = {
     },
     command: (message, param) => {
         let messageArray = message.content.split(" ");
-        let commandName = messageArray[0].slice(bot.config.prefix.length);
+        let commandName = messageArray[0].slice(bot.config[message.guild.id].prefix.length);
         let command = bot.commands.get(commandName);
         let name = command.help.name;
         let description = command.help.description;
         let usage = command.help.usage;
-        let examples = command.help.examples.join(`\n${bot.config.prefix}    `);
+        let examples = command.help.examples.join(`\n${bot.config[message.guild.id].prefix}    `);
         let exampleText;
         command.help.examples.length > 0 ?  exampleText = "Examples" : exampleText = "Example";
 
         if (param) {
             if (param.startsWith("[" || "(") && param.endsWith("]" || ")")) {
                 let embed = new Discord.RichEmbed()
-                    .setColor(bot.config.embedColor)
+                    .setColor(bot.config[message.guild.id].embedColor)
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
-                    .setDescription(`Invalid ${param} argument given.\n\n**Usage:**\n    ${bot.config.prefix}${command.help.usage}`);
+                    .setDescription(`Invalid ${param} argument given.\n\n**Usage:**\n    ${bot.config[message.guild.id].prefix}${command.help.usage}`);
                 message.channel.send(embed)
             } else {
                 let embed = new Discord.RichEmbed()
-                    .setColor(bot.config.embedColor)
+                    .setColor(bot.config[message.guild.id].embedColor)
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
-                    .setTitle(`Command: ${bot.config.prefix}${name}`)
-                    .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config.prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}\n\n${param}`);
+                    .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
+                    .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}\n\n${param}`);
                 message.channel.send(embed)
             }
         } else {
             let embed = new Discord.RichEmbed()
-                .setColor(bot.config.embedColor)
+                .setColor(bot.config[message.guild.id].embedColor)
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
-                .setTitle(`Command: ${bot.config.prefix}${name}`)
-                .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config.prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}`);
+                .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
+                .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}`);
             message.channel.send(embed)
         }
     },

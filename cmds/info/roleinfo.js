@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     } else {
         let role = message.guild.roles.filter(role => role.name.toLowerCase() === roleName).first() || message.guild.roles.get(args[0]) || message.guild.roles.filter(role => role.name.toLowerCase().indexOf(roleName) != -1).first()
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config.embedColor)
+            .setColor(bot.config[message.guild.id].embedColor)
             .setAuthor(role.name, bot.icons[message.guild.id])
             .addField("Name:", `<@&${role.id}>`, true)
             .addField("ID:", role.id, true)
