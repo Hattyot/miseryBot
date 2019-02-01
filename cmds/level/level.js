@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
     if(!member) member = message.member
 
     level.findOne({guild_ID: message.guild.id, user_ID: member.user.id}, (err, data) => {
-        level.findOne({guild_ID: message.guild.id}, (err, data2) => {
+        level.find({guild_ID: message.guild.id}, (err, data2) => {
             if(err) return console.log(err)
             let rank = `#${Math.floor(data2.findIndex(data => data.user_ID === member.user.id)) + 1}`;
             let currentTotalXP = data.xp
