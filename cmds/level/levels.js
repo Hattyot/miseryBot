@@ -56,7 +56,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "levels",
-    cat: "Level",
+    cat: "KKK Level",
     description: "Shows the level leaderboard",
     usage: `levels (page number)`,
     examples: [`levels`, `levels 2`]
