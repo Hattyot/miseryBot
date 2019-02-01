@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
             money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: bank}, $set: {inBank: 0}}, (err, data) => {
                 if(err) return console.log(err)
             });
-            return embedMaker.message(message, `Withdrew **${currency}${hand}**`)
+            return embedMaker.message(message, `Withdrew **${currency}${bank}**`)
         })
     }else if(Math.round(amount)) {
         let bankToHand = Math.round(amount);
