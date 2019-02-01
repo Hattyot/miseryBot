@@ -9,7 +9,7 @@ bot.icons = {};
 bot.blackjackLimiter = {};
 bot.cooldownTimes = {};
 
-mongoose.connect("mongodb://0I1n83q42L:tdAF9o68x1x8@ds213255.mlab.com:13255/heroku_6ml2f2jr", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
 });
 
@@ -46,6 +46,6 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-bot.login("NTEwNDMyODAxODg4MjcyMzg3.Dy4OVg.dJlo4x4P-_XKkHbMZpleG7EORyQ");
+bot.login(process.env.BOT_TOKEN);
 
 module.exports = bot;
