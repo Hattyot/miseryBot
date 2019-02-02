@@ -1,8 +1,8 @@
 const { decks } = require('cards');
 let blackjack = class Blackjack {
     constructor() {
-        this.deck = new decks.StandardDeck({jokers: 0}).shuffleAll();
-        console.log(this.deck)
+        deck = new decks.StandardDeck({jokers: 0}).shuffleAll();
+        console.log(deck)
         this.playerHand = deck.draw()
         this.dealerHand = deck.draw();
     }
