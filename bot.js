@@ -7,10 +7,13 @@ bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection()
 bot.config = require("./data/data.json");
 bot.icons = {};
-bot.blackjackLimiter = {};
-bot.cooldownTimes = {};
-bot.cooldownTimes.blackjack = {};
-bot.cooldownTimes.work = {};
+bot.games = {
+    blackjackLimiter: {},
+    cooldownTimes: {
+        blackjack: {},
+        work: {}
+    }
+}
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
