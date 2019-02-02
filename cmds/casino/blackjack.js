@@ -58,7 +58,6 @@ module.exports.run = async (bot, message, args) => {
                 result("Blackjack!", `${currency}${Math.round(bet) * 1.5}`);
                 return displayHands()
             }
-
             displayHands();
             hitStand()
         }
