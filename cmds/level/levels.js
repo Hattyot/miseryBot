@@ -16,6 +16,7 @@ module.exports.run = async (bot, message, args) => {
                 leaderboard[pageNum] = []
             }
             let member = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
+            if(!member) continue
             leaderboard[pageNum].push(`**#${i + 1}** - ${member.user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
         }
         let menu = embedMaker.embed(message, leaderboard[userPageNum].join("\n"), {author: "Leaderboard", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum}`})
