@@ -68,10 +68,10 @@ module.exports.run = async (bot, message, args) => {
             let playerHandString = [];
             let dealerHandString = [];
 
-            for (let i = 0; i < this.playerHand.length; i++) {
+            for (let i = 0; i < blackjackGame.playerHand.length; i++) {
                 playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}`);
             }
-            for (let j = 0; j < this.playerHand.length; j++) {
+            for (let j = 0; j < blackjackGame.playerHand.length; j++) {
                 dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}`);
             }
 
