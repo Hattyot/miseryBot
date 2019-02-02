@@ -76,13 +76,16 @@ module.exports = async (bot, message) => {
                             message.member.addRole(roleID)
                             let embed = embedMaker.embed(message, rewardText)
 
-                            if(levelChannel) {
+             
+
+                        }
+                        let embed = embedMaker.embed(message, rewardText)
+                       
+                        if(levelChannel) {
                                 return levelChannel.send(embed)
                             }else {
                                 return message.channel.send(embed)
                             }
-
-                        }
                     });
                 }
             }
