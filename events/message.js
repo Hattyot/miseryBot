@@ -68,7 +68,7 @@ module.exports = async (bot, message) => {
                     level.findOneAndUpdate({user_ID: message.author.id, guild_ID: message.guild.id}, {$inc: {level: 1}}, {new: true}, (err, data) => {
                         if(err) return console.log(err)
                         let currentLevel = data.level
-                        let rewardText = `<@${message.author.id}> You've leveled up to Level **${currentLevel + 1}!**`
+                        let rewardText = `<@${message.author.id}> You've leveled up to Level **${currentLevel}!**`
                         let levelChannel = message.guild.channels.get(bot.config[message.guild.id].lvlChannel)
                         let roleID = bot.config[message.guild.id].levelRoles[currentLevel]
                         if(bot.config[message.guild.id].levelRoles[currentLevel]) {
@@ -76,13 +76,16 @@ module.exports = async (bot, message) => {
                             message.member.addRole(roleID)
                             let embed = embedMaker.embed(message, rewardText)
 
-                            if(levelChannel) {
-                                return levelChannel.send(embed)
-                            }else {
-                                return message.channel.send(embed)
-                            }
+             
 
                         }
+                     
+                       
+                        if(levelChannel) {
+                                return levelChannel.send(rewardText)
+                            }else {
+                                return message.channel.send(rewardText)
+                            }
                     });
                 }
             }

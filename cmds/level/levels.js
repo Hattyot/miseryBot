@@ -16,6 +16,7 @@ module.exports.run = async (bot, message, args) => {
                 leaderboard[pageNum] = []
             }
             let member = bot.guilds.get(message.guild.id).members.get(data[i].user_ID)
+            if(!member) continue
             leaderboard[pageNum].push(`**#${i + 1}** - ${member.user.tag} - **Level**: \`${data[i].level}\` **XP**: \`${data[i].xp}\``)
         }
         let menu = embedMaker.embed(message, leaderboard[userPageNum].join("\n"), {author: "Leaderboard", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum}`})
@@ -40,6 +41,7 @@ module.exports.run = async (bot, message, args) => {
                     if(user.id !== message.author.id) return
                     let embed = _m.embeds[0]
                     let newPageNum = Math.round(embed.footer.text.match(/ \d/)[0]) + 1
+                    if(newPageNum > pageNum) return
                     let newEmbed = new Discord.RichEmbed(embed)
                         .setFooter(`Page ${newPageNum}/${pageNum}`)
                         .setDescription(leaderboard[newPageNum])
@@ -50,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
         let leaderBoardMenu = new RC.Menu(menu, menuButtons)
         handler.addMenus(leaderBoardMenu)
         message.channel.sendMenu(leaderBoardMenu)
-    })
+    }).sort({xp: -1})
     bot.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user))
 }
 
