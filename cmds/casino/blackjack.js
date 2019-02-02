@@ -69,14 +69,14 @@ module.exports.run = async (bot, message, args) => {
             let dealerHandString = [];
 
             for (let i = 0; i < blackjackGame.playerHand.length; i++) {
-                playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}\nValue: ${blackjackGame.playerTotal}`);
+                playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}`);
             }
             for (let j = 0; j < blackjackGame.dealerHand.length; j++) {
-                dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}\nValue: ${blackjackGame.dealerTotal}`);
+                dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}`);
             }
 
-            oldEmbed.fields[0].value = playerHandString.join(" ");
-            oldEmbed.fields[1].value = dealerHandString.join(" ");
+            oldEmbed.fields[0].value = `${playerHandString.join(" ")}\n\nValue: ${blackjackGame.playerTotal}`;
+            oldEmbed.fields[1].value = `${dealerHandString.join(" ")}\n\nValue: ${blackjackGame.dealerTotal}`;
             let newEmbed = new Discord.RichEmbed(oldEmbed);
             blackjackGame.embedMessage.edit(newEmbed)
         }
