@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
         }
 
         if(blackjackCooldown.has(message.author.id)) {
-            let time = Math.floor(bot.cooldownTimes[message.author.id]);
+            let time = Math.floor(bot.bot.cooldownTimes.blackjack[message.author.id]);
             let timeLeft = time - Date.now();
             if(time > Date.now()) return embedMaker.message(message, `:x: You can play blackjack again in **${ms(timeLeft, {long: true})}**`)
         }
@@ -31,7 +31,7 @@ module.exports.run = async (bot, message, args) => {
         if(bot.blackjackLimiter[message.author.id] === 5) {
             console.log("limit")
             blackjackCooldown.add(message.author.id);
-            bot.cooldownTimes[message.author.id] = Date.now() + 300000;
+            bot.cooldownTimes.blackjack[message.author.id] = Date.now() + 300000;
             let blackjackCooldownTime = 300;
             setTimeout(() => {
                 blackjackCooldown.delete(message.author.id)
@@ -39,7 +39,6 @@ module.exports.run = async (bot, message, args) => {
 
         }
         game();
-        console.log(bot.blackjackLimiter, bot.cooldownTimes, blackjackCooldown)
 
         function game() {
             blackjack.add(message.author.id);

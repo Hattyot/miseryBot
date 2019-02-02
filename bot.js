@@ -9,6 +9,8 @@ bot.config = require("./data/data.json");
 bot.icons = {};
 bot.blackjackLimiter = {};
 bot.cooldownTimes = {};
+bot.cooldownTimes.blackjack = {};
+bot.cooldownTimes.work = {};
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
