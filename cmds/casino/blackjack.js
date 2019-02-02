@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
             if(time > Date.now()) return embedMaker.message(message, `:x: You can play blackjack again in **${ms(timeLeft, {long: true})}**`)
         }
         bot.blackjackLimiter[message.author.id] = bot.blackjackLimiter[message.author.id] + 1 || 1;
-        if(bot.blackjackLimiter[message.author] === 5) {
+        if(bot.blackjackLimiter[message.author.id] === 5) {
             console.log("limit")
             blackjackLimiter.add(message.author.id);
             bot.cooldownTimes[message.author.id] = Date.now() + 300000;
