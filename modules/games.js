@@ -17,9 +17,9 @@ let blackjack = class Blackjack {
 
     hit(hand) {
         if(hand === "player") {
-            this.playerHand.push(deck.draw());
+            this.playerHand.push(this.deck.draw());
         }else {
-            this.dealerHand.push(deck.draw());
+            this.dealerHand.push(this.deck.draw());
         }
     }
 
