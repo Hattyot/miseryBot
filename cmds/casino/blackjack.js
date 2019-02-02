@@ -69,10 +69,10 @@ module.exports.run = async (bot, message, args) => {
             let dealerHandString = [];
 
             for (let i = 0; i < blackjackGame.playerHand.length; i++) {
-                playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}`);
+                playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}\nValue: ${blackjackGame.playerTotal}`);
             }
             for (let j = 0; j < blackjackGame.dealerHand.length; j++) {
-                dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}`);
+                dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}\nValue: ${blackjackGame.dealerTotal}`);
             }
 
             oldEmbed.fields[0].value = playerHandString.join(" ");
