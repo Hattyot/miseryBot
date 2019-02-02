@@ -33,8 +33,9 @@ let blackjack = class Blackjack {
     calculateTotal(hand) {
         let sum = 0;
         let ace = [];
+        console.log(hand)
         for (let i = 0; i < hand.length; i++) {
-            if(!hand[i]) continue
+            console.log(hand[i])
             let rank = hand[i].rank.shortName;
             if (["K", "Q", "J", "10"].includes(rank)) {
                 sum += 10;
