@@ -34,8 +34,8 @@ let blackjack = class Blackjack {
         let sum = 0;
         let ace = [];
         for (let i = 0; i < hand.length; i++) {
+            console.log(i)
             let rank = hand[i].rank.shortName;
-            console.log(hand[i], hand[i].rank.shortName)
             if (["K", "Q", "J", "10"].includes(rank)) {
                 sum += 10;
             } else if (rank === "A") {
