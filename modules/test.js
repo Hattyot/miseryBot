@@ -3,8 +3,8 @@ let blackjack = class Blackjack {
     constructor() {
         this.deck = new decks.StandardDeck({jokers: 0}).shuffleAll();
         console.log(this.deck)
-        this.playerHand = this.deck.draw()
-        this.dealerHand = this.deck.draw();
+        this.playerHand = deck.draw()
+        this.dealerHand = deck.draw();
     }
 
     hit(hand) {
