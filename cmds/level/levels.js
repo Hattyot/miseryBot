@@ -41,7 +41,7 @@ module.exports.run = async (bot, message, args) => {
                     if(user.id !== message.author.id) return
                     let embed = _m.embeds[0]
                     let newPageNum = Math.round(embed.footer.text.match(/ \d/)[0]) + 1
-                    if(newPageNum >= pageNum) return
+                    if(newPageNum > pageNum) return
                     let newEmbed = new Discord.RichEmbed(embed)
                         .setFooter(`Page ${newPageNum}/${pageNum}`)
                         .setDescription(leaderboard[newPageNum])
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
         let leaderBoardMenu = new RC.Menu(menu, menuButtons)
         handler.addMenus(leaderBoardMenu)
         message.channel.sendMenu(leaderBoardMenu)
-    })
+    }).sort({xp: -1})
     bot.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user))
 }
 
