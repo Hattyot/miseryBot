@@ -33,18 +33,18 @@ module.exports.run = async (bot, message, args) => {
             if(totalMoney < 1000) {
                 let max = 200;
                 let min = 100;
-                return Math.floor(Math.random()*(max-min+1)+max)
-            }else {
-                let max = 0.5 * totalMoney;
-                let min = 0.25 * totalMoney;
-                return Math.floor(Math.random()*(max-min+1)+max)
+                return Math.floor(Math.random()*(max-min+1)+min)
+            }else if (totalMoney < 15000) {
+                let max = 0.2 * totalMoney;
+                let min = 0.1 * totalMoney;
+                return Math.floor(Math.random()*(max-min+1)+min)
             }
         }
 
         function workSucessOrFail(addMoneyAmount) {
             let min = 3;
             let max = 10; // 30% chance of fail
-            let chance = Math.floor(Math.random()*(max-min+1)+max);
+            let chance = Math.floor(Math.random()*(max-min+1)+min);
 
             if(chance <= 3) {
                 money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: -addMoneyAmount}}, {new: true}, (err, data) => {
@@ -58,7 +58,7 @@ module.exports.run = async (bot, message, args) => {
                 }, workCoolDownTime);
                 return embedMaker.message(message, `Your company is having a rough time and you lost **${currency}${addMoneyAmount}**`)
             }else {
-                money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: +addMoneyAmount}}, {new: true}, (err, data) => {
+                money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: addMoneyAmount}}, {new: true}, (err, data) => {
                     if(err) return console.log(err)
                 });
                 workCooldown.add(message.author.id);
