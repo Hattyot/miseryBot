@@ -71,8 +71,7 @@ module.exports.run = async (bot, message, args) => {
             for (let i = 0; i < blackjackGame.playerHand.length; i++) {
                 playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}`);
             }
-            for (let j = 0; j < blackjackGame.playerHand.length; j++) {
-                console.log(blackjackGame.dealerHand)
+            for (let j = 0; j < blackjackGame.dealerHand.length; j++) {
                 dealerHandString.push(`${blackjackGame.dealerHand[j].rank.shortName}${unicodeString(blackjackGame.dealerHand[j].suit.name)}`);
             }
 
