@@ -31,6 +31,7 @@ let blackjack = class Blackjack {
     }
 
     calculateTotal(hand) {
+        console.log(hand)
         let sum = 0;
         let ace = [];
         for (let i = 0; i < hand.length; i++) {
