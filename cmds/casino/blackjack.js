@@ -140,139 +140,140 @@ module.exports.run = async (bot, message, args) => {
                         }
                     })
                 }
-                function hitStand(_ID) {
-                    let filter = _msg => _msg.author.id === blackjackAuthorID && _msg.channel.id === blackjackChannelID;
-                    message.channel.awaitMessages(filter, { max: 1, time: 120000, errors: ['time'] })
-                        .then(_messages => {
-                            _message = _messages.first();
-                            return decisionFunction(_message.content.toLowerCase(), _ID)
-                        })
-                        .catch(() => decisionFunction("stand", _ID))
+
+            })
+        }
+        function hitStand(_ID) {
+            let filter = _msg => _msg.author.id === blackjackAuthorID && _msg.channel.id === blackjackChannelID;
+            message.channel.awaitMessages(filter, { max: 1, time: 120000, errors: ['time'] })
+                .then(_messages => {
+                    _message = _messages.first();
+                    return decisionFunction(_message.content.toLowerCase(), _ID)
+                })
+                .catch(() => decisionFunction("stand", _ID))
+        }3
+        function decisionFunction(decision, _ID) {
+            if(decision === "hit") {
+                let total = hit(playerHand);
+                if(total === "Bust") {
+                    return displayHand(playerHand, "playerHand", _ID, _message => {
+                        lose();
+                        result(_message.id, "Bust.", `-${currency}${bet}`)
+                    })
+                }else {
+                    displayHand(playerHand, "playerHand", _ID, _message => {
+                        hitStand(_message.id);
+                    })
                 }
-                function decisionFunction(decision, _ID) {
-                    if(decision === "hit") {
+            }else if(decision === "stand") {
+                return dealerMachine(calculateTotal(playerHand), _ID);
+            }else if(decision === "double down") {
+                if(playerHand.length === 2) {
+                    if(bet*2 <= Math.round(userHand)) {
+                        bet *= 2;
                         let total = hit(playerHand);
                         if(total === "Bust") {
                             return displayHand(playerHand, "playerHand", _ID, _message => {
-                                lose();
-                                result(_message.id, "Bust.", `-${currency}${bet}`)
+                                lose(1);
+                                return result(_message.id, "Bust.", `-${currency}${bet}`)
                             })
                         }else {
-                            displayHand(playerHand, "playerHand", _ID, _message => {
-                                hitStand(_message.id);
+                            return displayHand(playerHand, "playerHand", _ID, _message => {
+                                dealerMachine(total, _message.id);
                             })
                         }
-                    }else if(decision === "stand") {
-                        return dealerMachine(calculateTotal(playerHand), _ID);
-                    }else if(decision === "double down") {
-                        if(playerHand.length === 2) {
-                            if(bet*2 <= Math.round(userHand)) {
-                                bet *= 2;
-                                let total = hit(playerHand);
-                                if(total === "Bust") {
-                                    return displayHand(playerHand, "playerHand", _ID, _message => {
-                                        lose(1);
-                                        return result(_message.id, "Bust.", `-${currency}${bet}`)
-                                    })
-                                }else {
-                                    return displayHand(playerHand, "playerHand", _ID, _message => {
-                                        dealerMachine(total, _message.id);
-                                    })
-                                }
-                            }else {return hitStand(_ID)}
-                        }else {return hitStand(_ID)}
                     }else {return hitStand(_ID)}
+                }else {return hitStand(_ID)}
+            }else {return hitStand(_ID)}
+        }
+        function hit(hand) {
+            hand.push(deck.draw());
+            return calculateTotal(hand);
+        }
+        function calculateTotal(hand) {
+            let sum = 0;
+            let ace = [];
+            for (let i = 0; i < hand.length; i++) {
+                let rank = hand[i][0].rank.shortName;
+                if(["K", "Q", "J", "10"].includes(rank)) {
+                    sum += 10;
+                }else if(rank === "A") {
+                    ace.push(i);
+                }else {
+                    sum += parseInt(rank);
                 }
-                function hit(hand) {
-                    hand.push(deck.draw());
-                    return calculateTotal(hand);
+            }
+            for (let j = 0; j < ace.length; j++) {
+                if(sum > 10) {
+                    sum++;
+                }else {
+                    sum += 11;
                 }
-                function calculateTotal(hand) {
-                    let sum = 0;
-                    let ace = [];
-                    for (let i = 0; i < hand.length; i++) {
-                        let rank = hand[i][0].rank.shortName;
-                        if(["K", "Q", "J", "10"].includes(rank)) {
-                            sum += 10;
-                        }else if(rank === "A") {
-                            ace.push(i);
-                        }else {
-                            sum += parseInt(rank);
-                        }
-                    }
-                    for (let j = 0; j < ace.length; j++) {
-                        if(sum > 10) {
-                            sum++;
-                        }else {
-                            sum += 11;
-                        }
-                    }
-                    if(sum > 21) {
-                        return "Bust";
-                    }else if(sum === 21 && hand.length === 2) {
-                        return "Blackjack";
-                    }else {
-                        return sum;
-                    }
-                }
-                function dealerMachine(playerTotal, _ID) {
-                    let dealerTotal = calculateTotal(dealerHand);
-                    if(dealerTotal === "Bust") {
-                        return displayHand(dealerHand, "dealerHand", _ID, _message => {
-                            payout(1);
-                            result(_message.id, "Dealer Bust!", `+${currency}${bet}`)
-                        })
-                    }
-                    if(dealerTotal > 16 || dealerTotal === 0) {
-                        if(dealerTotal === playerTotal) {
-                            return displayHand(dealerHand, "dealerHand", _ID, _message => {
-                                draw();
-                                result(_ID, "Draw, try again!", "Push")
-                            })
-                        }else if(dealerTotal > playerTotal) {
-                            return displayHand(dealerHand, "dealerHand", _ID, _message => {
-                                lose();
-                                result(_ID, "Dealer Wins, Better luck next time!", `-${currency}${bet}`)
-                            })
-                        }else if(dealerTotal === "Blackjack") {
-                            return displayHand(dealerHand, "dealerHand", _ID, _message => {
-                                lose();
-                                result(_message.id, "Dealer Blackjack.", `+${currency}${bet}`)
-                            })
-                        }else if(dealerTotal < playerTotal) {
-                            return displayHand(dealerHand, "dealerHand", _ID, _message => {
-                                payout(1);
-                                result(_ID, "You Win!", `+${currency}${bet}`)
-                            })
-                        }
-                    }else {
-                        hit(dealerHand);
-                        dealerMachine(playerTotal, _ID);
-                    }
-                }
-                function payout(multiplier) {
-                    blackjack.delete(message.author.id);
-                    let moneys = (bet * multiplier);
-                    money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: moneys}}, (err, data) => {
-                        if(err) return console.log(err)
+            }
+            if(sum > 21) {
+                return "Bust";
+            }else if(sum === 21 && hand.length === 2) {
+                return "Blackjack";
+            }else {
+                return sum;
+            }
+        }
+        function dealerMachine(playerTotal, _ID) {
+            let dealerTotal = calculateTotal(dealerHand);
+            if(dealerTotal === "Bust") {
+                return displayHand(dealerHand, "dealerHand", _ID, _message => {
+                    payout(1);
+                    result(_message.id, "Dealer Bust!", `+${currency}${bet}`)
+                })
+            }
+            if(dealerTotal > 16 || dealerTotal === 0) {
+                if(dealerTotal === playerTotal) {
+                    return displayHand(dealerHand, "dealerHand", _ID, _message => {
+                        draw();
+                        result(_ID, "Draw, try again!", "Push")
+                    })
+                }else if(dealerTotal > playerTotal) {
+                    return displayHand(dealerHand, "dealerHand", _ID, _message => {
+                        lose();
+                        result(_ID, "Dealer Wins, Better luck next time!", `-${currency}${bet}`)
+                    })
+                }else if(dealerTotal === "Blackjack") {
+                    return displayHand(dealerHand, "dealerHand", _ID, _message => {
+                        lose();
+                        result(_message.id, "Dealer Blackjack.", `+${currency}${bet}`)
+                    })
+                }else if(dealerTotal < playerTotal) {
+                    return displayHand(dealerHand, "dealerHand", _ID, _message => {
+                        payout(1);
+                        result(_ID, "You Win!", `+${currency}${bet}`)
                     })
                 }
-                function lose() {
-                    blackjack.delete(message.author.id);
-                    money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: -bet}}, (err, data) => {
-                        if(err) return console.log(err)
-                    })
-                }
-                function draw() {
-                    blackjack.delete(message.author.id)
-                }
-            })
+            }else {
+                hit(dealerHand);
+                dealerMachine(playerTotal, _ID);
+            }
         }
         function unicodeString(suit) {
             if(suit === "diamonds") return "♦";
             if(suit === "clubs") return "♣";
             if(suit === "hearts") return "♥";
             if(suit === "spades") return "♠";
+        }
+        function payout(multiplier) {
+            blackjack.delete(message.author.id);
+            let moneys = (bet * multiplier);
+            money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: moneys}}, (err, data) => {
+                if(err) return console.log(err)
+            })
+        }
+        function lose() {
+            blackjack.delete(message.author.id);
+            money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: -bet}}, (err, data) => {
+                if(err) return console.log(err)
+            })
+        }
+        function draw() {
+            blackjack.delete(message.author.id)
         }
 
     })
