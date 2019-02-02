@@ -79,12 +79,12 @@ module.exports = async (bot, message) => {
              
 
                         }
-                        let embed = embedMaker.embed(message, rewardText)
+                     
                        
                         if(levelChannel) {
-                                return levelChannel.send(embed)
+                                return levelChannel.send(rewardText)
                             }else {
-                                return message.channel.send(embed)
+                                return message.channel.send(rewardText)
                             }
                     });
                 }
