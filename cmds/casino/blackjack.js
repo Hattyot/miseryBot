@@ -37,9 +37,8 @@ module.exports.run = async (bot, message, args) => {
                 blackjackCooldown.delete(message.author.id)
             },blackjackCooldownTime * 1000)
 
-        }else {
-            game();
         }
+        game();
         console.log(bot.blackjackLimiter, bot.cooldownTimes, blackjackCooldown)
 
         function game() {
