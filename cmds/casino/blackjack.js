@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
         bot.blackjackLimiter[message.author.id] = bot.blackjackLimiter[message.author.id] + 1 || 1;
         if(bot.blackjackLimiter[message.author.id] === 5) {
             console.log("limit")
-            bot.blackjackLimiter.add(message.author.id);
+            blackjackCooldown.add(message.author.id);
             bot.cooldownTimes[message.author.id] = Date.now() + 300000;
             let blackjackCooldownTime = 300;
             setTimeout(() => {
