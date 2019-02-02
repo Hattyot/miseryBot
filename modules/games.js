@@ -18,10 +18,8 @@ let blackjack = class Blackjack {
     hit(hand) {
         if(hand === "player") {
             this.playerHand.push(this.deck.draw());
-            return this.calculateTotal(this.playerHand)
         }else {
             this.dealerHand.push(this.deck.draw());
-            return this.calculateTotal(this.dealerHand)
         }
     }
 
@@ -36,6 +34,7 @@ let blackjack = class Blackjack {
         let sum = 0;
         let ace = [];
         for (let i = 0; i < hand.length; i++) {
+            if(!hand) return
             let rank = hand[i].rank.shortName;
             if (["K", "Q", "J", "10"].includes(rank)) {
                 sum += 10;
@@ -61,7 +60,8 @@ let blackjack = class Blackjack {
         }
     }
 
-    dealerMachine(dealerTotal) {
+    dealerMachine() {
+        let dealerTotal = this.dealerTotal;
         let playerTotal = this.playerTotal;
         if(dealerTotal === "Bust") {
             return "Dealer Bust"
@@ -75,8 +75,8 @@ let blackjack = class Blackjack {
                 return "Player Win"
             }
         }else {
-            let dealerTotal = this.hit("dealer");
-            this.dealerMachine(dealerTotal);
+            this.hit("dealer");
+            this.dealerMachine();
         }
     }
 }
