@@ -1,4 +1,4 @@
-const blackjack = require("../modules/test.js");
+const blackjack = require("../modules/test.js").blackjack;
 module.exports = async (bot) => {
     let blackjackGame = new blackjack()
     blackjackGame.hit()
