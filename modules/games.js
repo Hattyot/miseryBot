@@ -33,7 +33,8 @@ let blackjack = class Blackjack {
     calculateTotal(hand) {
         let sum = 0;
         let ace = [];
-        console.log(hand)
+        console.log(this.dealerHand, "dealerHand")
+        console.log(this.playerHand, "playerHand")
         for (let i = 0; i < hand.length; i++) {
             console.log(hand[i])
             let rank = hand[i].rank.shortName;
