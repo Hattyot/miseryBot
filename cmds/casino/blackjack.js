@@ -74,7 +74,7 @@ module.exports.run = async (bot, message, args) => {
                             })
                         })
                     }
-                    if(total === "Black Jack!") {
+                    if(total === "Blackjack") {
                         payout(1.5)
                         return initialDisplay(_ID => {
                             result(_ID, "Blackjack!", `+${currency}${bet}`)
