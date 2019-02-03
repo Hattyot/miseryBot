@@ -63,15 +63,15 @@ let blackjack = class Blackjack {
         let dealerTotal = this.dealerTotal;
         let playerTotal = this.playerTotal;
         if(dealerTotal === "Bust") {
-            return "Dealer Bust"
+            this.result = "Dealer Bust"
         }
         if(dealerTotal > 16 || dealerTotal === 0) {
             if(dealerTotal === playerTotal) {
-                return "Draw"
+                this.result = "Draw"
             }else if(dealerTotal > playerTotal || dealerTotal === "Blackjack") {
-                return "Dealer Win"
+                this.result = "Dealer Win"
             }else if(dealerTotal < playerTotal) {
-                return "Player Win"
+                this.result ="Player Win"
             }
         }else {
             this.hit("dealer");
