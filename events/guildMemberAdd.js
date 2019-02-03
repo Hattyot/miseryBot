@@ -18,7 +18,7 @@ exports.run = (client, member) => {
 
                     image.print(font, 680, 410, text2);
                     image.write('welcome.png', () => {
-                        client.channels.get("479921142946332683").send({
+                        client.channels.get("536532064070270986").send({
                             files: [
                                 "welcome.png"
                             ]
