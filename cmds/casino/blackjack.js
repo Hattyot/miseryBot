@@ -97,7 +97,7 @@ module.exports.run = async (bot, message, args) => {
                 if (total === "Bust") {
                     displayHands();
                     lose();
-                    return result()
+                    return result(`Bust.`, `-${currency}${bet}`)
                 } else {
                     displayHands();
                     return hitStand()
