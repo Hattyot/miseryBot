@@ -104,30 +104,33 @@ module.exports.run = async (bot, message, args) => {
                 }
 
             } else if (decision === "stand") {
-                return stand()
+                return dealerMachine()
             }
         }
-
-        function stand() {
-            blackjackGame.dealerMachine();
+        function dealerMachine() {
+            let dealerTotal = blackjackGame.dealerTotal;
+            let playerTotal = blackjackGame.playerTotal;
             displayHands()
-            let result = blackjackGame.result
-            switch (result) {
-                case "Draw":
+            if(dealerTotal === "Bust") {
+                payout(1);
+                return result("Dealer Bust!", `+${currency}${bet}`)
+            }
+            if(dealerTotal > 16 || dealerTotal === 0) {
+                if(dealerTotal === playerTotal) {
                     draw();
                     return result("Draw, try again!", "Push");
-                case "Dealer Win":
+                }else if(dealerTotal > playerTotal || dealerTotal === "Blackjack") {
                     lose();
                     return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
-                case "Player Win":
+                }else if(dealerTotal < playerTotal) {
                     payout(1);
-                    return result("You Win!", `+${currency}${bet}`);
-                case "Dealer Bust":
-                    payout(1);
-                    return result("Dealer Bust!", `+${currency}${bet}`)
+                    return result("You Win!", `+${currency}${bet}`)
+                }
+            }else {
+                blackjackGame.hit("dealer");
+                dealerMachine();
             }
         }
-
         function result(result, money) {
             let oldEmbed = blackjackGame.embedMessage.embeds[0];
 

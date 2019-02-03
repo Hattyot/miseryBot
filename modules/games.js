@@ -58,26 +58,6 @@ let blackjack = class Blackjack {
             return sum;
         }
     }
-
-    dealerMachine() {
-        let dealerTotal = this.dealerTotal;
-        let playerTotal = this.playerTotal;
-        if(dealerTotal === "Bust") {
-            this.result = "Dealer Bust"
-        }
-        if(dealerTotal > 16 || dealerTotal === 0) {
-            if(dealerTotal === playerTotal) {
-                this.result = "Draw"
-            }else if(dealerTotal > playerTotal || dealerTotal === "Blackjack") {
-                this.result = "Dealer Win"
-            }else if(dealerTotal < playerTotal) {
-                this.result ="Player Win"
-            }
-        }else {
-            this.hit("dealer");
-            this.dealerMachine();
-        }
-    }
 }
 module.exports = {
     blackjack: blackjack
