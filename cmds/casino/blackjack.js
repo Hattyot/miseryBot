@@ -113,15 +113,19 @@ module.exports.run = async (bot, message, args) => {
             displayHands()
             if(result === "Draw") {
                 draw();
+                console.log("ff")
                 return result("Draw, try again!", "Push");
             }else if (result === "Dealer Win"){
                 lose();
+                console.log("ffff")
                 return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
             }else if (result === "Player Win"){
                 payout(1);
+                console.log("ffffff")
                 return result("You Win!", `+${currency}${bet}`);
             }else if (result === "Dealer Bust!"){
                 payout(1);
+                console.log("fffffffff")
                 return result("Dealer Bust!", `+${currency}${bet}`);
             }
         }
