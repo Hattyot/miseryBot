@@ -111,6 +111,7 @@ module.exports.run = async (bot, message, args) => {
         function stand() {
             let result = blackjackGame.dealerMachine();
             displayHands()
+            console.log(result)
             if(result === "Draw") {
                 draw();
                 console.log("ff")
