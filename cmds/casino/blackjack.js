@@ -111,23 +111,18 @@ module.exports.run = async (bot, message, args) => {
         function stand() {
             let result = blackjackGame.dealerMachine();
             displayHands()
-            switch (result) {
-                case "Draw":
-                    draw();
-                    result("Draw, try again!", "Push");
-                    break;
-                case "Dealer Win":
-                    lose();
-                    result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
-                    break;
-                case "Player Win":
-                    payout(1);
-                    result("You Win!", `+${currency}${bet}`);
-                    break;
-                case "Dealer Bust":
-                    payout(1);
-                    result("Dealer Bust!", `+${currency}${bet}`);
-                    break;
+            if(result === "Draw") {
+                draw();
+                return result("Draw, try again!", "Push");
+            }else if (result === "Dealer Win"){
+                lose();
+                return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
+            }else if (result === "Player Win"){
+                payout(1);
+                return result("You Win!", `+${currency}${bet}`);
+            }else if (result === "Dealer Bust!"){
+                payout(1);
+                return result("Dealer Bust!", `+${currency}${bet}`);
             }
         }
 
