@@ -114,16 +114,20 @@ module.exports.run = async (bot, message, args) => {
             switch (result) {
                 case "Draw":
                     draw();
-                    return result("Draw, try again!", "Push");
+                    result("Draw, try again!", "Push");
+                    break;
                 case "Dealer Win":
                     lose();
-                    return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
+                    result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
+                    break;
                 case "Player Win":
                     payout(1);
-                    return result("You Win!", `+${currency}${bet}`);
+                    result("You Win!", `+${currency}${bet}`);
+                    break;
                 case "Dealer Bust":
                     payout(1);
-                    return result("Dealer Bust!", `+${currency}${bet}`)
+                    result("Dealer Bust!", `+${currency}${bet}`);
+                    break;
             }
         }
 
