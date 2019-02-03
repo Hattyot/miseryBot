@@ -20,10 +20,6 @@ class Deck {
 			deck: cards.slice(),
 			held: [ ],
 		});
-
-		cards.forEach((card) => {
-			card.deck = this;
-		});
 	}
 	draw(count = 1) {
 		const { deck, held } = props.get(this);
