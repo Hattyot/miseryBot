@@ -1,8 +1,7 @@
-const cards = require("cards");
+const deck = require("../modules/deck.js");
 let blackjack = class Blackjack {
-    constructor(bet) {
-        this.bet = bet
-        this.deck = new cards.decks.StandardDeck({jokers: 0})
+    constructor() {
+        this.deck = new deck()
         this.deck.shuffleAll();
     }
 

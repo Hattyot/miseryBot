@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
 
         blackjack.add(message.author.id);
 
-        let blackjackGame = new blackjackMachine(bet);
+        let blackjackGame = new blackjackMachine();
 
         let embed = new Discord.RichEmbed()
             .setTimestamp()
