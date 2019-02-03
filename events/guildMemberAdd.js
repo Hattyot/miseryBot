@@ -1,8 +1,7 @@
 const Discord = require('discord.js');
 const Jimp = require("jimp");
-exports.run = (client, member) => {
+module.exports = async (bot, member) => {
     if (member.guild.id !== "522979850651435008") return;
-
 
     Jimp.read("https://cdn.glitch.com/f95d51d0-e705-417b-a9c8-47bb29dd12cb%2Fwelcomer.png?1536011031764").then(function (image) {
         Jimp.read(client.users.get(member.id).avatarURL).then(ima => {
