@@ -110,6 +110,7 @@ module.exports.run = async (bot, message, args) => {
 
         function stand() {
             let result = blackjackGame.dealerMachine();
+            displayHands()
             switch (result) {
                 case "Draw":
                     draw();
