@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
         // .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
             .setAuthor("(`◕‿◕´)  Just some extra info", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
             .addField("**1. Do you want to become a staff member?**", "Fill out this form: https://goo.gl/7L5JTo\n** **")
-            .addField("**2. Do you have complaints or compliments for a staff member?**", "Fill out this form: https://goo.gl/wZcW8k\n\n** **")
+            .addField("**2. Do you have complaints or compliments for a staff member?**", "Fill out this form: https://goo.gl/wZcW8k\n** **")
             .addField("**3. Do you have a suggestion for the server?**", "Fill out this form: https://goo.gl/VYTgrH\n** **")
             .setFooter("If you have any further questions ask a staff member", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
             .setColor("#9B59B6");
