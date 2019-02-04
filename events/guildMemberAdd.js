@@ -1,10 +1,25 @@
 const Discord = require('discord.js');
 const Jimp = require("jimp");
 module.exports = async (bot, member) => {
-    let guild = member.guild
-    let welcomeChannel = "522979850651435013"
+    let guild = member.guild;
+    let welcomeChannel = "522979850651435013";
+    let welcomeMessage = `Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108>. If you have any questions, feel free to ask a staff member`;
+    let welcomeTexts = [
+        "Enjoy Your Stay!",
+        "Welcome To Hell!",
+        "We Expected You",
+        "One Of Us!",
+        "Leave Your Guns.",
+        "Don't Advertise MLMs",
+        "?????????????",
+        "Challenger Approaches",
+        "Ha GAYYYYYY!!",
+        "This Person Is Cool",
+        "Heyyyyyyyyyy",
+        "Run While You Can!"
+    ];
     if (guild.id !== "522979850651435008") return;
-    member.send(`Welcome to Misery's Box <@${member.id}>! Please read the rules in #rules-and-info. If you have any questions, feel free to ask a staff member`)
+    member.send(welcomeMessage);
     Jimp.read("https://user-images.githubusercontent.com/39061940/52178067-699ca600-27d2-11e9-80bf-e5ceae9534fe.png").then((mainImage) => {
         Jimp.read(member.user.displayAvatarURL).then(userAvatar => {
             userAvatar.resize(537, 537);
@@ -12,50 +27,48 @@ module.exports = async (bot, member) => {
                 mask1.resize(537, 537);
                 userAvatar.mask(mask1, 0, 0);
                 mainImage.composite(userAvatar, 85, 160);
-                Jimp.loadFont("./images/FONT.fnt").then((font) => {
-                    Jimp.loadFont("./images/FONT1.fnt").then((font1) => {
-                        Jimp.loadFont("./images/FONT2.fnt").then((font2) => {
-                            Jimp.loadFont("./images/FONT3.fnt").then((font3) => {
-                                let text = "Enjoy Your Stay!"
-                                let text1 = member.user.username
-                                let text2 = member.user.discriminator
-                                let text3 = getText3(member.guild)
+                Jimp.loadFont("./images/FONT1.fnt").then((font1) => {
+                    Jimp.loadFont("./images/FONT2.fnt").then((font2) => {
+                        Jimp.loadFont("./images/FONT3.fnt").then((font3) => {
+                            let welcomeText = welcomeTexts[Math.floor(Math.random() * welcomeTexts.length)];
+                            let name = member.user.username;
+                            let discriminator = member.user.discriminator;
+                            let memberCount = getText3(member.guild);
 
-                                mainImage.print(font1, 630, 645, text);
-                                mainImage.print(font1, 690, 277, text1);
-                                mainImage.print(font2, 788, 438, text2);
-                                mainImage.print(font3, 90, 723, text3);
-                                mainImage.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
-                                    if (error) return console.log(error)
-                                    return guild.channels.get(welcomeChannel).send({
-                                        files: [{
-                                            name: 'welcome.png',
-                                            attachment: buffer
-                                        }]
-                                    })
+                            mainImage.print(font1, 630, 645, welcomeText);
+                            mainImage.print(font1, 690, 277, name);
+                            mainImage.print(font2, 788, 438, discriminator);
+                            mainImage.print(font3, 90, 723, memberCount);
+                            mainImage.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
+                                if (error) return console.log(error);
+                                return guild.channels.get(welcomeChannel).send({
+                                    files: [{
+                                        name: 'welcome.png',
+                                        attachment: buffer
+                                    }]
                                 })
                             })
                         })
-                    });
-                })
+                    })
+                });
             })
         });
-    })
+    });
 
     function getText3(guild) {
-        let text3 = `${guild.memberCount}`
-        switch (text3[text3.length-1]) {
+        let text3 = `${guild.memberCount}`;
+        switch (text3[text3.length - 1]) {
             case "1":
-                text3 += "st member!"
-                break
+                text3 += "st member!";
+                break;
             case "2":
-                text3 += "nd member!"
-                break
+                text3 += "nd member!";
+                break;
             case "3":
-                text3 += "rd member!"
-                break
+                text3 += "rd member!";
+                break;
             default:
-                text3 += "th member!"
+                text3 += "th member!";
                 break
         }
         return text3
