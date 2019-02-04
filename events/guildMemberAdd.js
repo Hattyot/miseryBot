@@ -4,7 +4,7 @@ module.exports = async (bot, member) => {
     let guild = member.guild
     let welcomeChannel = "522979850651435013"
     if (guild.id !== "522979850651435008") return;
-    member.send(`Welcome to Misery's Box <@${member.id}>! Please read the rules in #rules-and-info. If you have any questions, feel free to ask a staff member`)
+    member.send(`Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108>. If you have any questions, feel free to ask a staff member`)
     Jimp.read("https://user-images.githubusercontent.com/39061940/52178067-699ca600-27d2-11e9-80bf-e5ceae9534fe.png").then((mainImage) => {
         Jimp.read(member.user.displayAvatarURL).then(userAvatar => {
             userAvatar.resize(537, 537);
