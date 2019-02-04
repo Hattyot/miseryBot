@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
         "One Of Us!",
         "Don't Shoot!",
         "Don't Advertise MLMs",
-        "?????????????",
+        "( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)",
         "Challenger Approaches",
         "Ha GAYYYYYY!!",
         "This Person Is Cool",
