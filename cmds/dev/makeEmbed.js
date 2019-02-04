@@ -22,8 +22,9 @@ module.exports.run = async (bot, message, args) => {
         let newEmbed = new Discord.RichEmbed()
         // .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
             .setAuthor("(`◕‿◕´)  Just some extra info", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-            .addField("**1. Do you want access to nsfw channels?**", "Ask a staff member for the 18+ role\n** **")
-            .addField("**2. Do you want to become a staff member?**", "Currently we don't have an application set up or anything, so we'll just be on to lookout for helpful people that would be useful on the staff team.\n** **")
+            .addField("**1. Do you want to become a staff member?**", "Fill out this form: https://goo.gl/7L5JTo\n** **")
+            .addField("**2. Do you have complaints or compliments for a staff member?**", "Fill out this form: goo.gl/wZcW8k\n** **")
+            .addField("**3. Do you have a suggestion for the server?**", "Fill out this form: goo.gl/VYTgrH\n** **")
             .setFooter("If you have any further questions ask a staff member", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
             .setColor("#9B59B6");
         message.channel.send(newEmbed);
@@ -36,6 +37,8 @@ module.exports.run = async (bot, message, args) => {
             .addField("**2. Admin Box** :muscle:", "Dedicated, highly experienced individuals that are the brains behind the channel. The Admin Box keeps the server running & resolve super sensitive situations. Basically, Misery's right hand.\n** **")
             .addField("**3. Mod Box** :100:", "Appointed by Admins or Misery, they decide who become Mods. Mods help Admins resolve any large issues the server may face. Mods appoint Helpers. Mods communicate closely with the community to gather feedback on what changes may improve the server experience for all.\nAs a Mod, expect to notify Admins about questionable situations or issues that arise, such as handing out mutes to people spamming, harassing, trolling, etc.\n** **")
             .addField("**4. Help Box** :angel:", "The 1st step in becoming a Mod in the server is being entered into this role as a test trial, to see if it's a good fit.\nHelpers are in charge of keeping a light-hearted ambience within the server by welcoming new members, reporting to Admins or Mods of any wrong-doings, negative hate/trolling, arguments between members and to be helpful to those who are new to Discord that need extra help figuring things out.\n** **")
+            .addField("**5. YouTuber Box** :movie_camera:", "For YouTuber peeps, you need at minimum 1000 subs to get this role\n** **")
+            .addField("**6. Art Box** :paintbrush:", "For all the great artists on this server, if you're an artist ask a mod or admin for the role\n** **")
             .setFooter("These are all the current staff roles, this list might change later.", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
             .setColor("#9B59B6");
         message.channel.send(newEmbed);
