@@ -59,16 +59,16 @@ module.exports = async (bot, member) => {
         let text3 = `${guild.memberCount}`;
         switch (text3[text3.length - 1]) {
             case "1":
-                text3 += "st member!";
+                text3 += "st!";
                 break;
             case "2":
-                text3 += "nd member!";
+                text3 += "nd!";
                 break;
             case "3":
-                text3 += "rd member!";
+                text3 += "rd!";
                 break;
             default:
-                text3 += "th member!";
+                text3 += "th!";
                 break
         }
         return text3
