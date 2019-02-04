@@ -35,6 +35,10 @@ module.exports = async (bot, member) => {
                             let discriminator = member.user.discriminator;
                             let memberCount = getText3(member.guild);
 
+                            if(hasSpecialCharacter(name)) {
+                                name = "Special Name"
+                            }
+
                             mainImage.print(font1, 630, 653, welcomeText);
                             mainImage.print(font1, 693, 283, name);
                             mainImage.print(font2, 793, 440, discriminator);
@@ -72,5 +76,12 @@ module.exports = async (bot, member) => {
                 break
         }
         return text3
+    }
+
+    function hasSpecialCharacter(str) {
+        for (var i = 0, n = str.length; i < n; i++) {
+            if (str.charCodeAt( i ) > 255) { return true; }
+        }
+        return false;
     }
 };
