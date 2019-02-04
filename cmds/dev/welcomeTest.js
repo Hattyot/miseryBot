@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
         "Welcome To Hell!",
         "We Expected You",
         "One Of Us!",
-        "Leave Your Guns.",
+        "Don't Shoot!",
         "Don't Advertise MLMs",
         "?????????????",
         "Challenger Approaches",
@@ -36,10 +36,10 @@ module.exports.run = async (bot, message, args) => {
                             let discriminator = member.user.discriminator;
                             let memberCount = getText3(member.guild);
 
-                            mainImage.print(font1, 630, 645, welcomeText);
-                            mainImage.print(font1, 690, 277, name);
-                            mainImage.print(font2, 788, 438, discriminator);
-                            mainImage.print(font3, 90, 723, memberCount);
+                            mainImage.print(font1, 630, 653, welcomeText);
+                            mainImage.print(font1, 693, 283, name);
+                            mainImage.print(font2, 793, 440, discriminator);
+                            mainImage.print(font3, 90, 710, memberCount);
                             mainImage.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
                                 if (error) return console.log(error);
                                 return guild.channels.get(welcomeChannel).send({
@@ -59,16 +59,16 @@ module.exports.run = async (bot, message, args) => {
         let text3 = `${guild.memberCount}`;
         switch (text3[text3.length - 1]) {
             case "1":
-                text3 += "st member!";
+                text3 += "st";
                 break;
             case "2":
-                text3 += "nd member!";
+                text3 += "nd";
                 break;
             case "3":
-                text3 += "rd member!";
+                text3 += "rd";
                 break;
             default:
-                text3 += "th member!";
+                text3 += "th";
                 break
         }
         return text3
