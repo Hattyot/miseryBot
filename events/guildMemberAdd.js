@@ -11,7 +11,7 @@ module.exports = async (bot, member) => {
         "One Of Us!",
         "Leave Your Guns.",
         "Don't Advertise MLMs",
-        "?????????????",
+        "( ͡° ͜ʖ ͡°)( ͡° ͜ʖ ͡°)",
         "Challenger Approaches",
         "Ha GAYYYYYY!!",
         "This Person Is Cool",
