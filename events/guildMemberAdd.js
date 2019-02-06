@@ -16,7 +16,9 @@ module.exports = async (bot, member) => {
         "Ha GAYYYYYY!!",
         "This Person Is Cool",
         "Heyyyyyyyyyy",
-        "Run While You Can!"
+        "Run While You Can!",
+        "New Flesh :)",
+        "A Piggy Welcome"
     ];
     if (guild.id !== "522979850651435008") return;
     member.send(welcomeMessage);
