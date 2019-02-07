@@ -81,7 +81,8 @@ module.exports.run = async (bot, message, args) => {
     }
     function removeSpecialCharacters(str) {
         let letters = str.split("")
-        for (var i = 0, n = letters.length; i < n; i++) {
+        for (let i = 0; i < letters.length; i++) {
+            if(!letters[i]) continue
             if (letters[i].charCodeAt(0) > 255) {
                 letters.splice(i, 1)
             }
