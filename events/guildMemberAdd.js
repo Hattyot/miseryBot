@@ -34,8 +34,11 @@ module.exports = async (bot, member) => {
                             let name = member.user.username;
                             let discriminator = member.user.discriminator;
                             let memberCount = getText3(member.guild);
+                            let specialCharactersRemoved = removeSpecialCharacters(name)
 
-                            if(hasSpecialCharacter(name)) {
+                            if(specialCharactersRemoved) {
+                                name = specialCharactersRemoved
+                            }else {
                                 name = "Special Name"
                             }
 
@@ -78,9 +81,15 @@ module.exports = async (bot, member) => {
         return text3
     }
 
-    function hasSpecialCharacter(str) {
-        for (var i = 0, n = str.length; i < n; i++) {
-            if (str.charCodeAt( i ) > 255) { return true; }
+    function removeSpecialCharacters(str) {
+        let letters = str.split("")
+        for (var i = 0, n = letters.length; i < n; i++) {
+            if (letters[i].charCodeAt(0) > 255) {
+                letters.splice(i, 1)
+            }
+        }
+        if(letters.length > 0) {
+            return letters.join("")
         }
         return false;
     }
