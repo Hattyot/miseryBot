@@ -27,11 +27,11 @@ module.exports.run = async (bot, message, args) => {
 };
 
 module.exports.help = {
-    name: "bunny",
+    name: "shaggy",
     cat: "Image",
-    description: "Gives you a random bunny image",
-    usage: "bunny",
-    examples: ["bunny"]
+    description: "Gives you a random shaggy image",
+    usage: "shaggy",
+    examples: ["shaggy"]
 };
 
 module.exports.conf = {
