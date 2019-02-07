@@ -83,6 +83,7 @@ module.exports.run = async (bot, message, args) => {
         let letters = str.split("")
         for (let i = 0; i < letters.length; i++) {
             if(!letters[i]) continue
+            console.log(letters[i].charCodeAt(0))
             if (letters[i].charCodeAt(0) > 255) {
                 letters.splice(i, 1)
             }
