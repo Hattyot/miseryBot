@@ -87,6 +87,7 @@ module.exports.run = async (bot, message, args) => {
                 letters.splice(i, 1)
             }
         }
+        console.log(letters)
         if(letters.length > 0) {
             return letters.join("")
         }
