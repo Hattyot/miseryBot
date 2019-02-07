@@ -35,13 +35,10 @@ module.exports.run = async (bot, message, args) => {
                             let name = member.user.username;
                             let discriminator = member.user.discriminator;
                             let memberCount = getText3(member.guild);
-                            let specialCharactersRemoved = removeSpecialCharacters(name)
-
-                            if(specialCharactersRemoved) {
-                                name = specialCharactersRemoved
-                            }else {
-                                name = "Special Name"
+                            if(hasSpecialCharacter(name)) {
+                                let name = "Special Name"
                             }
+
                             mainImage.print(font1, 630, 653, welcomeText);
                             mainImage.print(font1, 693, 283, name);
                             mainImage.print(font2, 793, 440, discriminator);
@@ -79,18 +76,9 @@ module.exports.run = async (bot, message, args) => {
         }
         return text3
     }
-    function removeSpecialCharacters(str) {
-        let letters = str.split("")
-        for (let i = 0; i < letters.length; i++) {
-            if(!letters[i]) continue
-            console.log(letters[i].charCodeAt(0))
-            if (letters[i].charCodeAt(0) > 255) {
-                letters.splice(i, 1)
-            }
-        }
-        console.log(letters)
-        if(letters.length > 0) {
-            return letters.join("")
+    function hasSpecialCharacter(str) {
+        for (var i = 0, n = str.length; i < n; i++) {
+            if (str.charCodeAt( i ) > 255) { return true; }
         }
         return false;
     }
