@@ -7,9 +7,13 @@ let y = d * 365.25;
 module.exports = (val, options) => {
 	options = options || {}
 	let type = typeof val
-	if(type === "string" && val.length > 0) {return parse(val)
-	}else if(type === "number" && isNaN(val) === false) {return options.long ? fmtLong(val, options): fmtShort(val, options)
-	}else {throw new Error("ms.js given value isn't a valid number or string")}
+	if(type === "string" && val.length > 0) {
+		return parse(val)
+	}else if(type === "number" && isNaN(val) === false) {
+		return options.long ? fmtLong(val, options): fmtShort(val, options)
+	}else {
+		throw new Error("ms.js given value isn't a valid number or string")
+	}
 }
 function parse(str) {
 	str = String(str);

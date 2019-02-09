@@ -16,9 +16,7 @@ module.exports = async (bot, member) => {
         "Ha GAYYYYYY!!",
         "This Person Is Cool",
         "Heyyyyyyyyyy",
-        "Run While You Can!",
-        "New Flesh :)",
-        "A Piggy Welcome"
+        "Run While You Can!"
     ];
     if (guild.id !== "522979850651435008") return;
     member.send(welcomeMessage);
@@ -36,11 +34,8 @@ module.exports = async (bot, member) => {
                             let name = member.user.username;
                             let discriminator = member.user.discriminator;
                             let memberCount = getText3(member.guild);
-                            let specialCharactersRemoved = removeSpecialCharacters(name)
 
-                            if(specialCharactersRemoved) {
-                                name = specialCharactersRemoved
-                            }else {
+                            if(hasSpecialCharacter(name)) {
                                 name = "Special Name"
                             }
 
@@ -83,15 +78,9 @@ module.exports = async (bot, member) => {
         return text3
     }
 
-    function removeSpecialCharacters(str) {
-        let letters = str.split("")
-        for (var i = 0, n = letters.length; i < n; i++) {
-            if (letters[i].charCodeAt(0) > 255) {
-                letters.splice(i, 1)
-            }
-        }
-        if(letters.length > 0) {
-            return letters.join("")
+    function hasSpecialCharacter(str) {
+        for (var i = 0, n = str.length; i < n; i++) {
+            if (str.charCodeAt( i ) > 255) { return true; }
         }
         return false;
     }
