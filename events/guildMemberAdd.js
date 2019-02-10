@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const Jimp = require("jimp");
 module.exports = async (bot, member) => {
+    console.log(member.user.tag)
     let guild = member.guild;
     let welcomeChannel = "522979850651435013";
     let welcomeMessage = `Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108>. If you have any questions, feel free to ask a staff member`;
