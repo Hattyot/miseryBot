@@ -7,7 +7,7 @@ module.exports = async (bot) => {
 
     const PORT = process.env.PORT || 3000;
     const INDEX = path.join(__dirname, 'index.html');
-    console.log(index)
+    console.log(INDEX)
 
     const server = express()
         .use((req, res) => res.sendFile(INDEX) )
