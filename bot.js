@@ -35,10 +35,10 @@ fs.readdir("./cmds/", (err, files) => {
             jsfiles1.forEach((f, i) => {
                 let props = require(`./cmds/${folder}/${f}`);
                 console.log(`  ${i + 1}: ${f} loaded`);
-                bot.commands.set(props.help.name, props)
+                bot.commands.set(props.help.name.toLowerCase(), props)
                 if(props.conf.aliases.length > 0) {
                     props.conf.aliases.forEach(alias => {
-                        bot.aliases.set(alias, props.help.name)
+                        bot.aliases.set(alias, props.help.name.toLowerCase())
                     })
                 }
             })

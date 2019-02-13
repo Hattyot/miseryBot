@@ -1,6 +1,7 @@
 const raffle = require("../../modules/data.js").raffle;
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
+
     raffle.findOne({user_ID: message.author.id}, (err, data) => {
         if(!data) {
             let raffleID = (Math.round(Math.random() * 10000000) * Date.now())/5
