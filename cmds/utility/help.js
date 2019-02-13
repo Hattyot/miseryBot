@@ -38,6 +38,7 @@ module.exports.run = async (bot, message, args) => {
 
         for(j = 0; j < categories.length; j++) {
             if(categories[j] === "Dev") continue;
+            if(!categories[j]) continue
             if(message.guild.id !== "540846100332937240") {
                 if(categories[j].substring(0, 4) === "KKK ") continue
             }
