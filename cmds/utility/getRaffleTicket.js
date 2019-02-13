@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             newRaffleTicket.save()
                 .then(r => console.log(r))
                 .catch(e => console.log(e));
-            embedMaker.message(message, `:tickets: You raffle ticket number is: **${raffleID}**`)
+            embedMaker.message(message, `:tickets: Your raffle ticket number is: **${raffleID}**`)
         }else {
             let raffleID = data.raffle_ID
             embedMaker.message(message, `:tickets: Your raffle ticket number is: **${raffleID}**`)
