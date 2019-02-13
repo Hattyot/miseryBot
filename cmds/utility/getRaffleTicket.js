@@ -1,9 +1,9 @@
 const raffle = require("../../modules/data.js").raffle;
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
-    if(message.member.roles.has("530728428975161344")) {
-        return embedMaker.message(message, `Sorry staff can't enter the raffle`)
-    }
+    // if(message.member.roles.has("530728428975161344")) {
+    //     return embedMaker.message(message, `Sorry staff can't enter the raffle`)
+    // }
     raffle.findOne({user_ID: message.author.id}, (err, data) => {
         if(!data) {
             let raffleID = (Math.round(Math.random() * 100000) * Date.now())/20
@@ -14,10 +14,10 @@ module.exports.run = async (bot, message, args) => {
             newRaffleTicket.save()
                 .then(r => console.log(r))
                 .catch(e => console.log(e));
-            embedMaker.message(message, `You raffle ticket number is: **${raffleID}**`)
+            embedMaker.message(message, `:tickets: You raffle ticket number is: **${raffleID}**`)
         }else {
             let raffleID = data.raffle_ID
-            embedMaker.message(message, `You already got a raffle ticket: **${raffleID}**`)
+            embedMaker.message(message, `:tickets: Your raffle ticket number is: **${raffleID}**`)
         }
     })
 }
