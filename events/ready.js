@@ -1,24 +1,27 @@
-const http = require("http")
-const fs = require('fs');
+const express = require('express');
+const SocketServer = require('ws').Server;
+const path = require('path');
 module.exports = async (bot) => {
     console.log("Bot ready");
     bot.user.setActivity(`%help`)
 
-    http.createServer((req, res) => {
-        let responseCode = 404;
-        let content = '404 Error';
+    const PORT = process.env.PORT || 3000;
+    const INDEX = path.join(__dirname, 'index.html');
 
-        if (req.url === '/') {
-            responseCode = 200;
-            content = fs.readFileSync('../../index.html');
-        }
+    const server = express()
+        .use((req, res) => res.sendFile(INDEX) )
+        .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-        res.writeHead(responseCode, {
-            'content-type': 'text/html;charset=utf-8',
+    const wss = new SocketServer({ server });
+
+    wss.on('connection', (ws) => {
+        console.log('Client connected');
+        ws.on('close', () => console.log('Client disconnected'));
+    });
+
+    setInterval(() => {
+        wss.clients.forEach((client) => {
+            client.send(new Date().toTimeString());
         });
-
-        res.write(content);
-        res.end();
-    })
-        .listen(3000);
+    }, 1000);
 };

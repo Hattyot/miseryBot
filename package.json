@@ -11,13 +11,16 @@
   "dependencies": {
     "cards": "^1.0.1",
     "discord.js": "^11.4.2",
+    "express": "^4.16.4",
     "http": "0.0.0",
     "jimp": "^0.6.0",
     "moment": "^2.23.0",
     "mongoose": "^5.4.6",
+    "path": "^0.12.7",
     "reaction-core": "^2.2.0",
     "relevant-urban": "^2.0.0",
     "request": "^2.88.0",
-    "underscore-node": "^0.1.2"
+    "underscore-node": "^0.1.2",
+    "ws": "^6.1.3"
   }
 }
