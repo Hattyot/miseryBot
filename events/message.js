@@ -6,7 +6,7 @@ module.exports = async (bot, message) => {
     if(message.author.bot) return;
 
     let messageArray = message.content.split(" ");
-    let command = messageArray[0];
+    let command = messageArray[0].toLowerCase();
     let args = messageArray.slice(1);
     let cmd = bot.commands.get(command.slice(bot.config[message.guild.id].prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config[message.guild.id].prefix.length)))
 
