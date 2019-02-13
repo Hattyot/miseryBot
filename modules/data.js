@@ -13,7 +13,12 @@ moneySchema = mongoose.Schema({
     inBank: Number
 });
 
+raffleSchema = mongoose.Schema({
+    user_ID: String,
+    raffle_ID: Number
+});
 module.exports = {
     level: mongoose.model("level", levelSchema),
     money: mongoose.model("money", moneySchema),
+    raffle:  mongoose.model("raffle", raffleSchema),
 };
