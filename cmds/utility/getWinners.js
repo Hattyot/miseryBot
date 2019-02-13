@@ -18,11 +18,11 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "getRaffleTicket",
+    name: "getWinners",
     cat: "Utility",
-    description: "Get your ticket with the raffle",
-    usage: `getRaffleTicket`,
-    examples: [`getRaffleTicket`]
+    description: "Get Raffle Winners",
+    usage: `getWinners`,
+    examples: [`getWinners`]
 }
 
 module.exports.conf = {
