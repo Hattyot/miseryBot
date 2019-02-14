@@ -1,9 +1,9 @@
 const raffle = require("../../modules/data.js").raffle;
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
-    // if(message.member.roles.has("530728428975161344")) {
-    //     return embedMaker.message(message, `Sorry staff can't enter the raffle`)
-    // }
+    if(message.member.roles.has("530728428975161344")) {
+        return embedMaker.message(message, `Sorry staff can't enter the raffle`)
+    }
     raffle.findOne({user_ID: message.author.id}, (err, data) => {
         if(!data) {
             let raffleID = Math.round(Math.round((Math.random() * 100000) * Date.now())/20)
