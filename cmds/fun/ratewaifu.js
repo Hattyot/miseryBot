@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
         sum += Math.floor(content[i].charCodeAt())
     }
     let rating = sum % 101
-    return message.channel.send(`I rate <@${member.user.id}> with a **${rating}/100**`)
+    return message.channel.send(`I rate ${member.user.username} with a **${rating}/100**`)
 };
 
 module.exports.help = {
