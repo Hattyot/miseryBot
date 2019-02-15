@@ -7,7 +7,12 @@ module.exports.run = async (bot, message, args) => {
     for(let i = 0; i < content.length; i++) {
         sum += Math.floor(content[i].charCodeAt())
     }
-    let rating = sum % 101
+    let rating = sum % 101;
+    if(rating < 20) {
+        rating += 60;
+    }else if(rating < 40) {
+        rating += 30;
+    }
     return message.channel.send(`I rate ${member.user.username} with a **${rating}/100**`)
 };
 
