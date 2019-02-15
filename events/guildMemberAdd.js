@@ -4,7 +4,7 @@ module.exports = async (bot, member) => {
     console.log(member.user.tag)
     let guild = member.guild;
     let welcomeChannel = "522979850651435013";
-    let welcomeMessage = `Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108>. If you have any questions, feel free to ask a staff member`;
+    let welcomeMessage = `Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108> and check <#533908134805372939> for updates and the raffle we're currently running. If you have any questions, feel free to ask a staff member`;
     let welcomeTexts = [
         "Enjoy Your Stay!",
         "Welcome To Hell!",
