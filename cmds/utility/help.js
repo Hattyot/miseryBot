@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
         let embed = new Discord.RichEmbed()
             .setColor(bot.config[message.guild.id].embedColor)
             .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
-            .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config.prefix}${examples}`);
+            .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}`);
         message.channel.send(embed)
     }else {
         let helpEmbed = new Discord.RichEmbed()
