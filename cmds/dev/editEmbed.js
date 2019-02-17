@@ -4,8 +4,7 @@ module.exports.run = async (bot, message, args) => {
     let channel = guild.channels.get("524064741543641108");
     function rules() {
         channel.fetchMessage("536196178136662016").then(message => {
-            let oldEmbed = message.embeds[0]
-            let newEmbed = new Discord.RichEmbed(oldEmbed)
+            let newEmbed = new Discord.RichEmbed()
                 .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
                 .setAuthor("(`◕‿◕´)  Welcome to Misery's Box", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .setDescription(`** **\nLet's be a fun, loving and positive community that supports one another regardless of race, religion or social/political views.\n** **`)
@@ -26,11 +25,10 @@ module.exports.run = async (bot, message, args) => {
     }
     function info() {
         channel.fetchMessage("536218699049336863").then(message => {
-            let oldEmbed = message.embeds[0]
-            let newEmbed = new Discord.RichEmbed(oldEmbed)
+            let newEmbed = new Discord.RichEmbed()
             // .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
                 .setAuthor("(`◕‿◕´)  Just some extra info", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-                .addField("**1. Do you want to become a staff member?**", "Fill out this form: https://goo.gl/7L5JTo\n** **")
+                .addField("**1. Do you want to become a staff member?**", "Fill out this form: https://goo.gl/UhWfJh\n** **")
                 .addField("**2. Do you have complaints or compliments for a staff member?**", "Fill out this form: https://goo.gl/wZcW8k\n** **")
                 .addField("**3. Do you have a suggestion for the server?**", "Fill out this form: https://goo.gl/VYTgrH\n** **")
                 .setFooter("If you have any further questions ask a staff member", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
@@ -40,8 +38,7 @@ module.exports.run = async (bot, message, args) => {
     }
     function roles1() {
         channel.fetchMessage("536218716694642689").then(message => {
-            let oldEmbed = message.embeds[0]
-            let newEmbed = new Discord.RichEmbed(oldEmbed)
+            let newEmbed = new Discord.RichEmbed()
                 .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
                 .setAuthor("(`◕‿◕´)  Staff Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .addField("**1. Misery Box** :pig: :package:", "Mr. Misery Box himself, Reducing misery by zero point zero!\n** **")
@@ -57,8 +54,7 @@ module.exports.run = async (bot, message, args) => {
     }
     function roles2() {
         channel.fetchMessage("536218737494458371").then(message => {
-            let oldEmbed = message.embeds[0]
-            let newEmbed = new Discord.RichEmbed(oldEmbed)
+            let newEmbed = new Discord.RichEmbed()
                 .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
                 .setAuthor("(`◕‿◕´)  Level Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .addField("**1. Cheerful Box** :smile: ", "Achieved at Level 1")
