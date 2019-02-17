@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 
     }
     function info() {
-        channel.fetchMessage("536218699049336863").then(message => {
+        channel.fetchMessage("542032188389195806").then(message => {
             let newEmbed = new Discord.RichEmbed()
             // .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
                 .setAuthor("(`◕‿◕´)  Just some extra info", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
