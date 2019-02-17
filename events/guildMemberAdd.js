@@ -10,7 +10,7 @@ module.exports = async (bot, member) => {
         "Welcome To Hell!",
         "We Expected You",
         "One Of Us!",
-        "Leave Your Guns.",
+        "M'Lady",
         "Don't Advertise MLMs",
         "Don't Be A Hater",
         "Challenger Approaches",
