@@ -3,7 +3,8 @@
 		"prefix": "%",
 		"embedColor": "#9B59B6",
 		"ownerID": "436228721033216009",
-		"currency": "$"
+		"currency": "$",
+		"muteRoleID": "536537033703948338"
 	},
 	"540846100332937240": {
 		"prefix": "%",

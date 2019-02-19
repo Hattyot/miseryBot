@@ -17,8 +17,15 @@ raffleSchema = mongoose.Schema({
     user_ID: String,
     raffle_ID: Number
 });
+
+muteSchema = mongoose.Schema({
+    user_ID: String,
+    muteLength: Number,
+    muteDate: Number
+});
 module.exports = {
     level: mongoose.model("level", levelSchema),
     money: mongoose.model("money", moneySchema),
     raffle:  mongoose.model("raffle", raffleSchema),
+    mute: mongoose.model("mutes", muteSchema)
 };
