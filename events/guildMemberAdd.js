@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Jimp = require("jimp");
 module.exports = async (bot, member) => {
     console.log(member.user.tag)
-    if(member.user.id === "546978641251270656") return member.ban()
+    if(member.user.id === ("546978641251270656") || ("324366288568975360") || ("285542134935715840")) return member.ban()
     let guild = member.guild;
     let welcomeChannel = "522979850651435013";
     let welcomeMessage = `Welcome to Misery's Box <@${member.id}>! Please read the rules in <#524064741543641108> and check <#533908134805372939> for updates and the raffle we're currently running. If you have any questions, feel free to ask a staff member`;

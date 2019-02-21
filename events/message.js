@@ -4,7 +4,7 @@ const embedMaker = require("../modules/embed.js");
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") return;
     if(message.author.bot) return;
-
+    if(message.type === `PINS_ADD`) return message.delete()
     let messageArray = message.content.split(" ");
     let command = messageArray[0].toLowerCase();
     let args = messageArray.slice(1);
