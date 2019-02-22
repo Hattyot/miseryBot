@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
             ]
             let firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
             let secondWinner = `<@${data[winningNumbers[1]].user_ID}>`
-            let thirdWinner = `<@${data[winningNumbers[2]].raffle_ID}>`
+            let thirdWinner = `<@${data[winningNumbers[2]].user_ID}>`
 
             embedMaker.message(message, `1st place winner: ${firstWinner}\n2nd place winner: ${secondWinner}\n3rd place winner: ${thirdWinner}`)
         })
