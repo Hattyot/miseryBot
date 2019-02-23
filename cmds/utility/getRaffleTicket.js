@@ -1,6 +1,8 @@
 const raffle = require("../../modules/data.js").raffle;
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
+    let enabled = false
+    if(!enabled) return
     if(message.member.roles.has("530728428975161344")) {
         return embedMaker.message(message, `Sorry staff can't enter the raffle`)
     }
