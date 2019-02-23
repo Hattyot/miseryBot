@@ -89,7 +89,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "giveaway",
-    cat: "Utility",
+    cat: "Staff",
     description: "Starts giveaway creation process",
     usage: `giveaway`,
     examples: [`giveaway`]
