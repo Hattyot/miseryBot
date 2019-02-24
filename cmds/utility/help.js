@@ -40,9 +40,6 @@ module.exports.run = async (bot, message, args) => {
             if(categories[j] === "Staff") continue;
             if(categories[j] === "Join") continue;
             if(!categories[j]) continue
-            if(message.guild.id !== "540846100332937240") {
-                if(categories[j].substring(0, 4) === "KKK ") continue
-            }
             let cmds = commands.filter(c => c.help.cat === categories[j]);
             let cmdNames = cmds.map(c => `\`${c.help.name}\``);
             helpEmbed.addField(`>${categories[j]}`, cmdNames.join(" **|** "))
