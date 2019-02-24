@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
         }
 
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
             .setImage(urls[randomImageNumber]);
         message.channel.send(embed)
     })

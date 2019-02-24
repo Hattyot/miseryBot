@@ -4,7 +4,7 @@ module.exports = {
     message: (message, text, options, callback) => {
         options = options || {};
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(`${text}`)
             .setTimestamp();
@@ -33,7 +33,7 @@ module.exports = {
     },
     image: (message, link) => {
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
             .setImage(link)
             .setTimestamp()
             .setFooter(`${message.author.tag}`, message.author.displayAvatarURL);
@@ -42,7 +42,7 @@ module.exports = {
     embed: (message, text, options) => {
         options = options || {};
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
             .setAuthor(message.author.tag, message.author.displayAvatarURL)
             .setDescription(`${text}`)
             .setTimestamp();
@@ -69,18 +69,18 @@ module.exports = {
         let usage = command.help.usage;
         let examples = command.help.examples.join(`\n${bot.config[message.guild.id].prefix}    `);
         let exampleText;
-        command.help.examples.length > 0 ?  exampleText = "Examples" : exampleText = "Example";
+        command.help.examples.length === 1 ?  exampleText = "Examples" : exampleText = "Example";
 
         if (param) {
             if (param.startsWith("[" || "(") && param.endsWith("]" || ")")) {
                 let embed = new Discord.RichEmbed()
-                    .setColor(bot.config[message.guild.id].embedColor)
+                    .setColor(bot.config[message.guild.id].colors.default)
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
-                    .setDescription(`Invalid ${param} argument given.\n\n**Usage:**\n    ${bot.config[message.guild.id].prefix}${command.help.usage}`);
+                    .setDescription(`Invalid \`${param}\` argument given.\n\n**Usage:**\n    *${bot.config[message.guild.id].prefix}${command.help.usage}*`);
                 message.channel.send(embed)
             } else {
                 let embed = new Discord.RichEmbed()
-                    .setColor(bot.config[message.guild.id].embedColor)
+                    .setColor(bot.config[message.guild.id].colors.default)
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                     .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
                     .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}\n\n${param}`);
@@ -88,7 +88,7 @@ module.exports = {
             }
         } else {
             let embed = new Discord.RichEmbed()
-                .setColor(bot.config[message.guild.id].embedColor)
+                .setColor(bot.config[message.guild.id].colors.default)
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                 .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
                 .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n    ${bot.config.prefix}${examples}`);

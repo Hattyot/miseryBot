@@ -35,7 +35,7 @@ module.exports.run = async (bot, message) => {
         .addField("Bots:", botcount, true)
         .addField("Created At:", servercreated,)
         .addField(`Role List [${rolenum}]:`, `${roles}`)
-        .setColor(bot.config[message.guild.id].embedColor)
+        .setColor(bot.config[message.guild.id].colors.default)
         .setTimestamp()
         .setFooter(`ID: ${guild.id}`)
         .setAuthor(`${guild.name}`, bot.icons[guild.id]);

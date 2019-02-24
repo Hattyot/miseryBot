@@ -58,18 +58,29 @@ module.exports.run = async (bot, message, args) => {
             .setColor("#9B59B6");
         message.channel.send(newEmbed);
     }
+    function join() {
+        let newEmbed = new Discord.RichEmbed()
+            .setAuthor("Welcome!", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+            .setDescription(`**Please type \`${bot.config[message.guild.id].prefix}age [your age]\` to get access to the rest of the chats.\ne.g. \`%age 17\`**`)
+            .setFooter(`If you're having troubles please contact a staff member`)
+            .setColor("#9B59B6");
+        message.channel.send(newEmbed);
+    }
     if(message.author.id === bot.config[message.guild.id].ownerID) {
-        if(args[0] === "rules") {
-            rules()
-        }else if(args[0] === "info") {
-            info()
-        }else if(args[0] === "roles1") {
-            roles1()
-        }else if(args[0] === "roles2") {
-            roles2()
+        switch (args[0]) {
+            case "rules":
+                return rules()
+            case "info":
+                return info()
+            case "roles1":
+                return roles1()
+            case "roles2":
+                return roles2()
+            case "join":
+                return join()
+            
         }
     }
-
 };
 
 module.exports.help = {
@@ -83,4 +94,5 @@ module.exports.help = {
 module.exports.conf = {
     enabled: true,
     aliases: [],
+    test: true
 };

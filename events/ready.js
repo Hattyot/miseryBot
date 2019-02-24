@@ -1,8 +1,8 @@
 const mute = require("../modules/data.js").mute
 const Discord = require("discord.js")
+const ms = require("../modules/ms.js")
 module.exports = async (bot) => {
     console.log("Bot ready");
-    if(bot.user.id === "548436033390379008") return
     bot.user.setActivity(`%help`)
 
     let guild = bot.guilds.get("522979850651435008")
@@ -26,13 +26,14 @@ module.exports = async (bot) => {
 
     function unmute(_member) {
         let muteRole = guild.roles.get(bot.config[guild.id].muteRoleID)
-        if(muteRole) member.removeRole(muteRole)
-        mute.findOneAndRemove({user_ID: member.user.id}, (err, data) => {
+        if(muteRole) _member.removeRole(muteRole)
+        mute.findOneAndRemove({user_ID: _member.user.id}, (err, data) => {
             if(err) return console.log(err)
         })
         let embed2 = new Discord.RichEmbed()
-            .setDescription(`You have been unmuted **Server:**${guild.name}\n**Unmuted By:** The Bot\n**Reason:** Automatic Unmute`)
-            .setColor(bot.config[guild.id].embedColor)
+            .setAuthor(`You have been unmuted`)
+            .setDescription(`**Server:** *${guild.name}*\n**Unmuted By:** *The Bot*\n**Reason:** *Automatic Unmute*`)
+            .setColor(bot.config[guild.id].colors.green)
             .setTimestamp()
             .setFooter(`Unmuted At:`)
         _member.send(embed2)

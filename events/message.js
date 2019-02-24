@@ -16,8 +16,10 @@ module.exports = async (bot, message) => {
             if(!cmd.conf.test) return
         }
         if(message.content.startsWith(bot.config[message.guild.id].prefix)) {
-            cmd.run(bot, message, args);
+            await cmd.run(bot, message, args);
         }
+    }else {
+        if(message.channel.id === "549186081007075328") message.delete()
     }
 
     //kkk level system

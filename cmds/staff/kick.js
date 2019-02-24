@@ -3,7 +3,7 @@ const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("KICK_MEMBERS")) return
 
-    let kickMember = message.mentions.members.first()
+    let kickMember = getKickMember()
     let reason = args.slice(1).join(" ")
 
     if(!kickMember) return embedMaker.command(message, "[user]")
@@ -14,14 +14,27 @@ module.exports.run = async (bot, message, args) => {
     }
 
     let embed = new Discord.RichEmbed()
-        .setColor(bot.config[message.guild.id].embedColor)
+        .setColor(bot.config[message.guild.id].colors.orange)
         .setAuthor(`You have been kicked`)
         .setDescription(`**Server:** ${message.guild.name}\n**Kicked By:** <@${message.author.id}>\n**Reason:** ${reason}`)
         .setFooter(`Kicked At:`)
         .setTimestamp();
-    kickMember.send(embed).then(() => {
-        return kickMember.kick(`${reason}`)
-    })
+    kickMember.send(embed)
+        .then(() => {
+            embedMaker.message(message, `<@${kickMember.user.id}> has been kicked. Reason: **${reason}**`)
+            return kickMember.kick(`${reason}`)
+        })
+
+
+    function getKickMember() {
+        let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
+        if (!kickMember && args[0]) {
+            let regex = new RegExp(`(${args[0]})`, `i`)
+            let members = message.guild.members.filter(m => m.user.username.match(regex))
+            if(members.size === 1) return members.first()
+        }
+        return kickMember
+    }
 
 }
 
@@ -34,7 +47,7 @@ module.exports.help = {
 }
 
 module.exports.conf = {
-    enabled: false,
+    enabled: true,
     aliases: [],
-    cooldown: "3 Seconds",
+    cooldown: "3 Seconds"
 };

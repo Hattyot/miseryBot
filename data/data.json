@@ -1,10 +1,15 @@
 {
 	"522979850651435008": {
 		"prefix": "%",
-		"embedColor": "#9B59B6",
 		"ownerID": "436228721033216009",
 		"currency": "$",
 		"muteRoleID": "536537033703948338",
-		"welcomeChannel": "522979850651435013"
+		"welcomeChannel": "522979850651435013",
+		"colors": {
+			"default": "#9B59B6",
+			"red": "#FF0000",
+			"green": "#00CC00",
+			"orange": "#FFA500"
+		}
 	}
 }
