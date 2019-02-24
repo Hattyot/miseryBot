@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
         let exampleText;
         command.help.examples.length > 0 ? exampleText = "Examples" : exampleText = "Example"
         let embed = new Discord.RichEmbed()
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
             .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
             .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}`);
         message.channel.send(embed)
@@ -33,7 +33,7 @@ module.exports.run = async (bot, message, args) => {
         let helpEmbed = new Discord.RichEmbed()
             .setTitle("**>Commands**")
             .setDescription(`A list of available commands.\nFor additional info on a command, type \`${bot.config[message.guild.id].prefix}help [command]\``)
-            .setColor(bot.config[message.guild.id].embedColor);
+            .setColor(bot.config[message.guild.id].colors.default);
 
         for(j = 0; j < categories.length; j++) {
             if(categories[j] === "Dev") continue;

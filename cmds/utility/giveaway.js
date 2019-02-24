@@ -77,7 +77,7 @@ module.exports.run = async (bot, message, args) => {
             .setDescription(`React with :tada: to enter!\nTime Left: ${ms(time, { long: true })}`)
             .setFooter(footerMessage || "Ends At")
             .setTimestamp(endDate)
-            .setColor(bot.config[message.guild.id].embedColor)
+            .setColor(bot.config[message.guild.id].colors.default)
         channel.send(":tada: **GIVEAWAY** :tada:", {embed: embed}).then(m => {
             m.react("🎉")
             giveaway.setMessage(m)
