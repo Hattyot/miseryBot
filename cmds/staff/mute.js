@@ -79,7 +79,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "mute",
-    cat: "Staff",
+    cat: "Staff - Moderation",
     description: "Mute a user",
     usage: `mute [user] [time] [reason]`,
     examples: [`mute @Hattyot 2h being rude`, `mute @Hattyot 2d broke several rules`]

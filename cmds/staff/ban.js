@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "ban",
-    cat: "Staff",
+    cat: "Staff - Moderation",
     description: "Ban a member",
     usage: `ban [user] [reason]`,
     examples: [`ban @Hattyot Stealing hearts and selling them on the black market`]
