@@ -19,7 +19,7 @@ module.exports = async (bot, message) => {
             await cmd.run(bot, message, args);
         }
     }else {
-        if(message.channel.id === "549186081007075328") message.delete()
+        if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
     }
 
     //kkk level system
