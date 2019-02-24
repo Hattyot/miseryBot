@@ -2,3 +2,4 @@
 /.idea
 nodemon.json
 start.bat
+bot.js
