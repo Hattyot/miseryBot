@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const bot = require("../../bot.js");
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     let commands = bot.commands
@@ -39,6 +38,7 @@ module.exports.run = async (bot, message, args) => {
         for(j = 0; j < categories.length; j++) {
             if(categories[j] === "Dev") continue;
             if(categories[j] === "Staff") continue;
+            if(categories[j] === "Join") continue;
             if(!categories[j]) continue
             if(message.guild.id !== "540846100332937240") {
                 if(categories[j].substring(0, 4) === "KKK ") continue

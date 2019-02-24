@@ -11,6 +11,10 @@ module.exports = async (bot, message) => {
     let cmd = bot.commands.get(command.slice(bot.config[message.guild.id].prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config[message.guild.id].prefix.length)))
 
     if(cmd) {
+        if(!cmd.conf.enabled) return
+        if(bot.user.id === "548436033390379008") {
+            if(!cmd.conf.test) return
+        }
         if(message.content.startsWith(bot.config[message.guild.id].prefix)) {
             cmd.run(bot, message, args);
         }
