@@ -2,6 +2,7 @@ const mute = require("../modules/data.js").mute
 const Discord = require("discord.js")
 module.exports = async (bot) => {
     console.log("Bot ready");
+    if(bot.user.id === "548436033390379008") return
     bot.user.setActivity(`%help`)
 
     let guild = bot.guilds.get("522979850651435008")
