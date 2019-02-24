@@ -23,7 +23,7 @@ module.exports.run = async (bot, message, args) => {
     banMember.send(embed)
         .then(() => {
             embedMaker.message(message, `<@${banMember.user.id}> has been banned. Reason: **${reason}**`)
-            return banMember.ban()
+            return banMember.ban({reason: reason})
          })
         .catch(error => {console.log(error)})
 

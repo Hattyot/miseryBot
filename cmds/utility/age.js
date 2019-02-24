@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
 
     if(memberAge < 13) {
         return member.send(`Sorry, but discord is 13+ and we are required to ban you`).then(() => {
-            member.ban()
+            member.ban({reason: 'He needed to go' })
         })
     }else if(memberAge >= 18) {
         let adultRole = message.guild.roles.get(`530678409706209291`)
