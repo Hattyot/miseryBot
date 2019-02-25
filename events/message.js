@@ -5,7 +5,7 @@ module.exports = async (bot, message) => {
     if (message.channel.type === "dm") return;
     if(message.author.bot) return;
     if(message.type === `PINS_ADD`) return message.delete()
-    let messageArray = message.content.split(" ");
+    let messageArray = message.content.replace(/ +(?= )/g, "").split(" ");
     let command = messageArray[0].toLowerCase();
     let args = messageArray.slice(1);
     let cmd = bot.commands.get(command.slice(bot.config[message.guild.id].prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config[message.guild.id].prefix.length)))
