@@ -33,6 +33,6 @@ module.exports.help = {
 }
 
 module.exports.conf = {
-    enabled: true,
+    enabled: false,
     aliases: []
 };

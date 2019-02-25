@@ -40,7 +40,7 @@ module.exports.run = async (bot, message, args) => {
             if(categories[j].match(/(Staff)/i)) continue;
             if(categories[j] === "Join") continue;
             if(!categories[j]) continue
-            let cmds = commands.filter(c => c.help.cat === categories[j]);
+            let cmds = commands.filter(c => c.help.cat === categories[j] && c.conf.enabled);
             let cmdNames = cmds.map(c => `\`${c.help.name}\``);
             helpEmbed.addField(`>${categories[j]}`, cmdNames.join(" **|** "))
         }
