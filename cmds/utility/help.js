@@ -37,7 +37,7 @@ module.exports.run = async (bot, message, args) => {
 
         for(j = 0; j < categories.length; j++) {
             if(categories[j] === "Dev") continue;
-            if(categories[j] === "Staff") continue;
+            if(categories[j].match(/(Staff)/i)) continue;
             if(categories[j] === "Join") continue;
             if(!categories[j]) continue
             let cmds = commands.filter(c => c.help.cat === categories[j]);
