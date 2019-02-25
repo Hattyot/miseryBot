@@ -16,6 +16,7 @@ module.exports = async (bot, message) => {
         if(cmd.help.cat.match(/Staff/i) && !message.member.roles.has("530728428975161344")) return
 
         if(message.content.startsWith(bot.config[message.guild.id].prefix)) {
+            if(message.channel.id === "522979850651435013") return
             await cmd.run(bot, message, args);
         }
     }else {
