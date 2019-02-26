@@ -54,7 +54,7 @@ module.exports.run = async (bot, message, args) => {
 
     let member = list[message.mentions.members.first().id]
     if(!member) return embedMaker.command(message, "[Staff Member]")
-    embedMaker.message(message, `<@${message.mentions.first().id}>\n**Age:**${member.age}\n**Time Zone:**${member.timeZone}`)
+    embedMaker.message(message, `<@${message.mentions.members.first().id}>\n**Age:**${member.age}\n**Time Zone:**${member.timeZone}`)
 };
 
 module.exports.help = {
