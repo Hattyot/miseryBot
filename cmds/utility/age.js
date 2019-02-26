@@ -32,6 +32,7 @@ module.exports.run = async (bot, message, args) => {
         "Don't Be A Hater",
         "Challenger Approaches",
         "Ha GAYYYYYY!!",
+        "I SMELL PENNIES",
         "This Person Is Cool",
         "Heyyyyyyyyyy",
         "Run While You Can!"
