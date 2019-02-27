@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "staffHelp",
-    cat: "Utility",
+    cat: "Staff - Utility",
     description: "list of staff commands",
     usage: "staffHelp (command)",
     examples: ["staffHelp ban"]
