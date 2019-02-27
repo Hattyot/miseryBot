@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
+    if(!args[0]) return embedMaker.command(message)
     let list = {
         "458311006020435988": {
             age: 26,
