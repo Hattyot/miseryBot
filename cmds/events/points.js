@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
         }else {
            pointsAmount = data.amount 
         }
-        embedMaker.message(message, `You currently have **${pointsAmount} points**.`)    
+        embedMaker.message(message, `You currently have **${pointsAmount}** points.`)    
     })
 
 }

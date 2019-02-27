@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
         
         raffle.find({user_ID: message.author.id}, (err, data) => {
             if(pointsAmount < 5) {
-                embedMaker.message(message, `You don't have enough points to buy a new raffle ticket, you need 5 to buy 1.`)
+                embedMaker.message(message, `You don't have enough points to buy a new raffle ticket, you need **5** to buy one.`)
             }else {
                 let raffleID = Math.round(Math.round((Math.random() * 100000) * Date.now())/20)
                 let newRaffleTicket = new raffle({
