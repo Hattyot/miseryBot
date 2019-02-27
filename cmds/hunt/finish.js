@@ -6,6 +6,14 @@ module.exports.run = async (bot, message, args) => {
     if(!key) return
     if(key !== "149659964876678") return
     huntWinners.find({}, (err, data) => {
+        let alreadyWon
+        for(let i = 0; i < data.length; i++) {
+            if(data[i].user_ID === message.author.id) {
+                alreadyWon = true
+                break;
+            }
+        }
+        if(alreadyWon) return message.member.send(`You've already claimed it once, what you doing boi.`)
         if(data.size >= 5) {
             return message.member.send(`Sorry 5 winners have already claimed this, you're too late`)
         }else {
