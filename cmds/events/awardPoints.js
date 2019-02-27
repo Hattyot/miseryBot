@@ -50,6 +50,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: [],
-    test: true
+    aliases: []
 };
