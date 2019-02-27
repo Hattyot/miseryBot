@@ -7,14 +7,17 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message)
 
     let muteMember = getmuteMember()
-    let time = ms(args[1])
+    let time = args[1]
     let reason = args.slice(2).join(" ")
     let muteRole = message.guild.roles.get(bot.config[message.guild.id].muteRoleID)
 
+    if(/^\d+$/.test(args[1])) return embedMaker.command(message, "[time]")
     if(!muteMember) return embedMaker.command(message, "[user]")
     if(!time) return embedMaker.command(message, "[time]")
     if(!reason) return embedMaker.command(message, "[reason]")
     if(!time) return embedMaker.command(message, "[time]")
+
+    time = ms(time)
 
     if(message.member.highestRole.position <= muteMember.highestRole.position) {
         return embedMaker.message(message, `You can't mute a user who has a higher or the same role as you`)
@@ -53,7 +56,7 @@ module.exports.run = async (bot, message, args) => {
         let muteMember = message.mentions.members.first() || message.guild.members.get(args[0]);
         if (!muteMember && args[0]) {
             let regex = new RegExp(`(${args[0]})`, `i`)
-            let members = message.guild.members.filter(m => m.user.username.match(regex))
+            let members = message.guild.members.filter(m => m.user.tag.match(regex))
             if(members.size === 1) return members.first()
         }
         return muteMember
@@ -82,11 +85,11 @@ module.exports.help = {
     cat: "Staff - Moderation",
     description: "Mute a user",
     usage: `mute [user] [time] [reason]`,
-    examples: [`mute @Hattyot 2h being rude`, `mute @Hattyot 2d broke several rules`]
+    examples: [`mute @Hattyot 2h being rude`, `mute Hattyot 2d broke several rules`, `mute 436228721033216009 10m spam`]
 }
 
 module.exports.conf = {
     enabled: true,
     aliases: [],
-    cooldown: "3 Seconds",
+    cooldown: "3 Seconds"
 };

@@ -23,9 +23,16 @@ muteSchema = mongoose.Schema({
     muteLength: Number,
     muteDate: Number
 });
+
+pointSchema = mongoose.Schema({
+    user_ID: String,
+    amount: Number
+});
+
 module.exports = {
     level: mongoose.model("level", levelSchema),
     money: mongoose.model("money", moneySchema),
     raffle:  mongoose.model("raffle", raffleSchema),
-    mute: mongoose.model("mutes", muteSchema)
+    mute: mongoose.model("mutes", muteSchema),
+    points: mongoose.model("points", pointSchema)
 };

@@ -17,6 +17,7 @@ module.exports.run = async (bot, message, args) => {
 
     if(args[0]){
         let command = bot.commands.get(args[0])
+        console.log(command)
         if(!command) return embedMaker.message(message, "That's not a valid command.")
         let name = command.help.name
         let description = command.help.description
@@ -60,4 +61,5 @@ module.exports.help = {
 module.exports.conf = {
     enabled: true,
     aliases: [],
+    test: true
 };

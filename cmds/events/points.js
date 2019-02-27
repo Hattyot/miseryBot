@@ -1,0 +1,38 @@
+const { points } = require("../../modules/data.js")
+const embedMaker = require("../../modules/embed.js")
+module.exports.run = async (bot, message, args) => {
+    let pointsAmount
+    if(message.member.roles.has("530728428975161344")) {
+        return embedMaker.message(message, `Sorry staff can't have points`)
+    }
+    points.findOne({user_ID: message.author.id}, (err, data) => {
+        if(!data) {
+            let newPoints = new points({
+                user_ID: `${message.author.id}`,
+                amount: 0
+            });
+            newPoints.save()
+                .then(r => console.log(r))
+                .catch(e => console.log(e));
+            pointsAmount = 0
+        }else {
+           pointsAmount = data.amount 
+        }
+        embedMaker.message(message, `You currently have **${pointsAmount} points**.`)    
+    })
+
+}
+
+module.exports.help = {
+    name: "points",
+    cat: "Events",
+    description: "See how many points you have",
+    usage: `points`,
+    examples: [`points`]
+}
+
+module.exports.conf = {
+    enabled: true,
+    aliases: [],
+    test: true
+};

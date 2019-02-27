@@ -59,7 +59,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "staffInfo",
-    cat: "Staff",
+    cat: "Staff - Info",
     description: "Get age and timezone of a staff member",
     usage: "staffInfo [Staff Member]",
     examples: ["staffInfo Hattyot"]
@@ -68,4 +68,5 @@ module.exports.help = {
 module.exports.conf = {
     enabled: true,
     aliases: [],
+    test: true
 };
