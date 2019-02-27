@@ -40,6 +40,7 @@ module.exports.run = async (bot, message, args) => {
             if(categories[j] === "Dev") continue;
             if(categories[j].match(/(Staff)/i)) continue;
             if(categories[j] === "Join") continue;
+            if(categories[j] === "Hunt") continue;
             if(!categories[j]) continue
             let cmds = commands.filter(c => c.help.cat === categories[j] && c.conf.enabled);
             let cmdNames = cmds.map(c => `\`${c.help.name}\``);

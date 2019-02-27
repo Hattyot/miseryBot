@@ -29,10 +29,20 @@ pointSchema = mongoose.Schema({
     amount: Number
 });
 
+pointSchema = mongoose.Schema({
+    user_ID: String,
+    amount: Number
+});
+
+huntWinnersSchema = mongoose.Schema({
+    user_ID: String
+});
+
 module.exports = {
     level: mongoose.model("level", levelSchema),
     money: mongoose.model("money", moneySchema),
     raffle:  mongoose.model("raffle", raffleSchema),
     mute: mongoose.model("mutes", muteSchema),
-    points: mongoose.model("points", pointSchema)
+    points: mongoose.model("points", pointSchema),
+    huntWinners: mongoose.model("huntWinners", huntWinnersSchema)
 };
