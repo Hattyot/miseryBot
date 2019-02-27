@@ -84,7 +84,7 @@ module.exports = {
                 .setColor(bot.config[message.guild.id].colors.default)
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                 .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
-                .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config.prefix}${examples}`);
+                .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}`);
             message.channel.send(embed)
         }
     },
