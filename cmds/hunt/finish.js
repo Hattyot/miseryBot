@@ -17,8 +17,8 @@ module.exports.run = async (bot, message, args) => {
         if(data.size >= 5) {
             return message.member.send(`Sorry 5 winners have already claimed this, you're too late`)
         }else {
-            message.member.send(`Congrats, you did it! :tada: You've won 15 points!`)
-            points.findOneAndUpdate({user_ID: user.id}, {$inc: {amount: 15}}, (err, data) => {
+            message.member.send(`Congrats, you did it! :tada: You've won 20 points!`)
+            points.findOneAndUpdate({user_ID: user.id}, {$inc: {amount: 20}}, (err, data) => {
                 if(err) return console.log(err)
             });
             let newHuntWinner = new huntWinners({
