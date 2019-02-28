@@ -6,7 +6,9 @@ module.exports.run = async (bot, message, args) => {
     if(member.roles.has(potatoRole.id)) return
 
     let memberAge = Math.floor(args[0])
-    if(!memberAge) return embedMaker.command(message, `[your age]`)
+    if(!memberAge) return embedMaker.command(message, `[your age]`, msg => {
+        msg.delete(5000)
+    })
 
     if(memberAge < 13) {
         return member.send(`Sorry, but discord is 13+ and we are required to ban you`).then(() => {

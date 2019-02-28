@@ -60,7 +60,7 @@ module.exports = {
         }
         return embed
     },
-    command: (message, param) => {
+    command: (message, param, callback) => {
         let messageArray = message.content.split(" ");
         let commandName = messageArray[0].slice(bot.config[message.guild.id].prefix.length);
         let command = bot.commands.get(commandName);
@@ -77,7 +77,9 @@ module.exports = {
                     .setColor(bot.config[message.guild.id].colors.default)
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                     .setDescription(`Invalid \`${param}\` argument given.\n\n**Usage:**\n    *${bot.config[message.guild.id].prefix}${command.help.usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}*`);
-                message.channel.send(embed)
+                message.channel.send(embed).then(m => {
+                    if(callback) callback(m)
+                })
             }
         } else {
             let embed = new Discord.RichEmbed()
@@ -85,7 +87,9 @@ module.exports = {
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                 .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
                 .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}`);
-            message.channel.send(embed)
+            message.channel.send(embed).then(m => {
+                if(callback) callback(m)
+            })
         }
     },
 };
