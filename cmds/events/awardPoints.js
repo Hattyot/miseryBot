@@ -20,6 +20,7 @@ module.exports.run = async (bot, message, args) => {
             newPoints.save()
                 .then(r => console.log(r))
                 .catch(e => console.log(e));
+            embedMaker.message(message, `<@${awardMember.user.id}> has been awarded **${amount}** points`)
         }else {
             points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: amount}}, (err, data) => {
                 if(err) return console.log(err)
