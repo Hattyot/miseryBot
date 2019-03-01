@@ -75,7 +75,7 @@ module.exports.run = async (bot, message, args) => {
                 .addField("**2. How do I get the art box role?**", "1. You need to be actively open for commissions\n2.You need to be level 5+")
                 .setFooter("", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .setColor("#9B59B6");
-            message.edit(newEmbed);
+            message.channel.send(newEmbed);
         })
     }
     if(message.author.id === bot.config[message.guild.id].ownerID) {
