@@ -67,16 +67,14 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send(newEmbed);
     }
     function faq() {
-        channel.fetchMessage("536218737494458371").then(message => {
-            let newEmbed = new Discord.RichEmbed()
-                .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
-                .setAuthor("(`◕‿◕´)  Level Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-                .addField("**1. How do I get the youtube role?**", "1st make sure your youtube channel is connected to your discord account.\n2nd You have to have 10k subs\n3rd if 1st and 2nd are done dm a staff member.")
-                .addField("**2. How do I get the art box role?**", "1. You need to be actively open for commissions\n2.You need to be level 5+")
-                .setFooter("", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-                .setColor("#9B59B6");
-            message.channel.send(newEmbed);
-        })
+        let newEmbed = new Discord.RichEmbed()
+            .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
+            .setAuthor("(`◕‿◕´)  Level Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+            .addField("**1. How do I get the youtube role?**", "1st make sure your youtube channel is connected to your discord account.\n2nd You have to have 10k subs\n3rd if 1st and 2nd are done dm a staff member.")
+            .addField("**2. How do I get the art box role?**", "1. You need to be actively open for commissions\n2.You need to be level 5+")
+            .setFooter("", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+            .setColor("#9B59B6");
+        message.channel.send(newEmbed);
     }
     if(message.author.id === bot.config[message.guild.id].ownerID) {
         switch (args[0]) {
