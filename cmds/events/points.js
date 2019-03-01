@@ -2,7 +2,8 @@ const { points } = require("../../modules/data.js")
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     let pointsAmount
-    if(message.member.roles.has("530728428975161344")) {
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member
+    if(member.roles.has("530728428975161344")) {
         return embedMaker.message(message, `Sorry staff can't have points`)
     }
     points.findOne({user_ID: message.author.id}, (err, data) => {
