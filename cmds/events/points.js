@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
     if(member.roles.has("530728428975161344")) {
         return embedMaker.message(message, `Sorry staff can't have points`)
     }
-    points.findOne({user_ID: message.author.id}, (err, data) => {
+    points.findOne({user_ID: member.user.id}, (err, data) => {
         if(!data) {
             let newPoints = new points({
                 user_ID: `${message.author.id}`,
@@ -19,7 +19,7 @@ module.exports.run = async (bot, message, args) => {
         }else {
            pointsAmount = data.amount 
         }
-        embedMaker.message(message, `You currently have **${pointsAmount}** points.`)    
+        embedMaker.message(message, `<@${member.user.id}> currently has**${pointsAmount}** points.`)    
     })
 
 }
