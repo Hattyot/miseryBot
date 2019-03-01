@@ -18,9 +18,21 @@ module.exports.run = async (bot, message, args) => {
             return message.member.send(`Sorry 5 winners have already claimed this, you're too late`)
         }else {
             message.member.send(`Congrats, you did it! :tada: You've won 20 points!`)
-            points.findOneAndUpdate({user_ID: user.id}, {$inc: {amount: 20}}, (err, data) => {
-                if(err) return console.log(err)
-            });
+            points.findOne({user_ID: user.id}, (err, data) => {
+                if(!data) {
+                    let newPoints = new points({
+                        user_ID: `${message.author.id}`,
+                        amount: 20
+                    });
+                    newPoints.save()
+                        .then(r => console.log(r))
+                        .catch(e => console.log(e));
+                }else {
+                    points.findOneAndUpdate({user_ID: user.id}, {$inc: {amount: 20}}, (err, data) => {
+                        if(err) return console.log(err)
+                    });
+                }
+            })
             let newHuntWinner = new huntWinners({
                 user_ID: `${message.author.id}`
             });
