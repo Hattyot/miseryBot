@@ -21,5 +21,6 @@ module.exports = async (bot, message) => {
         }
     }else {
         if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
+        if(message.content.toLowerCase() === "%%open") return message.delete()
     }
 };
