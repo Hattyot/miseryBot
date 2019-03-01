@@ -19,6 +19,8 @@ module.exports.run = async (bot, message, args) => {
                 .addField("**9. No doxing or exposing of private information of other members**", " Doxing members will result in a permanent ban, we do not care about your ex/friend and what he did wrong.")
                 .addField("**10. Keep controversial topics out of main chats and voice channels**", "When bringing up Subjects to discuss, we are against matters such as heavy illegal drug usage (Cocaine and so on as an example) and we promote Life and Love, so we don't appreciate suicidal subjects in main chats or Voice chats, we have help channels for those in need, or staff on hand who are qualified to handle life matters for the most part.")
                 .addField("**11. Don't uselessly ping or dm staff members**", "Unless there's something that immediately requires staff attention, don't ping or dm staff.")
+                .addField("**12. Your username or nickname must be pingable**", "If it's not pingable you will be assigned a temporary name.")
+                .addField("**13. Do not randomly friend request any staff member without interaction or activity on the server.**", "If you're not friends with the staff memebr or don't have any activity on the server just don't send them a friend request. It's kind of annoying and the request will be denied.")
                 .setFooter("Talk to staff if you have any questions about rules or if you find a mistake in them.", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .setColor("#9B59B6");
             message.edit(newEmbed);
@@ -67,6 +69,18 @@ module.exports.run = async (bot, message, args) => {
                 .addField("**6. Gloomy Box** :frowning2: ", "Achieved at Level 40")
                 .addField("**7. Miserable Box** :cry:", "Achieved at Level 60")
                 .setFooter("We might add more level roles in the future, but for now this is the complete list", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+                .setColor("#9B59B6");
+            message.edit(newEmbed);
+        })
+    }
+    function faq() {
+        channel.fetchMessage("536218737494458371").then(message => {
+            let newEmbed = new Discord.RichEmbed()
+                .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
+                .setAuthor("(`◕‿◕´)  Level Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+                .addField("**1. How do I get the youtube role?**", "1st make sure your youtube channel is connected to your discord account.\n2nd You have to have 10k subs\n3rd if 1st and 2nd are done dm a staff member.")
+                .addField("**2. How do I get the art box role?**", "1. You need to be actively open for commissions\n2.You need to be level 5+")
+                .setFooter("", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
                 .setColor("#9B59B6");
             message.edit(newEmbed);
         })
