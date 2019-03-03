@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
     let categories = remove_same(cats).sort()
 
     if(args[0]){
-        let command = commands.get(args[0])
+        let command = commands.get(args[0].toLowerCase())
         if(!command) return embedMaker.message(message, "That's not a valid command.")
         let name = command.help.name
         let description = command.help.description
