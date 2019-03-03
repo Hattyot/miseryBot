@@ -2,7 +2,7 @@ const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message);
 
-    let waitTime = tools.random(2000, 3000);
+    let waitTime = Math.floor(Math.random()*(3000-1500+1)+1500);
     let answers = [
 		{color: 0x43B581, answer: "It is certain",},
         {color: 0x43B581, answer: "It is decidedly so",},
