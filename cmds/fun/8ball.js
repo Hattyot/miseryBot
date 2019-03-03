@@ -1,5 +1,4 @@
 const embedMaker = require("../../modules/embed.js")
-const tools = require('../../modules/tools.js')
 module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message);
 
