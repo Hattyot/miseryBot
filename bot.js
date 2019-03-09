@@ -15,7 +15,7 @@ bot.games = {
     }
 }
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(`mongodb://0I1n83q42L:tdAF9o68x1x8@ds213255.mlab.com:13255/heroku_6ml2f2jr`, {
     useNewUrlParser: true
 });
 
@@ -57,6 +57,6 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-bot.login(process.env.BOT_TOKEN);
+bot.login(`NTQ4NDM2MDMzMzkwMzc5MDA4.D1Qa8Q.79GxeiVgqUNUmwb-KgybEE6hh3o`);
 
 module.exports = bot;

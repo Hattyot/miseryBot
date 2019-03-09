@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
     function join() {
         let newEmbed = new Discord.RichEmbed()
             .setAuthor("Welcome!", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-            .setDescription(`**Please type \`${bot.config[message.guild.id].prefix}age [your age]\` to get access to the rest of the chats.\ne.g. \`%age 17\`**`)
+            .setDescription(`**Please type \`${bot.config[message.guild.id].prefix}age [your age]\` to get access to the rest of the chats.\ne.g. \`%age 17\`**\n\nIf you put the wrong age here and we find out about it, we'll have to ban you.`)
             .setFooter(`If you're having troubles please contact a staff member`)
             .setColor("#9B59B6");
         message.channel.send(newEmbed);
