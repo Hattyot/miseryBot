@@ -57,6 +57,6 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-bot.login(process.env.);
+bot.login(process.env.BOT_TOKEN);
 
 module.exports = bot;
