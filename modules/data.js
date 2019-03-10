@@ -38,11 +38,14 @@ huntWinnersSchema = mongoose.Schema({
     user_ID: String
 });
 
-warningsSchema = mongoose.Schema({
+punishmentsSchema = mongoose.Schema({
     user_ID: String,
-    warning: String,
-    warnTime: Number
+    type: String,
+    message: String,
+    time: Number,
+    caseNumber: Number
 });
+
 
 module.exports = {
     level: mongoose.model("level", levelSchema),
@@ -51,5 +54,5 @@ module.exports = {
     mute: mongoose.model("mutes", muteSchema),
     points: mongoose.model("points", pointSchema),
     huntWinners: mongoose.model("huntWinners", huntWinnersSchema),
-    warnings: mongoose.model("warnings", huntWinnersSchema)
+    punishments: mongoose.model("punishments", punishmentsSchema)
 };

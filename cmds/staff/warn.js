@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
-const { warnings } = require("../../modules/data.js")
+const { punishments } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return
     if(!args[0]) return embedMaker.command(message)
@@ -19,16 +19,20 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp();
         
     warnMember.send(embed)
-    warnings.find({user_ID: warnMember.user.id}, (err, data) => {
+    punishments.find({user_ID: warnMember.user.id, type: `Warning`}, (err, data) => {
         embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has **${data.length + 1}** warning(s)`)
-        let newWarning = new warnings({
-            user_ID: `${message.author.id}`,
-            warning: warning,
-            warnTime: Date.now()
-        });
-        newWarning.save()
-            .then(r => console.log(r))
-            .catch(e => console.log(e));
+        punishments.find({}, (err, data) => {
+            let newWarning = new punishments({
+                user_ID: warnMember.user.id,
+                type: `Warning`,
+                message: warning,
+                time: Date.now(),
+                caseNumber: data.length
+            });
+            newWarning.save()
+                .then(r => console.log(r))
+                .catch(e => console.log(e));
+        })
     })
 
     function getWarnMember() {

@@ -29,15 +29,6 @@ module.exports.run = async (bot, message, args) => {
             let timeLeft = Math.floor(data.muteDate + data.muteLength) - Date.now()
             return embedMaker.message(message, `Member is already muted, mute will end in ${ms(timeLeft, {long: true})}`)
         } else {
-            let newMute = new mute({
-                user_ID: `${muteMember.user.id}`,
-                muteLength: Math.floor(ms(time)),
-                muteDate: Date.now()
-            });
-            newMute.save()
-                .then(r => console.log(r))
-                .catch(e => console.log(e));
-
             let embed = new Discord.RichEmbed()
                 .setColor(bot.config[message.guild.id].colors.orange)
                 .setAuthor(`You have been muted`)
@@ -46,8 +37,22 @@ module.exports.run = async (bot, message, args) => {
                 .setTimestamp();
             muteMember.send(embed)
             muteMember.addRole(muteRole)
-            embedMaker.message(message, `<@${muteMember.user.id}> has been muted for **${ms(time, {long: true})}**. Reason: **${reason}**`)
+            punishments.find({user_ID: warnMember.user.id, type: `Mute`}, (err, data) => {
+                embedMaker.message(message, `<@${muteMember.user.id}> has been muted for **${ms(time, {long: true})}**. Reason: **${reason}**\n\nThis user has been muted **${data.length}** times before`)
+                punishments.find({}, (err, data) => {
+                    let newMute = new punishments({
+                        user_ID: warnMember.user.id,
+                        type: `Mute`,
+                        message: warning,
+                        time: Date.now(),
+                        caseNumber: data.length
+                    });
+                    newMute.save()
+                        .then(r => console.log(r))
+                        .catch(e => console.log(e));
+                })
 
+            })
             unMuteTimer(muteMember, time)
         }
     })
