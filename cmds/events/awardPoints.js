@@ -11,6 +11,7 @@ module.exports.run = async (bot, message, args) => {
     if(awardMember.roles.has("530728428975161344")) {
         return embedMaker.message(message, `Sorry staff can't have points`)
     }
+    if(message.author.id === "501322998821814273") return embedMaker.message(message, `This member has been banned from future events`)
     points.findOne({user_ID: awardMember.user.id}, (err, data) => {
         if(!data) {
             let newPoints = new points({
