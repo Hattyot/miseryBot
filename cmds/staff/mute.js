@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
         return embedMaker.message(message, `You can't mute a user who has a higher or the same role as you`)
     }
     
-    mute.findOne({user_ID: message.author.id}, (err, data) => {
+    mute.findOne({user_ID: muteMember.user.id}, (err, data) => {
         if (err) return console.trace(err)
         if (data) {
             let timeLeft = Math.floor(data.muteDate + data.muteLength) - Date.now()
