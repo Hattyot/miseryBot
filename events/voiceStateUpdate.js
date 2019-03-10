@@ -4,7 +4,7 @@ module.exports = async (bot, oldMember, newMember) => {
             let role = newMember.guild.roles.get("554345816270307329")
             newMember.addRole(role)
         }else if(!newMember.voiceChannelID) {
-            let role = newMember.guild.roles.find("554345816270307329")
+            let role = newMember.guild.roles.get("554345816270307329")
             newMember.removeRole(role)
         }
     }
