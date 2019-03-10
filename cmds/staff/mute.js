@@ -38,11 +38,11 @@ module.exports.run = async (bot, message, args) => {
                 .setTimestamp();
             muteMember.send(embed)
             muteMember.addRole(muteRole)
-            punishments.find({user_ID: warnMember.user.id, type: `Mute`}, (err, data) => {
+            punishments.find({user_ID: muteMember.user.id, type: `Mute`}, (err, data) => {
                 embedMaker.message(message, `<@${muteMember.user.id}> has been muted for **${ms(time, {long: true})}**. Reason: **${reason}**\n\nThis user has been muted **${data.length}** times before`)
                 punishments.find({}, (err, data) => {
                     let newMute = new punishments({
-                        user_ID: warnMember.user.id,
+                        user_ID: muteMember.user.id,
                         type: `Mute`,
                         message: warning,
                         time: Date.now(),
