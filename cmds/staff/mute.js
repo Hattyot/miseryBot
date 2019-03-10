@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const ms = require("../../modules/ms.js")
 const embedMaker = require("../../modules/embed.js")
 const mute = require("../../modules/data.js").mute
+const { punishments } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_ROLES")) return
     if(!args[0]) return embedMaker.command(message)

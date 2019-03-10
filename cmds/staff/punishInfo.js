@@ -5,7 +5,8 @@ const handler = new RC.Handler()
 const { punishments } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return
-
+    if(!args[0]) return embedMaker.command(message)
+    
     let member = getMember()
     punishments.find({user_ID: member.user.id, type: "Warning"}, (err, data) => {
         let warnings = data.length
