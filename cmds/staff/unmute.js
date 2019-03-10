@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
 const { mute } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
-    if(!message.member.hasPermission("MANAGE)_CHANNELS")) return
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return
     if(!args[0]) return embedMaker.command(message)
 
     let reason = args.slice(1).join(" ")
