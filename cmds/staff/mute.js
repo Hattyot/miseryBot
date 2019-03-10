@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const ms = require("../../modules/ms.js")
 const embedMaker = require("../../modules/embed.js")
 const mute = require("../../modules/data.js").mute
-const { punishments } = require("../../modules/data.js")
+const { punishments, mute } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_ROLES")) return
     if(!args[0]) return embedMaker.command(message)
@@ -16,7 +16,6 @@ module.exports.run = async (bot, message, args) => {
     if(!muteMember) return embedMaker.command(message, "[user]")
     if(!time) return embedMaker.command(message, "[time]")
     if(!reason) return embedMaker.command(message, "[reason]")
-    if(!time) return embedMaker.command(message, "[time]")
 
     time = ms(time)
 
@@ -49,6 +48,14 @@ module.exports.run = async (bot, message, args) => {
                         caseNumber: data.length
                     });
                     newMute.save()
+                        .then(r => console.log(r))
+                        .catch(e => console.log(e));
+                    let newMuteTimer = new mute({
+                        user_ID: muteMember.user.id,
+                        muteLength: time,
+                        muteDate: Date.now()
+                    });
+                    newMuteTimer.save()
                         .then(r => console.log(r))
                         .catch(e => console.log(e));
                 })
