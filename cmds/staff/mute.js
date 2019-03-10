@@ -69,18 +69,20 @@ module.exports.run = async (bot, message, args) => {
 
     function unMuteTimer(muteMember, muteTime) {
         setTimeout(() => {
-
-            muteMember.removeRole(muteRole)
-            mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
-                if(err) return console.log(err)
-            })
-            let embed2 = new Discord.RichEmbed()
-                .setAuthor(`You have been unmuted`)
-                .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *The Bot*\n**Reason:** *Automatic Unmute*`)
-                .setColor(bot.config[message.guild.id].colors.green)
-                .setTimestamp()
-                .setFooter(`Unmuted At:`)
-            muteMember.send(embed2)
+            muteMember = message.guild.members.get(muteMember.user.id)
+            if(muteMember.roles.has(muteRole)) {
+                muteMember.removeRole(muteRole)
+                mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
+                    if(err) return console.log(err)
+                })
+                let embed2 = new Discord.RichEmbed()
+                    .setAuthor(`You have been unmuted`)
+                    .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *The Bot*\n**Reason:** *Automatic Unmute*`)
+                    .setColor(bot.config[message.guild.id].colors.green)
+                    .setTimestamp()
+                    .setFooter(`Unmuted At:`)
+                muteMember.send(embed2)
+            }
         }, muteTime)
     }
 }
