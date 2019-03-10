@@ -1,3 +1,4 @@
+const Jimp = require(`jimp`)
 module.exports = async (bot, member) => {
     if(bot.user.id === "548436033390379008") return
     if(member.user.id === "297265801155575809") return member.ban()
