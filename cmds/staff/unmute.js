@@ -41,11 +41,11 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "unban",
+    name: "unmute",
     cat: "Staff - Moderation",
-    description: "unban a member",
-    usage: `unban [user] [reason]`,
-    examples: [`unban @Hattyot Oopse Doopsie`]
+    description: "unmute a member",
+    usage: `unmute [user] [reason]`,
+    examples: [`unmute @Hattyot Oopse Doopsie`]
 }
 
 module.exports.conf = {
