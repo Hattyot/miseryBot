@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
         
     warnMember.send(embed)
     warnings.find({user_ID: warnMember.user.id}, (err, data) => {
-        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has ${data.length + 1} warning(s)`)
+        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has **${data.length + 1}** warning(s)`)
         let newWarning = new warnings({
             user_ID: `${message.author.id}`,
             warning: warning,
