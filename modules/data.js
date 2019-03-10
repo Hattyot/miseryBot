@@ -38,11 +38,18 @@ huntWinnersSchema = mongoose.Schema({
     user_ID: String
 });
 
+warningsSchema = mongoose.Schema({
+    user_ID: String,
+    warning: String,
+    warnTime: Number
+});
+
 module.exports = {
     level: mongoose.model("level", levelSchema),
     money: mongoose.model("money", moneySchema),
     raffle:  mongoose.model("raffle", raffleSchema),
     mute: mongoose.model("mutes", muteSchema),
     points: mongoose.model("points", pointSchema),
-    huntWinners: mongoose.model("huntWinners", huntWinnersSchema)
+    huntWinners: mongoose.model("huntWinners", huntWinnersSchema),
+    warnings: mongoose.model("warnings", huntWinnersSchema)
 };

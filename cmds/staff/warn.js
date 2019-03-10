@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
+const { warnings } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return
     if(!args[0]) return embedMaker.command(message)
@@ -13,12 +14,21 @@ module.exports.run = async (bot, message, args) => {
     let embed = new Discord.RichEmbed()
         .setColor(bot.config[message.guild.id].colors.orange)
         .setAuthor(`You have been warned`)
-        .setDescription(`**Server:** ${message.guild.name}\n**Warned By:** <@${message.author.id}>\n**Warning:** ${warning}`)
+        .setDescription(`**Server:** ${message.guild.name}\n**Warning:** ${warning}`)
         .setFooter(`Warned At:`)
         .setTimestamp();
-        warnMember.send(embed)
-        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**`)
-
+        
+    warnMember.send(embed)
+    warnings.find({user_ID: warnMember.user.id}, (err, data) => {
+        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has ${data.length + 1} warning(s)`)
+        let newWarning = new warnings({
+            user_ID: `${message.author.id}`,
+            warning: warning
+        });
+        newWarning.save()
+            .then(r => console.log(r))
+            .catch(e => console.log(e));
+    })
 
     function getWarnMember() {
         let warnMember = message.mentions.members.first() || message.guild.members.get(args[0]);
