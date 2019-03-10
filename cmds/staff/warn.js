@@ -23,7 +23,8 @@ module.exports.run = async (bot, message, args) => {
         embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has ${data.length + 1} warning(s)`)
         let newWarning = new warnings({
             user_ID: `${message.author.id}`,
-            warning: warning
+            warning: warning,
+            warnTime: Date.now()
         });
         newWarning.save()
             .then(r => console.log(r))
