@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
                     let newMute = new punishments({
                         user_ID: muteMember.user.id,
                         type: `Mute`,
-                        message: warning,
+                        message: reason,
                         time: Date.now(),
                         caseNumber: data.length
                     });
