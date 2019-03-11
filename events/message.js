@@ -30,7 +30,7 @@ module.exports = async (bot, message) => {
      
                         }else {
                     
-                            return points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: 5}}, (err, data) => {
+                            return points.findOneAndUpdate({user_ID: message.author.id}, {$inc: {amount: 5}}, (err, data) => {
                                 if(err) return console.log(err)
                                 let newWinner = new huntWinners({
                                     user_ID: `${message.author.id}`,
