@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
         if(!data) {
             return embedMaker.command(message, "[case number]")
         }else {
-            let member = message.members.get(data.user_ID)
+            let member = message.guild.members.get(data.user_ID)
             let type = data.type
             let msg = data.message
             let date = moment.utc(data.time).format("ddd, MMM Do YYYY, HH:mm");
