@@ -41,9 +41,9 @@ module.exports = async (bot, message) => {
                 }
             });
         }else {
-                }
+
              
-            })
+
             
 
             return message.channel.send("Thats not the right answer")
