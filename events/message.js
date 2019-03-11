@@ -1,8 +1,5 @@
-const level = require("../modules/data.js").level;
-const xpCooldown = new Set();
-const embedMaker = require("../modules/embed.js");
+const Discord = require("discord.js");
 const { huntWinners, points } = require("../modules/data.js")
-const looksSame = require('looks-same')
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
@@ -72,10 +69,16 @@ module.exports = async (bot, message) => {
     }else {
         if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
         if(message.content.toLowerCase() === "%%open") return message.delete()
-        if(message.attachments.first()) {
-            looksSame(`https://cdn.discordapp.com/attachments/549605105616289823/554734208405471233/image0.png`, message.attachments.first().url, (err, equal) => {
-                if(equal) message.delete()
-            })
+        if(message.content.match(/hatty/i)) {
+            console.log(`test`)
+            let embed = new Discord.RichEmbed()
+                .setAuthor(message.author.id, message.author.displayAvatarURL)
+                .setColor(bot.config[message.guild.id].colors.default)
+                .setTitle(`Link`)
+                .setURL(`https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`)
+                .setTimestamp()
+                .setDescription(`**Message:** ${message.content}\n**Channel:**<#${message.channel.id}>`)
+            return message.guild.channels.get("536532064070270986").send(`<@436228721033216009>`, { embed })
         }
     }
 };
