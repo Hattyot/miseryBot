@@ -17,7 +17,7 @@ module.exports = async (bot) => {
                     setTimeout(() => {
                         let member = guild.members.get(`${data[i].user_ID}`)
                         unmute(member)
-                    }, ms(time))
+                    }, ms(data.muteLength))
                 }
             }
 
