@@ -6,7 +6,7 @@ module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
         if(message.content.toLowerCase() === "gluttony"){
-            huntWinners.findOne({user_ID: message.author.id}, (err, data) => {
+            return huntWinners.findOne({user_ID: message.author.id}, (err, data) => {
                 if(data) {
                     return message.channel.send(`youve already claimed this prize once`)
                 }else {
