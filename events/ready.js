@@ -25,6 +25,7 @@ module.exports = async (bot) => {
     })
 
     function unmute(_member) {
+        if(!_member) return
         let muteRole = guild.roles.get(bot.config[guild.id].muteRoleID)
         if(muteRole) _member.removeRole(muteRole)
         mute.findOneAndRemove({user_ID: _member.user.id}, (err, data) => {
