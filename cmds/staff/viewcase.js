@@ -5,7 +5,7 @@ const moment = require("moment");
 const { punishments } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message)
-    punishments.findOne({caseNumber: agrs[0]}, (err, data) => {
+    punishments.findOne({caseNumber: args[0]}, (err, data) => {
         if(!data) {
             return embedMaker.command(message, "[case number]")
         }else {
