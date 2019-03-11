@@ -6,7 +6,7 @@ const { punishments } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return
     if(!args[0]) return embedMaker.command(message)
-    
+
     let member = getMember()
     punishments.find({user_ID: member.user.id, type: "Warning"}, (err, data) => {
         let warnings = data.length
@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
                 let kicks = data.length
                 punishments.find({user_ID: member.user.id}, (err, data) => {
                     let perPage = 10
-                    let userPageNum = Math.floor(args[0]) || 1
+                    let userPageNum = 1
                     let pageNum = 1
                     let punishmentList = {}
                     punishmentList[pageNum] = []
@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
                             pageNum++
                             punishmentList[pageNum] = []
                         }
-                        punishmentList[pageNum].push(`**#${i + 1}** - \`Case #${data[i].caseNumber}\` - **${data[i].type}**: ${data[i].message}`)
+                        punishmentList[pageNum].push(`\`Case #${data[i].caseNumber}\` - **${data[i].type}**: ${data[i].message}`)
                     }
                     if(punishmentList[1].length < 1) punishmentList[1].push(`This user has no punishments`)
                     let menu = embedMaker.embed(message, punishmentList[userPageNum].join("\n"), {author: "punishment list", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum} | Warned: ${warnings} | Muted: ${mutes} | Kicked: ${kicks}`})
@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
                     let punishmentListMenu = new RC.Menu(menu, menuButtons)
                     handler.addMenus(punishmentListMenu)
                     message.channel.sendMenu(punishmentListMenu)
-                }).sort({caseNumber: -1})
+                }).sort({caseNumber: 1})
             })
         })
     })

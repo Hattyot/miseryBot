@@ -13,20 +13,19 @@ module.exports.run = async (bot, message, args) => {
 
     mute.findOne({user_ID: muteMember.user.id}, (err, data) => {
         if(data) {
-            if(muteMember.roles.has(muteRole)) {
-                muteMember.removeRole(muteRole)
-                mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
-                    if(err) return console.log(err)
-                })
-                let embed2 = new Discord.RichEmbed()
-                    .setAuthor(`You have been unmuted`)
-                    .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *<@${message.author.id}>*\n**Reason:** *${reason}*`)
-                    .setColor(bot.config[message.guild.id].colors.green)
-                    .setTimestamp()
-                    .setFooter(`Unmuted At:`)
-                muteMember.send(embed2)
-                embedMaker.message(message, `<@${muteMember.user.id}> has been unmuted. Reason: **${reason}**`)
-            }
+            console.log(data)
+            muteMember.removeRole(muteRole)
+            mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
+                if(err) return console.log(err)
+            })
+            let embed2 = new Discord.RichEmbed()
+                .setAuthor(`You have been unmuted`)
+                .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *<@${message.author.id}>*\n**Reason:** *${reason}*`)
+                .setColor(bot.config[message.guild.id].colors.green)
+                .setTimestamp()
+                .setFooter(`Unmuted At:`)
+            muteMember.send(embed2)
+            embedMaker.message(message, `<@${muteMember.user.id}> has been unmuted. Reason: **${reason}**`)
         }
     })
 
