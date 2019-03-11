@@ -1,3 +1,4 @@
+const { punishments } = require("./data.js")
 module.exports = {
     punishmentsTools:  {
         add: (guild, userId, type, msg) => {
