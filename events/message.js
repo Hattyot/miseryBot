@@ -1,11 +1,16 @@
 const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
 const embedMaker = require("../modules/embed.js");
+const { huntWinners } = require("../../modules/data.js")
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
         if(message.content.toLowerCase() === "gluttony"){
-            message.channel.send("Congrats you got the right answer, you've been given 5 points")
+            huntWinners.findOne({user_ID: message.author.id}, (err, data) => {
+                if(data) {
+                    return message.channel.send(`youve already claimed this prize once`)
+                }else {
+                    message.channel.send("Congrats you got the right answer, you've been given 5 points")
             return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
                 if(!data) {
                 let newPoints = new points({
@@ -15,14 +20,31 @@ module.exports = async (bot, message) => {
                 return newPoints.save()
                     .then(r => console.log(r))
                     .catch(e => console.log(e));
+                    
+                 let newWinner = new huntWinners({
+                    user_ID: `${message.author.id}`,
+
+                });
+                return newWinner.save()
+                    .then(r => console.log(r))
      
                 }else {
                     return points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: 5}}, (err, data) => {
                         if(err) return console.log(err)
-                    })
+                         let newWinner = new huntWinners({
+                         user_ID: `${message.author.id}`,
+
+                         });
+                         return newWinner.save()
+                            .then(r => console.log(r))
+                        })
                 }
             });
         }else {
+                }
+             
+            })
+            
 
             return message.channel.send("Thats not the right answer")
         }
