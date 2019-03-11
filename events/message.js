@@ -1,7 +1,7 @@
 const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
 const embedMaker = require("../modules/embed.js");
-const { huntWinners } = require("../../modules/data.js")
+const { huntWinners } = require("../modules/data.js")
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
