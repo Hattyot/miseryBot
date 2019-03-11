@@ -2,7 +2,31 @@ const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
 const embedMaker = require("../modules/embed.js");
 module.exports = async (bot, message) => {
-    if (message.channel.type === "dm") return;
+    if (message.channel.type === "dm") {
+        if(message.content.toLowerCase() === "gluttony"){
+            message.member.send("Congrats you got the right answer, you've been given 5 points")
+            return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
+                if(!data) {
+                let newPoints = new points({
+                    user_ID: `${message.author.id}`,
+                    amount: 5
+                });
+                return newPoints.save()
+                    .then(r => console.log(r))
+                    .catch(e => console.log(e));
+     
+                }else {
+                    return points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: 5}}, (err, data) => {
+                        if(err) return console.log(err)
+                    })
+                }
+            });
+        }else {
+            return message.member.send("Thats not the right answer")
+        }
+
+
+    };
     if(message.author.bot) return;
     if(message.type === `PINS_ADD`) return message.delete()
     let messageArray = message.content.replace(/ +(?= )/g, "").split(" ");
