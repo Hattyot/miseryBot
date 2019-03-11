@@ -22,6 +22,7 @@ module.exports = async (bot, message) => {
                 }
             });
         }else {
+            if(!message.member) return
             return message.member.send("Thats not the right answer")
         }
 
