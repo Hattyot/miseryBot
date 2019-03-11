@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const ms = require("../../modules/ms.js")
 const embedMaker = require("../../modules/embed.js")
 const { punishments, mute } = require("../../modules/data.js")
+const { punishmentsTools } = require("../../modules/tools.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_ROLES")) return
     if(!args[0]) return embedMaker.command(message)
@@ -37,18 +38,8 @@ module.exports.run = async (bot, message, args) => {
             muteMember.send(embed)
             muteMember.addRole(muteRole)
             punishments.find({user_ID: muteMember.user.id, type: `Mute`}, (err, data) => {
+                punishmentsTools.add(message.guild, muteMember.id, `Mute`, reason)
                 embedMaker.message(message, `<@${muteMember.user.id}> has been muted for **${ms(time, {long: true})}**. Reason: **${reason}**\n\nThis user has been muted **${data.length}** times before`)
-                punishments.find({}, (err, data) => {
-                    let newMute = new punishments({
-                        user_ID: muteMember.user.id,
-                        type: `Mute`,
-                        message: reason,
-                        time: Date.now(),
-                        caseNumber: data.length
-                    });
-                    newMute.save()
-                        .then(r => console.log(r))
-                        .catch(e => console.log(e));
                     let newMuteTimer = new mute({
                         user_ID: muteMember.user.id,
                         muteLength: time,
@@ -58,8 +49,6 @@ module.exports.run = async (bot, message, args) => {
                         .then(r => console.log(r))
                         .catch(e => console.log(e));
                 })
-
-            })
             unMuteTimer(muteMember, time)
         }
     })

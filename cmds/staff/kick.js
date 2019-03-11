@@ -26,18 +26,7 @@ module.exports.run = async (bot, message, args) => {
             embedMaker.message(message, ``)
             punishments.find({user_ID: kickMember.user.id, type: `Warning`}, (err, data) => {
                 embedMaker.message(message, `<@${kickMember.user.id}> has been kicked. Reason: **${reason}**\n\nThis user has been kicked **${data.length}** time(s) before.`)
-                punishments.find({}, (err, data) => {
-                    let newKick = new punishments({
-                        user_ID: kickMember.user.id,
-                        type: `Kick`,
-                        message: reason,
-                        time: Date.now(),
-                        caseNumber: data.length
-                    });
-                    newKick.save()
-                        .then(r => console.log(r))
-                        .catch(e => console.log(e));
-                })
+                punishmentsTools.add(message.guild, kickMember.id, `Kick`, reason)
             })
             return kickMember.kick(`${reason}`)
         })
