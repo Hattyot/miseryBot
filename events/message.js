@@ -72,7 +72,7 @@ module.exports = async (bot, message) => {
     }else {
         if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
         if(message.content.toLowerCase() === "%%open") return message.delete()
-        if(message.attachments) {
+        if(message.attachments.first()) {
             looksSame(`https://cdn.discordapp.com/attachments/549605105616289823/554734208405471233/image0.png`, message.attachments.first().url, (err, {equal}) => {
                 if(equal) message.delete()
             })
