@@ -2,6 +2,7 @@ const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
 const embedMaker = require("../modules/embed.js");
 const { huntWinners, points } = require("../modules/data.js")
+const looksSame = require('looks-same')
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
@@ -17,7 +18,7 @@ module.exports = async (bot, message) => {
                                user_ID: `${message.author.id}`,
                                amount: 5
                             });
-                        return newPoints.save()
+                        newPoints.save()
                         .then(r => console.log(r))
                         .catch(e => console.log(e));
                        
@@ -44,11 +45,6 @@ module.exports = async (bot, message) => {
                 }
             })
         }else {
-
-             
-
-            
-
             return message.channel.send("Thats not the right answer")
         }
 
@@ -76,5 +72,10 @@ module.exports = async (bot, message) => {
     }else {
         if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
         if(message.content.toLowerCase() === "%%open") return message.delete()
+        if(message.attachments.first().url) {
+            looksSame(`https://cdn.discordapp.com/attachments/549605105616289823/554734208405471233/image0.png`, message.attachments.first().url, (err, {equal}) => {
+                if(equal) message.delete()
+            })
+        }
     }
 };
