@@ -1,7 +1,7 @@
 const level = require("../modules/data.js").level;
 const xpCooldown = new Set();
 const embedMaker = require("../modules/embed.js");
-const { huntWinners } = require("../modules/data.js")
+const { huntWinners, points } = require("../modules/data.js")
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
@@ -11,7 +11,7 @@ module.exports = async (bot, message) => {
                     return message.channel.send(`youve already claimed this prize once`)
                 }else {
                     message.channel.send("Congrats you got the right answer, you've been given 5 points")
-                    return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
+                    return points.findOne({user_ID: message.author.id}, (err, data) => {
                         if(!data) {
                             let newPoints = new points({
                                user_ID: `${message.author.id}`,
