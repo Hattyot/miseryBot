@@ -7,6 +7,7 @@ module.exports.run = async (bot, message, args) => {
 
     let reason = args.slice(1).join(" ")
     let muteMember = getmuteMember()
+    let muteRole = message.guild.roles.get(bot.config[message.guild.id].muteRoleID)
     if(!muteMember) return embedMaker.command(message, "[user]")
     if(!reason) return embedMaker.command(message, "[reason]")
 
