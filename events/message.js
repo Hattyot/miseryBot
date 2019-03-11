@@ -40,8 +40,8 @@ module.exports = async (bot, message) => {
                             .then(r => console.log(r))
                          })
                     }
-                }
-            });
+                })
+            }
         }else {
 
              
