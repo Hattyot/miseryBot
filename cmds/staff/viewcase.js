@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
             let msg = data.message
             let date = moment.utc(data.time).format("ddd, MMM Do YYYY, HH:mm");
             let caseNumber = data.caseNumber
-            let ago =  ms(Date.now() - date)
+            let ago =  ms(Date.now() - data.time)
             let embed = new Discord.RichEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL)
                 .setColor(bot.config[message.guild.id].colors.default)
