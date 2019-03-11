@@ -4,7 +4,7 @@ const embedMaker = require("../modules/embed.js");
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.content.toLowerCase() === "gluttony"){
-            message.member.send("Congrats you got the right answer, you've been given 5 points")
+            message.channel.send("Congrats you got the right answer, you've been given 5 points")
             return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
                 if(!data) {
                 let newPoints = new points({
@@ -22,8 +22,8 @@ module.exports = async (bot, message) => {
                 }
             });
         }else {
-            if(!message.member) return
-            return message.member.send("Thats not the right answer")
+
+            return message.channel.send("Thats not the right answer")
         }
 
 
