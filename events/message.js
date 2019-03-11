@@ -11,34 +11,36 @@ module.exports = async (bot, message) => {
                     return message.channel.send(`youve already claimed this prize once`)
                 }else {
                     message.channel.send("Congrats you got the right answer, you've been given 5 points")
-            return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
-                if(!data) {
-                let newPoints = new points({
-                    user_ID: `${message.author.id}`,
-                    amount: 5
-                });
-                return newPoints.save()
-                    .then(r => console.log(r))
-                    .catch(e => console.log(e));
-                    
-                 let newWinner = new huntWinners({
-                    user_ID: `${message.author.id}`,
+                    return points.findOne({user_ID: awardMember.user.id}, (err, data) => {
+                    if(!data) {
+                        let newPoints = new points({
+                           user_ID: `${message.author.id}`,
+                           amount: 5
+                        });
+                    return newPoints.save()
+                        .then(r => console.log(r))
+                        .catch(e => console.log(e));
+                       
+                    let newWinner = new huntWinners({
+                        user_ID: `${message.author.id}`,
 
-                });
-                return newWinner.save()
-                    .then(r => console.log(r))
+                    });
+                    return newWinner.save()
+                        .then(r => console.log(r))
      
-                }else {
-                    return points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: 5}}, (err, data) => {
-                        if(err) return console.log(err)
-                         let newWinner = new huntWinners({
-                         user_ID: `${message.author.id}`,
+                    }else {
+                    
+                        return points.findOneAndUpdate({user_ID: awardMember.user.id}, {$inc: {amount: 5}}, (err, data) => {
+                            if(err) return console.log(err)
+                            let newWinner = new huntWinners({
+                            user_ID: `${message.author.id}`,
 
                          });
                          return newWinner.save()
                             .then(r => console.log(r))
-                        })
-                }
+                         })
+                    }
+                 }
             });
         }else {
 
