@@ -21,6 +21,7 @@ module.exports.run = async (bot, message, args) => {
                 .setDescription(`**Member: <@${member.user.id}> (${member.user.id})**\n**Action:** ${type}\n**Reason:** ${msg}\n**Action Date:** ${date} (${ago} ago)`)
                 .setThumbnail()
                 .setFooter(`Case #${caseNumber}`)
+            message.channel.send(embed)
 
         }
     })
