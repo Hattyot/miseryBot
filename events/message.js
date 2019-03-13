@@ -69,16 +69,6 @@ module.exports = async (bot, message) => {
     }else {
         if(message.channel.id === "549186081007075328" && !message.member.roles.has("530728428975161344")) message.delete()
         if(message.content.toLowerCase() === "%%open") return message.delete()
-        if(message.content.match(/hatty/i)) {
-            console.log(`test`)
-            let embed = new Discord.RichEmbed()
-                .setAuthor(message.author.id, message.author.displayAvatarURL)
-                .setColor(bot.config[message.guild.id].colors.default)
-                .setTitle(`Link`)
-                .setURL(`https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`)
-                .setTimestamp()
-                .setDescription(`**Message:** ${message.content}\n**Channel:**<#${message.channel.id}>`)
-            return message.guild.channels.get("536532064070270986").send(`<@436228721033216009>`, { embed })
-        }
+        
     }
 };
