@@ -3,13 +3,14 @@ const moment = require("moment");
 module.exports.run = async (bot, message, args) => {
     let user = message.mentions.users.first();
     if(!user) user = message.author;
+    let member = message.guild.members.get(user.id)
 
         let member = message.guild.members.get(user.id);
         let roles = member.roles.map(r => `<@&${r.id}>`).join(" ").replace(`<@&${message.guild.id}>`, "");
         let rolenum = Math.floor(member.roles.size) - 1;
         let perms = [];
         let status = user.presence.status;
-        let joined = moment.utc(message.member.joinedAt).format("ddd, MMM Do YYYY, HH:mm");
+        let joined = moment.utc(member.joinedAt).format("ddd, MMM Do YYYY, HH:mm");
         let registered = moment.utc(user.createdAt).format("ddd, MMM Do YYYY, HH:mm");
         let permissions = {
             "ADMINISTRATOR": "Administrator",
