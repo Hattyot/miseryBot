@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
         if(!data) {
             let newPoints = new points({
                 user_ID: `${message.author.id}`,
-                amount: amount
+                amount: Math.floor(amount)
             });
             newPoints.save()
                 .then(r => console.log(r))
