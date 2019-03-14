@@ -3,7 +3,7 @@ const moment = require("moment");
 module.exports.run = async (bot, message, args) => {
     let user = message.mentions.users.first();
     if(!user) user = message.author;
-    let member = message.guild.members.get(user.id)
+
 
         let member = message.guild.members.get(user.id);
         let roles = member.roles.map(r => `<@&${r.id}>`).join(" ").replace(`<@&${message.guild.id}>`, "");
