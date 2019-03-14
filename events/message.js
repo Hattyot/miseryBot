@@ -3,7 +3,7 @@ const { huntWinners, points } = require("../modules/data.js")
 module.exports = async (bot, message) => {
     if (message.channel.type === "dm") {
         if(message.author.bot) return
-        if(message.content.toLowerCase() === "pokemon"){
+        if(message.content.toLowerCase() === "melancholy") {
             return huntWinners.findOne({user_ID: message.author.id}, (err, data) => {
                 if(data) {
                     return message.channel.send(`youve already claimed this prize once`)
