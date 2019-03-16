@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) embedMaker.command(message)
 
     let emote = args[0]
-    let emoteRegex = /(<:\w+:\d+>)/g
+    let emoteRegex = /(<\w+:\w+:\d+>)/g
 
     if(emote.match(emoteRegex)) {
         let key = args[0].replace(/\D+/g, '')
