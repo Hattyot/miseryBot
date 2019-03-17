@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
 const { punishments } = require("../../modules/data.js")
+const { punishmentsTools } = require("../../modules/tools.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("KICK_MEMBERS")) return
     if(!args[0]) return embedMaker.command(message)
