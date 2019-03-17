@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp();
     kickMember.send(embed)
         .then(() => {
-            embedMaker.message(message, ``)
+
             punishments.find({user_ID: kickMember.user.id, type: `Warning`}, (err, data) => {
                 embedMaker.message(message, `<@${kickMember.user.id}> has been kicked. Reason: **${reason}**\n\nThis user has been kicked **${data.length}** time(s) before.`)
                 punishmentsTools.add(message.guild, kickMember.id, `Kick`, reason)
