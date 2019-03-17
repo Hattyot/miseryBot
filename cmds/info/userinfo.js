@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
     return message.channel.send(embed)
     
     function getInfoMember() {
-        let infoMember = message.mentions.members.first().user || message.guild.members.get(args[0]).user; || message.author
+        let infoMember = message.mentions.members.first().user || message.guild.members.get(args[0]).user || message.author
         return infoMember
     }
 };
