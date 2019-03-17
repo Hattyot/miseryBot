@@ -1,10 +1,7 @@
 const Discord = require("discord.js");
 const moment = require("moment");
 module.exports.run = async (bot, message, args) => {
-    let user = message.mentions.users.first();
-    if(!user) user = message.author;
-
-
+    let user = getInfoMember()
         let member = message.guild.members.get(user.id);
         let roles = member.roles.map(r => `<@&${r.id}>`).join(" ").replace(`<@&${message.guild.id}>`, "");
         let rolenum = Math.floor(member.roles.size) - 1;
@@ -54,6 +51,11 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp()
         .setFooter(`ID: ${user.id}`);
     return message.channel.send(embed)
+    
+    function getInfoMember() {
+        let infoMember = message.mentions.members.first().user || message.guild.members.get(args[0]).user; || message.author
+        return infoMember
+    }
 };
 
 module.exports.help = {
