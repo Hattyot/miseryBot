@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
     points.findOne({user_ID: awardMember.user.id}, (err, data) => {
         if(!data) {
             let newPoints = new points({
-                user_ID: `${message.author.id}`,
+                user_ID: `${awardMember.user.id}`,
                 amount: Math.floor(amount)
             });
             newPoints.save()
