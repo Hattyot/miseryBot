@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
                 .setAuthor(`Free 5 Points`, message.guild.iconURL)
             message.guild.channels.get(`522979850651435013`).send(embed).then(_m => {
                 let filter = m => m.content === "%claim"
-                _m.channel.awaitMessages(filter, {max: 1})
+                _m.channel.awaitMessages(filter, {max: 1, time: 60000, error:['time']})
                     .then(collected => {
                         let _msg = collected.first()
                         let winner = _msg.member
@@ -41,6 +41,12 @@ module.exports.run = async (bot, message, args) => {
                             }
                         })
                     })
+                    .catch(e => {
+                        _m.delete()
+                        let time = Math.floor(Math.random()*(10800000-600000+1)+600000)
+                        return sendClaimMessage(time)
+                    })
+  
             })
         }, time)
     }
