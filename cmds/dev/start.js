@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
                 .setTimestamp()
                 .setDescription(`Type %claim to claim 5 points`)
                 .setAuthor(`Free 5 Points`, message.guild.iconURL)
-            message.guild.channels.get(`536532064070270986`).send(embed).then(_m => {
+            message.guild.channels.get(`522979850651435013`).send(embed).then(_m => {
                 let filter = m => m.content === "%claim"
                 _m.channel.awaitMessages(filter, {max: 1})
                     .then(collected => {
