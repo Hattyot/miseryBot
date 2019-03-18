@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
         let time = 6
         setTimeout(() => {
             let embed = new Discord.RichEmbed()
-                .setColor(bot.config.colors.default)
+                .setColor(bot.config[message.guild.id].colors.default)
                 .setTimestamp()
                 .setDescription(`Type %claim to claim 5 points`)
                 .setAuthor(`Free 5 Points`)
