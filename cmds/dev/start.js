@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { points } = require("../../modules/data.js")
 module.exports.run = async (bot, message, args) => {
     if(message.author.id !== "436228721033216009") return
-
+    sendClaimMessage()
     function sendClaimMessage() {
         // let time = Math.floor(Math.random()*(10800000-600000+1)+600000)
         let time = 6
