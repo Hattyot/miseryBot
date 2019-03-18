@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
                 .setColor(bot.config[message.guild.id].colors.default)
                 .setTimestamp()
                 .setDescription(`Type %claim to claim 5 points`)
-                .setAuthor(`Free 5 Points`)
+                .setAuthor(`Free 5 Points`, message.guild.iconURL)
             message.guild.channels.get(`536532064070270986`).send(embed).then(_m => {
                 let filter = m => m.content === "%claim"
                 _m.channel.awaitMessages(filter, {max: 1})
@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
                                     .catch(e => console.log(e));
                                 return winner.send(`You've been given 5 points`)
                             }else {
-                                points.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {amount: amount}}, (err, data) => {
+                                points.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {amount: 5}}, (err, data) => {
                                     if(err) return console.log(err)
                                     winner.send(`You've been given 5 points`)
                                 });
