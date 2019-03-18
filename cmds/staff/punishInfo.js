@@ -28,7 +28,7 @@ module.exports.run = async (bot, message, args) => {
                         punishmentList[pageNum].push(`\`Case #${data[i].caseNumber}\` - **${data[i].type}**: ${data[i].message}`)
                     }
                     if(punishmentList[1].length < 1) punishmentList[1].push(`This user has no punishments`)
-                    let menu = embedMaker.embed(message, punishmentList[userPageNum].join("\n"), {author: "punishment list", aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum} | Warned: ${warnings} | Muted: ${mutes} | Kicked: ${kicks}`})
+                    let menu = embedMaker.embed(message, punishmentList[userPageNum].join("\n"), {author: `${member.user.tag} - Punishment List`, aIcon: bot.icons[message.guild.id], footer: `Page ${userPageNum}/${pageNum} | Warned: ${warnings} | Muted: ${mutes} | Kicked: ${kicks}`})
                     let menuButtons = [
                         {
                             emoji: '⬅',
