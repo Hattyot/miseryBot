@@ -3,7 +3,7 @@ const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     let pointsAmount
     let ticketAmount = Math.floor(args[0])
-    if(!ticketAmount) return embedMaker.command(messagem, "[amount]")
+    if(!ticketAmount) return embedMaker.command(message, "[amount]")
     if(message.member.roles.has("530728428975161344")) return embedMaker.message(message, `Sorry staff can't enter the raffle`)
     points.findOne({user_ID: message.author.id}, (err, data) => {
         if(!data) {
@@ -45,11 +45,11 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "buyRaffleTicket",
+    name: "buyRaffleTickets",
     cat: "Events",
-    description: "Buy a new raffle ticket",
-    usage: `buyRaffleTicket [amount]`,
-    examples: [`buyRaffleTicket 2`]
+    description: "Buy new raffle tickets",
+    usage: `buyRaffleTickets [amount]`,
+    examples: [`buyRaffleTickets 2`]
 }
 
 module.exports.conf = {
