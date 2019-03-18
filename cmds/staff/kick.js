@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
 const { punishments } = require("../../modules/data.js")
+const { punishmentsTools } = require("../../modules/tools.js")
 module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("KICK_MEMBERS")) return
     if(!args[0]) return embedMaker.command(message)
@@ -23,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp();
     kickMember.send(embed)
         .then(() => {
-            embedMaker.message(message, ``)
+
             punishments.find({user_ID: kickMember.user.id, type: `Warning`}, (err, data) => {
                 embedMaker.message(message, `<@${kickMember.user.id}> has been kicked. Reason: **${reason}**\n\nThis user has been kicked **${data.length}** time(s) before.`)
                 punishmentsTools.add(message.guild, kickMember.id, `Kick`, reason)

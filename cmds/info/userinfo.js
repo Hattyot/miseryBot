@@ -1,15 +1,13 @@
 const Discord = require("discord.js");
 const moment = require("moment");
 module.exports.run = async (bot, message, args) => {
-    let user = message.mentions.users.first();
-    if(!user) user = message.author;
-
+    let user = getInfoMember().user
         let member = message.guild.members.get(user.id);
         let roles = member.roles.map(r => `<@&${r.id}>`).join(" ").replace(`<@&${message.guild.id}>`, "");
         let rolenum = Math.floor(member.roles.size) - 1;
         let perms = [];
         let status = user.presence.status;
-        let joined = moment.utc(message.member.joinedAt).format("ddd, MMM Do YYYY, HH:mm");
+        let joined = moment.utc(member.joinedAt).format("ddd, MMM Do YYYY, HH:mm");
         let registered = moment.utc(user.createdAt).format("ddd, MMM Do YYYY, HH:mm");
         let permissions = {
             "ADMINISTRATOR": "Administrator",
@@ -53,6 +51,11 @@ module.exports.run = async (bot, message, args) => {
         .setTimestamp()
         .setFooter(`ID: ${user.id}`);
     return message.channel.send(embed)
+    
+    function getInfoMember() {
+        let infoMember = message.mentions.members.first() || message.guild.members.get(args[0]) || message.member
+        return infoMember
+    }
 };
 
 module.exports.help = {
