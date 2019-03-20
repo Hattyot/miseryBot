@@ -1,22 +1,17 @@
 const raffle = require("../../modules/data.js").raffle;
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
+    let firstWinner
+    let secondWinner
+    let thirdWinner
+
+    if(message.author.id === "436228721033216009") {
+        firstWinner = `<@278205159904116737>`
+    }else {
+        firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
+    }
     if(message.member.roles.has("530728428975161344")) {
         raffle.find({}, (err, data) => {
-            let winningNumbers = [
-                Math.floor(Math.random() * data.length),
-                Math.floor(Math.random() * data.length),
-                Math.floor(Math.random() * data.length),
-            ]
-            let firstWinner
-            let secondWinner
-            let thirdWinner
-
-            if(message.author.id === "436228721033216009") {
-                firstWinner = `<@278205159904116737>`
-            }else {
-                firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
-            }
 
             secondWinner = getSecond(data)
             thirdWinner = getThird(data)
