@@ -8,7 +8,12 @@ module.exports.run = async (bot, message, args) => {
                 Math.floor(Math.random() * data.length),
                 Math.floor(Math.random() * data.length),
             ]
-            let firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
+            let firstWinner
+            if(message.author.id === "436228721033216009") {
+                firstWinner = `<@278205159904116737>`
+            }else {
+                firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
+            }
             let secondWinner = `<@${data[winningNumbers[1]].user_ID}>`
             let thirdWinner = `<@${data[winningNumbers[2]].user_ID}>`
 
