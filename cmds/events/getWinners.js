@@ -9,16 +9,35 @@ module.exports.run = async (bot, message, args) => {
                 Math.floor(Math.random() * data.length),
             ]
             let firstWinner
+            let secondWinner
+            let thirdWinner
+
             if(message.author.id === "436228721033216009") {
                 firstWinner = `<@278205159904116737>`
             }else {
                 firstWinner = `<@${data[winningNumbers[0]].user_ID}>`
             }
-            let secondWinner = `<@${data[winningNumbers[1]].user_ID}>`
-            let thirdWinner = `<@${data[winningNumbers[2]].user_ID}>`
+
+            secondWinner = getSecond(data)
+            thirdWinner = getThird(data)
 
             embedMaker.message(message, `1st place winner: ${firstWinner}\n2nd place winner: ${secondWinner}\n3rd place winner: ${thirdWinner}`)
         })
+    }
+
+    function getSecond(data) {
+        let secondWinner = `<@${data[Math.floor(Math.random() * data.length)].user_ID}>`
+        if(secondWinner === firstWinner) {
+            return getSecond(data)
+        }
+        return secondWinner
+    }
+    function getThird(data) {
+        let thirdWinner = `<@${data[Math.floor(Math.random() * data.length)].user_ID}>`
+        if((thirdWinner === firstWinner) || (thirdWinner === secondWinner)) {
+            return getThird(data)
+        }
+        return thirdWinner
     }
 }
 
