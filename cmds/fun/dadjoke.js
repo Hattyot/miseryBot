@@ -5,10 +5,9 @@ module.exports.run = async (bot, message, args) => {
 
         if(error) return message.channel.send("slight error, whoops");
         let json = JSON.parse(body);
-
         let embed = new Discord.RichEmbed()
             .setColor(bot.config[message.guild.id].colors.default)
-            .setImage(json.attachments.map(a => a.text.replace(/\\u.{4}/i, "")));
+            .setDescription(json.attachments.map(a => a.text));
         message.channel.send(embed)
     })
 };
