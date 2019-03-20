@@ -13,8 +13,8 @@ module.exports.run = async (bot, message, args) => {
             image2.fade(0.6);
             image.composite(image2, 0, 0);
             image.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
-            message.channel.send({files: [{ name: 'gay.png', attachment: buffer }] });
-        });
+              message.channel.send({files: [{ name: 'gay.png', attachment: buffer }] });
+            });
       });
     });
 }
@@ -23,7 +23,7 @@ module.exports.help = {
   name: "gay",
   cat: "Image",
   description: "Applies gay pride flag filter over image",
-  usage: `invert (source)`,
+  usage: `gaymagik (source)`,
   examples: [`gay`, `gay https://i.imgur.com/UdZQHBJ.jpg`, `gay @Hattyot`]
 }
 

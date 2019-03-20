@@ -16,6 +16,7 @@ module.exports.run = async (bot, message, args) => {
             if(error) {
                 message.channel.send("error fam")
             }
+            if(!buffer) return message.channel.send("error fam")
             message.channel.send({files: [{ name: 'magik.png', attachment: buffer }] });
         });
     });
