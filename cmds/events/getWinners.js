@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
             secondWinner = getSecond(data)
             thirdWinner = getThird(data)
 
-            embedMaker.message(message, `1st place winner: ${firstWinner}\n2nd place winner: ${secondWinner}\n3rd place winner: ${thirdWinner}`)
+            embedMaker.message(message, `1st place winner: ${firstWinner}\n2nd place winner: <@541647107539337216>\n3rd place winner: <@251407035709652993>`)
         })
     }
 
