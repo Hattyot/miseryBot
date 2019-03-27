@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
         setTimeout(() => {
             console.log('tt')
             muteMember = message.guild.members.get(muteMember.user.id)
-            let mRole = %eval message.guild.roles.find(t => t.name === 'Muted')
+            let mRole = message.guild.roles.find(t => t.name === 'Muted')
             if(muteMember.roles.has(mRole)) {
                 muteMember.removeRole(mRole)
                 mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
