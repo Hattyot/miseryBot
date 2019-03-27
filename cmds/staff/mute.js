@@ -47,9 +47,10 @@ module.exports.run = async (bot, message, args) => {
                     });
                     newMuteTimer.save()
                         .then(r => console.log(r))
-                        .catch(e => console.log(e));
+                        .catch(e => console.log(e))
+                unMuteTimer(muteMember, time)
                 })
-            unMuteTimer(muteMember, time)
+            
         }
     })
 
