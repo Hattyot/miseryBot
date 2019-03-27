@@ -48,6 +48,7 @@ module.exports.run = async (bot, message, args) => {
                     newMuteTimer.save()
                         .then(r => console.log(r))
                         .catch(e => console.log(e))
+                console.log('2')
                 unMuteTimer(muteMember, time)
                 })
             
@@ -65,7 +66,9 @@ module.exports.run = async (bot, message, args) => {
     }
 
     function unMuteTimer(muteMember, muteTime) {
+        console.log('1')
         setTimeout(() => {
+            console.log('tt')
             muteMember = message.guild.members.get(muteMember.user.id)
             if(muteMember.roles.has(muteRole)) {
                 muteMember.removeRole(muteRole)
