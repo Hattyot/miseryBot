@@ -71,7 +71,7 @@ module.exports.run = async (bot, message, args) => {
             console.log('tt')
             muteMember = message.guild.members.get(muteMember.user.id)
             let mRole = message.guild.roles.find(t => t.name === 'Muted')
-            if(muteMember.roles.has(mRole)) {
+        
                 console.log('hel', muteMember.roles)
 
                 muteMember.removeRole(mRole)
@@ -85,7 +85,7 @@ module.exports.run = async (bot, message, args) => {
                     .setTimestamp()
                     .setFooter(`Unmuted At:`)
                 muteMember.send(embed2)
-            }
+            
         }, muteTime)
     }
 }
