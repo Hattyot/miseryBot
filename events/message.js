@@ -47,7 +47,7 @@ module.exports = async (bot, message) => {
 
 
     };
-    if(/jeff/i.test(message.content.split(" ").join(""))) return message.delete()
+    if(/jeff/i.test(message.content.split(" ").join(""))) return message.delete(500)
     if(message.author.bot) return;
     if(message.type === `PINS_ADD`) return message.delete()
     let messageArray = message.content.replace(/ +(?= )/g, "").split(" ");
