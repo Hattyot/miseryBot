@@ -45,17 +45,12 @@ module.exports.run = async (bot, message, args) => {
     }
     function roles2() {
         let newEmbed = new Discord.RichEmbed()
-            .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
-            .setAuthor("(`◕‿◕´)  Level Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-            .addField("**1. Cheerful Box** :smile: ", "Achieved at Level 1")
-            .addField("**2. Joyful Box** :smiley: ", "Achieved at Level 5")
-            .addField("**3. Happy Box** :slight_smile: ", "Achieved at Level 10")
-            .addField("**4. Apathetic Box** :neutral_face: ", "Achieved at Level 20")
-            .addField("**5. Sad Box** :slight_frown: ", "Achieved at Level 30")
-            .addField("**6. Gloomy Box** :frowning2: ", "Achieved at Level 40")
-            .addField("**7. Miserable Box** :cry:", "Achieved at Level 60")
-            .setFooter("We might add more level roles in the future, but for now this is the complete list", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
-            .setColor("#9B59B6");
+                .setThumbnail("https://user-images.githubusercontent.com/39061940/50972501-77bb1780-14ef-11e9-9712-fcacf98014ad.png")
+                .setAuthor("(`◕‿◕´) Roles", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+                .addField("**1. What are the requirements for the YouTuber role?**", "Your YouTube channel needs to be connected to your discord account and you need to have at least 10k subs")
+                .addField("**2. What are the requirements for the Art Box role?**", "You need to be at least level 5, you need to be open to commissions and you need to have a system to handle them.")
+                .setFooter("", "https://user-images.githubusercontent.com/39061940/50972668-e304e980-14ef-11e9-817f-cedabcf88313.png")
+                .setColor("#9B59B6");
         message.channel.send(newEmbed);
     }
     function join() {
