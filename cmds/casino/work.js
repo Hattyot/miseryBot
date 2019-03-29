@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 
     money.findOne({user_ID: message.author.id}, (err, data) =>{
         if(!data) {
-            let data = { onHand: 0, inBank: 0, user_ID: message.author.id }
+            let data = { onHand: 0, inBank: 200, user_ID: message.author.id }
             let newMoney = new money(data)
             newMoney.save()
 
@@ -45,14 +45,14 @@ module.exports.run = async (bot, message, args) => {
             let min = 3;
             let max = 10; 
             let chance = Math.floor(Math.random()*(max-min+1)+min);
-            let workCoolDownTime = 57600000; //16 hours
+            let workCoolDownTime = 21600000; //6 hours
 
             workCooldown.add(message.author.id);
             bot.cooldownTimes.work[message.author.id] = Date.now() + workCoolDownTime;
             setTimeout(() => {
                 workCooldown.delete(message.author.id)
             }, workCoolDownTime);
-            
+
             // 30% chance of fail
             if(chance <= 3) {
                 money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {inBank: -addMoneyAmount}}, {new: true}, (err, data) => {
@@ -70,6 +70,7 @@ module.exports.run = async (bot, message, args) => {
 };
 module.exports.help = {
     name: "work",
+    cat: "Casino",
     description: "Work for money",
     usage: `work`,
     examples: [`work`]
@@ -79,5 +80,4 @@ module.exports.conf = {
     enabled: true,
     aliases: [],
     cooldown: "3 Seconds",
-    cat: "Money"
 };

@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args) => {
     if(amount.toLowerCase() === "all") {
         money.findOne({user_ID: message.author.id}, (err, data) => {
             if(!data) {
-                let data = { onHand: 0, inBank: 0, user_ID: message.author.id }
+                let data = { onHand: 0, inBank: 200, user_ID: message.author.id }
                 let newMoney = new money(data)
                 newMoney.save()
             }
@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 
         money.findOne({user_ID: message.author.id}, (err, data) => {
             if(!data) {
-                let data = { onHand: 0, inBank: 0, user_ID: message.author.id }
+                let data = { onHand: 0, inBank: 200, user_ID: message.author.id }
                 let newMoney = new money(data)
                 newMoney.save()
             }

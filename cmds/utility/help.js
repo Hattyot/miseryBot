@@ -37,6 +37,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor(bot.config[message.guild.id].colors.default);
 
         for(j = 0; j < categories.length; j++) {
+            if(!categories[j]) continue
             if(categories[j] === "Dev") continue;
             if(categories[j].match(/(Staff)/i)) continue;
             if(categories[j] === "Join") continue;

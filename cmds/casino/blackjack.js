@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
 
     money.findOne({user_ID: userID}, (err, data) => {
         if(!data) {
-            let data = { onHand: 0, inBank: 0, user_ID: userID }
+            let data = { onHand: 0, inBank: 200, user_ID: userID }
             let newMoney = new money(data)
             newMoney.save()
         }
@@ -60,7 +60,7 @@ module.exports.run = async (bot, message, args) => {
             blackjackGame.deal();
             if (blackjackGame.playerTotal === "Blackjack") {
                 payout(1.5);
-                result("Blackjack!", `${currency}${Math.round(bet) * 1.5}`);
+                result("Blackjack!", `${currency}${Math.round(bet) * 1.5}`, "win");
                 return displayHands()
             }
             displayHands();
@@ -102,8 +102,10 @@ module.exports.run = async (bot, message, args) => {
                 if (total === "Bust") {
                     displayHands();
                     lose();
-                    return result(`Bust.`, `-${currency}${bet}`)
-                } else {
+                    return result(`Bust.`, `-${currency}${bet}`, "lose")
+                }else if(total === 21) {
+                    return dealerMachine()
+                }else {
                     displayHands();
                     return hitStand()
                 }
@@ -118,39 +120,46 @@ module.exports.run = async (bot, message, args) => {
             displayHands()
             if(dealerTotal === "Bust") {
                 payout(1);
-                return result("Dealer Bust!", `+${currency}${bet}`)
+                return result("Dealer Bust!", `+${currency}${bet}`, "win")
             }
             if(dealerTotal > 16 || dealerTotal === 0) {
                 if(dealerTotal === playerTotal) {
                     draw();
-                    return result("Draw, try again!", "Push");
+                    return result("Draw, try again!", "Push", "draw");
                 }else if(dealerTotal > playerTotal || dealerTotal === "Blackjack") {
                     lose();
-                    return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`);
+                    return result("Dealer Wins, Better luck next time!", `-${currency}${bet}`, "lose");
                 }else if(dealerTotal < playerTotal) {
                     payout(1);
-                    return result("You Win!", `+${currency}${bet}`)
+                    return result("You Win!", `+${currency}${bet}`, "win")
                 }
             }else {
                 blackjackGame.hit("dealer");
                 dealerMachine();
             }
         }
-        function result(result, money) {
+        function result(result, money, endType) {
             let oldEmbed = blackjackGame.embedMessage.embeds[0];
-
             oldEmbed.description = `${result} ${money}`;
+
             let newEmbed = new Discord.RichEmbed(oldEmbed);
+            switch (endType) {
+                case "win":
+                    newEmbed.setColor(bot.config[message.guild.id].colors.green)
+                    break;
+                case "lose":
+                    newEmbed.setColor(bot.config[message.guild.id].colors.red)
+                    break;
+                case "draw":
+                    newEmbed.setColor(bot.config[message.guild.id].colors.orange)
+                    break;
+                default:
+                    break;
+            }
             blackjackGame.embedMessage.edit(newEmbed)
         }
 
         function payout(multiplier) {
-            let oldEmbed = blackjackGame.embedMessage.embeds[0];
-            oldEmbed.hexColor = bot.config[message.guild.id].colors.green;
-
-            let newEmbed = new Discord.RichEmbed(oldEmbed);
-            blackjackGame.embedMessage.edit(newEmbed)
-
             blackjack.delete(userID);
             let addMoney = (bet * multiplier);
             money.findOneAndUpdate({user_ID: userID}, {$inc: {onHand: addMoney}}, (err, data) => {
@@ -159,12 +168,6 @@ module.exports.run = async (bot, message, args) => {
         }
 
         function lose() {
-            let oldEmbed = blackjackGame.embedMessage.embeds[0];
-            oldEmbed.hexColor = bot.config[message.guild.id].colors.red;
-            
-            let newEmbed = new Discord.RichEmbed(oldEmbed);
-            blackjackGame.embedMessage.edit(newEmbed)
-
             blackjack.delete(userID);
             money.findOneAndUpdate({user_ID: userID}, {$inc: {onHand: -bet}}, (err, data) => {
                 if (err) return console.log(err)
@@ -172,12 +175,6 @@ module.exports.run = async (bot, message, args) => {
         }
 
         function draw() {
-            let oldEmbed = blackjackGame.embedMessage.embeds[0];
-            oldEmbed.hexColor = bot.config[message.guild.id].colors.orange;
-            
-            let newEmbed = new Discord.RichEmbed(oldEmbed);
-            blackjackGame.embedMessage.edit(newEmbed)
-
             blackjack.delete(userID)
         }
 
