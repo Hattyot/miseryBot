@@ -9,10 +9,11 @@ bot.config = require("./data/data.json");
 bot.icons = {};
 bot.games = {
     blackjackLimiter: {},
-    cooldownTimes: {
-        blackjack: {},
-        work: {}
-    }
+}
+bot.cooldownTimes = {
+    blackjack: {},
+    work: {},
+    rob: {}
 }
 
 mongoose.connect(process.env.MONGODB_URI, {
