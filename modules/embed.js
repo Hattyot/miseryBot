@@ -62,8 +62,8 @@ module.exports = {
     },
     command: (message, param, callback) => {
         let messageArray = message.content.split(" ");
-        let commandName = messageArray[0].slice(bot.config[message.guild.id].prefix.length);
-        let command = bot.commands.get(commandName.toLowerCase());
+        let commandName = messageArray[0].slice(bot.config[message.guild.id].prefix.length)
+        let command = bot.commands.get(commandName.toLowerCase()) || bot.commands.get(bot.aliases.get(commandName))
         let name = command.help.name;
         let description = command.help.description;
         let usage = command.help.usage;

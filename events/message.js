@@ -1,53 +1,7 @@
 const Discord = require("discord.js");
 const { huntWinners, points } = require("../modules/data.js")
 module.exports = async (bot, message) => {
-    if (message.channel.type === "dm") {
-        if(message.author.bot) return
-        if(message.content.toLowerCase() === "insignificant") {
-            return huntWinners.findOne({user_ID: message.author.id}, (err, data) => {
-                if(data) {
-                    return message.channel.send(`youve already claimed this prize once`)
-                }else {
-                    message.channel.send("Congrats you got the right answer, you've been given 5 points")
-                    return points.findOne({user_ID: message.author.id}, (err, data) => {
-                        if(!data) {
-                            let newPoints = new points({
-                               user_ID: `${message.author.id}`,
-                               amount: 5
-                            });
-                        newPoints.save()
-                        .then(r => console.log(r))
-                        .catch(e => console.log(e));
-                       
-                        let newWinner = new huntWinners({
-                            user_ID: `${message.author.id}`,
-
-                        });
-                        return newWinner.save()
-                        .then(r => console.log(r))
-     
-                        }else {
-                    
-                            return points.findOneAndUpdate({user_ID: message.author.id}, {$inc: {amount: 5}}, (err, data) => {
-                                if(err) return console.log(err)
-                                let newWinner = new huntWinners({
-                                    user_ID: `${message.author.id}`,
-
-                                });
-                             return newWinner.save()
-                                .then(r => console.log(r))
-                            })
-                        }
-                    })
-                }
-            })
-        }else {
-            return message.channel.send("Thats not the right answer")
-        }
-
-
-    };
-
+    if(message.channel.type === "dm") return
     if(message.author.bot) return;
     if(message.type === `PINS_ADD`) return message.delete()
     let messageArray = message.content.replace(/ +(?= )/g, "").split(" ");
