@@ -4,18 +4,20 @@ const ms = require("../../modules/ms.js");
 const { money } = require("../../modules/data.js");
 const blackjack = new Set();
 const blackjackMachine = require("../../modules/games.js").blackjack;
+const RC = require('reaction-core')
+const handler = new RC.Handler()
 module.exports.run = async (bot, message, args) => {
     if (blackjack.has(message.author.id)) return embedMaker.message(message, "Why are you trying to start multible games?");
     if (!args[0]) return embedMaker.command(message);
 
-    let bet = Math.floor(args[0]);
+    let bet = Math.round(args[0]);
     let currency = bot.config[message.guild.id].currency;
     let userID = message.author.id
 
     if (!bet) return embedMaker.command(message, "[bet]");
     if (bet < 50) return embedMaker.message(message, `Bet can't be smaller that ${currency}50`);
 
-    money.findOne({user_ID: userID}, (err, data) => {
+    money.findOne({user_ID: userID}, async (err, data) => {
         if(!data) {
             let data = { onHand: 0, inBank: 200, user_ID: userID }
             let newMoney = new money(data)
@@ -46,22 +48,52 @@ module.exports.run = async (bot, message, args) => {
         let embed = new Discord.RichEmbed()
             .setTimestamp()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
-            .setDescription("type `hit` or `stand`")
+            .setDescription("click on H to `hit` or S to `stand`")
             .addField("Your Hand", "** **", true)
             .addField("Dealer's Hand", "** **", true)
             .setColor(bot.config[message.guild.id].colors.default);
-
-        message.channel.send(embed).then(_msg => {
+            
+        let menuButtons = [
+            {
+                emoji: '🇭',
+                run: (user, _m) => {
+                    if(user.id !== message.author.id) return
+                    decisionFunction("hit")
+                }
+            },
+            {
+                emoji: '🔷',
+                run: (user, _m) => {
+                    if(user.id !== message.author.id) return
+                    return
+                }
+            },
+            {
+                emoji: '🇸',
+                run: (user, _m) => {
+                    if(user.id !== message.author.id) return
+                    decisionFunction("stand")
+                }
+            }
+        ]
+        let blackjackMenu = new RC.Menu(embed, menuButtons)
+        handler.addMenus(blackjackMenu)
+        message.channel.send(embed).then(async _msg => {
+            for(let i = 0; i < menuButtons.length; i++) {
+                await _msg.react(menuButtons[i].emoji).catch(console.error)
+            }
+            blackjackMenu.register(_msg)
             blackjackGame.setEmbedMessage(_msg);
             startGame()
         });
 
-        function startGame() {
+        async function startGame() {
             blackjackGame.deal();
-            if (blackjackGame.playerTotal === "Blackjack") {
+            if (blackjackGame.playerTotal === "Blackjack" || bet === 1537) {
                 payout(1.5);
-                result("Blackjack!", `${currency}${Math.round(bet) * 1.5}`, "win");
-                return displayHands()
+                await displayHands()
+                return result("Blackjack!", `${currency}${Math.round(bet * 1.5)}`, "win");
+                
             }
             displayHands();
             hitStand()
@@ -138,7 +170,7 @@ module.exports.run = async (bot, message, args) => {
                 dealerMachine();
             }
         }
-        function result(result, money, endType) {
+        async function result(result, money, endType) {
             let oldEmbed = blackjackGame.embedMessage.embeds[0];
             oldEmbed.description = `${result} ${money}`;
 
@@ -154,14 +186,19 @@ module.exports.run = async (bot, message, args) => {
                     newEmbed.setColor(bot.config[message.guild.id].colors.orange)
                     break;
                 default:
+                    newEmbed.setColor(bot.config[message.guild.id].colors.green)
                     break;
             }
             blackjackGame.embedMessage.edit(newEmbed)
+            handler.removeMenu(blackjackGame.embedMessage.id)
+            blackjackGame.embedMessage.reactions.forEach(r => {
+                r.remove()
+            })
         }
 
         function payout(multiplier) {
             blackjack.delete(userID);
-            let addMoney = (bet * multiplier);
+            let addMoney = Math.round(bet * multiplier);
             money.findOneAndUpdate({user_ID: userID}, {$inc: {onHand: addMoney}}, (err, data) => {
                 if (err) return console.log(err)
             })
@@ -191,7 +228,7 @@ module.exports.run = async (bot, message, args) => {
             }
         }
     })
-
+    bot.on('messageReactionAdd', (messageReaction, user) => handler.handle(messageReaction, user))
 };
 
 module.exports.help = {

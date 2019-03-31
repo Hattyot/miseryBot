@@ -78,7 +78,7 @@ module.exports = {
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL)
                     .setDescription(`Invalid \`${param}\` argument given.\n\n**Usage:**\n    *${bot.config[message.guild.id].prefix}${command.help.usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}*`);
                 message.channel.send(embed).then(m => {
-                    if(callback) callback(m)
+                    if(callback) return callback(m)
                 })
             }
         } else {
@@ -88,7 +88,7 @@ module.exports = {
                 .setTitle(`Command: ${bot.config[message.guild.id].prefix}${name}`)
                 .setDescription(`**Description:** ${description}\n**Usage:** ${bot.config[message.guild.id].prefix}${usage}\n**${exampleText}:**\n${bot.config[message.guild.id].prefix}${examples}`);
             message.channel.send(embed).then(m => {
-                if(callback) callback(m)
+                if(callback) return callback(m)
             })
         }
     },
