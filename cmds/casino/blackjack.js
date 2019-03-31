@@ -233,7 +233,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "blackjack",
-    cat: "Casino",
+    cat: "Casino - Games",
     description: "Play blackjack",
     usage: `blackjack [bet]`,
     examples: [`blackjack 100`]

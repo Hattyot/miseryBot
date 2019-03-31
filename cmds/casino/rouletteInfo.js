@@ -24,7 +24,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "rouletteInfo",
-    cat: "Casino",
+    cat: "Casino - Games",
     description: "View info about the roulette game",
     usage: `rouletteInfo`,
     examples: [`rouletteInfo`]
