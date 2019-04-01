@@ -3,8 +3,8 @@ module.exports.run = async (bot, message, args) => {
     let search = args.join("");
 
     request(`https://time.is/${search}`, (error, response) => {
-        if(error) throw error;
-        console.log(response.headers)
+        if(error) console.trace(error);
+
         let date = response.headers.expires;
         let dateRegex = /([0-9]+:)+([0-9]+)/;
         let timezoneRegex = /(\+|-)([0-9]{2})/g;

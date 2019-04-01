@@ -69,11 +69,6 @@ module.exports.run = async (bot, message, args) => {
 
     function getMember() {
         let muteMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!muteMember && args[0]) {
-            let regex = new RegExp(`(${args[0]})`, `i`)
-            let members = message.guild.members.filter(m => m.user.tag.match(regex))
-            if(members.size === 1) return members.first()
-        }
         return muteMember
     }
 };

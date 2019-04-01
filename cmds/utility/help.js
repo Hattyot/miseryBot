@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
     let commands = bot.commands
-    let cats = commands.map(cmd => cmd.help.cat)
+    let categories = commands.map(cmd => cmd.help.cat)
 
     function remove_same(array1) {
         let result = []
@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
         return result
     }
 
-    let categories = remove_same(cats).sort()
+    categories = remove_same(categories).sort()
 
     if(args[0]){
         let command = bot.commands.get(args[0].toLowerCase())
@@ -37,12 +37,9 @@ module.exports.run = async (bot, message, args) => {
             .setColor(bot.config[message.guild.id].colors.default);
 
         for(j = 0; j < categories.length; j++) {
-            if(!categories[j]) continue
             if(categories[j] === "Dev") continue;
             if(categories[j].match(/(Staff)/i)) continue;
-            if(categories[j] === "Join") continue;
-            if(categories[j] === "Hunt") continue;
-            if(!categories[j]) continue
+            
             let cmds = commands.filter(c => c.help.cat === categories[j] && c.conf.enabled);
             let cmdNames = cmds.map(c => `\`${c.help.name}\``);
             helpEmbed.addField(`>${categories[j]}`, cmdNames.join(" **|** "))
