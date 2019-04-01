@@ -71,7 +71,6 @@ module.exports.run = async (bot, message, args) => {
 
     function getMember() {
         let _member = message.mentions.members.first() || message.guild.members.get(args[0])
-        
         return _member
     }
 }
