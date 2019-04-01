@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return
     if(!args[0]) return embedMaker.command(message)
 
-    let warnMember = getWarnMember()
+    let warnMember = message.mentions.members.first() || message.guild.members.get(args[0])
     let warning = args.slice(1).join(" ")
 
     if(!warnMember) return embedMaker.command(message, "[user]")
@@ -21,15 +21,9 @@ module.exports.run = async (bot, message, args) => {
         
     warnMember.send(embed)
     punishments.find({user_ID: warnMember.user.id, type: `Warning`}, (err, data) => {
-        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nCurrently the user has **${data.length + 1}** warning(s)`)
+        embedMaker.message(message, `<@${warnMember.user.id}> has been warned. Warning: **${warning}**\n\nThis user has been warned **${data.length}** times before`)
         punishmentsTools.add(message.guild, warnMember.id, `Warning`, warning)
     })
-
-    function getWarnMember() {
-        let warnMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-        return warnMember
-    }
-
 }
 
 module.exports.help = {

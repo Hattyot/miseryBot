@@ -6,38 +6,30 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message)
 
     let reason = args.slice(1).join(" ")
-    let muteMember = getmuteMember()
+    let muteMember = message.mentions.members.first() || message.guild.members.get(args[0]);
     let muteRole = message.guild.roles.get(bot.config[message.guild.id].muteRoleID)
+
     if(!muteMember) return embedMaker.command(message, "[user]")
     if(!reason) return embedMaker.command(message, "[reason]")
 
     mute.findOne({user_ID: muteMember.user.id}, (err, data) => {
-        if(data) {
-            console.log(data)
-            muteMember.removeRole(muteRole)
-            mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
-                if(err) return console.log(err)
-            })
-            let embed2 = new Discord.RichEmbed()
-                .setAuthor(`You have been unmuted`)
-                .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *<@${message.author.id}>*\n**Reason:** *${reason}*`)
-                .setColor(bot.config[message.guild.id].colors.green)
-                .setTimestamp()
-                .setFooter(`Unmuted At:`)
-            muteMember.send(embed2)
-            embedMaker.message(message, `<@${muteMember.user.id}> has been unmuted. Reason: **${reason}**`)
-        }
-    })
+        if(!data) return embedMaker.message(message, `This user isn't muted`)
+        
+        let embed2 = new Discord.RichEmbed()
+            .setAuthor(`You have been unmuted`)
+            .setDescription(`**Server:** *${message.guild.name}*\n**Unmuted By:** *<@${message.author.id}>*\n**Reason:** *${reason}*`)
+            .setColor(bot.config[message.guild.id].colors.green)
+            .setTimestamp()
+            .setFooter(`Unmuted At:`)
 
-    function getmuteMember() {
-        let muteMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!muteMember && args[0]) {
-            let regex = new RegExp(`(${args[0]})`, `i`)
-            let members = message.guild.members.filter(m => m.user.tag.match(regex))
-            if(members.size === 1) return members.first()
-        }
-        return muteMember
-    }
+        embedMaker.message(message, `<@${muteMember.user.id}> has been unmuted. Reason: **${reason}**`)
+        muteMember.send(embed2)
+        muteMember.removeRole(muteRole)
+        
+        mute.findOneAndDelete({user_ID: muteMember.user.id}, (err, data) => {
+            if(err) return console.log(err)
+        })
+    })
 }
 
 module.exports.help = {

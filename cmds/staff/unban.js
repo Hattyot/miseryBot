@@ -5,17 +5,13 @@ module.exports.run = async (bot, message, args) => {
     if(!args[0]) return embedMaker.command(message)
 
     message.guild.fetchBans().then(bans => {
-        let banMember = bans.get(args[0])
-        if(!banMember) {
-            let banMember = bans.filter(m => `${m.username}#${m.discriminator}` === args[0]).first()
-            if(!banMember) return embedMaker.command(message, "[user]")
-        }else {
-            let reason = args.slice(1).join(" ")
-            if(!reason) return embedMaker.command(message, "[reason]")
-        
-            embedMaker.message(message, `<@${banMember.user.id}> has been unbanned. Reason: **${reason}**`)
-            return message.guild.unban(banMember.user.id, reason)
-        }
+        let banMember = bans.get(args[0]) || bans.filter(m => `${m.username}#${m.discriminator}` === args[0]).first()
+        let reason = args.slice(1).join(" ")
+        if(!banMember) return embedMaker.command(message, "[user]")
+        if(!reason) return embedMaker.command(message, "[reason]")
+    
+        embedMaker.message(message, `<@${banMember.user.id}> has been unbanned. Reason: **${reason}**`)
+        return message.guild.unban(banMember.user.id, reason)
     })
 }
 

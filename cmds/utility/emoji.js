@@ -9,11 +9,8 @@ module.exports.run = async (bot, message, args) => {
     if(emote.match(emoteRegex)) {
         let key = args[0].replace(/\D+/g, '')
         if(!key) return
-        request(`https://cdn.discordapp.com/emojis/${key}.gif?v=1`, (error, response, body) => {
-            if(error) throw error
-            response.body === "" ? imageURL = `https://cdn.discordapp.com/emojis/${key}.png?v=1` : imageURL = `https://cdn.discordapp.com/emojis/${key}.gif?v=1`
-            embedMaker.image(message, imageURL)
-        })
+        
+        embedMaker.image(message, `https://cdn.discordapp.com/emojis/${key}`)
     }
 }
 

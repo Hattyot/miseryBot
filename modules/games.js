@@ -1,4 +1,5 @@
 const cards = require("cards");
+let games = {}
 const Discord = require("discord.js");
 let blackjack = class Blackjack {
     constructor() {
@@ -6,8 +7,8 @@ let blackjack = class Blackjack {
         this.deck.shuffleAll();
     }
 
-    setEmbedMessage(_embedMessage) {
-        this.embedMessage = _embedMessage
+    setEmbedMessage(embedMessage) {
+        this.embedMessage = embedMessage
     }
 
     deal() {
@@ -16,11 +17,7 @@ let blackjack = class Blackjack {
     }
 
     hit(hand) {
-        if(hand === "player") {
-            this.playerHand.push(...this.deck.draw());
-        }else {
-            this.dealerHand.push(...this.deck.draw());
-        }
+        hand === "player" ? this.playerHand.push(...this.deck.draw()) : this.dealerHand.push(...this.deck.draw())
     }
 
     get playerTotal() {
@@ -33,34 +30,31 @@ let blackjack = class Blackjack {
     calculateTotal(hand) {
         let sum = 0;
         let ace = [];
-        for (let i = 0; i < hand.length; i++) {
+
+        for(let i = 0; i < hand.length; i++) {
             let rank = hand[i].rank.shortName;
-            if (["K", "Q", "J", "10"].includes(rank)) {
+            if(["K", "Q", "J", "10"].includes(rank)) {
                 sum += 10;
-            } else if (rank === "A") {
+            }else if(rank === "A") {
                 ace.push(i);
-            } else {
+            }else {
                 sum += parseInt(rank);
             }
         }
-        for (let j = 0; j < ace.length; j++) {
-            if (sum > 10) {
-                sum++;
-            } else {
-                sum += 11;
-            }
+        for(let j = 0; j < ace.length; j++) {
+            sum > 10 ? sum++ : sum += 11
         }
-        if (sum > 21) {
+
+        if(sum > 21) {
             return "Bust";
-        } else if (sum === 21 && hand.length === 2) {
+        }else if (sum === 21 && hand.length === 2) {
             return "Blackjack";
-        } else {
+        }else {
             return sum;
         }
     }
 }
 
-let games = {}
 let roulette = class Roulette {
 	constructor(guildID, redBlack, spaces) {
         this.guildID = guildID
@@ -83,15 +77,6 @@ let roulette = class Roulette {
 
         games[this.guildID] = this;
 	}
-
-	awaitPlayers(time) {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				games.delete(this.guildID);
-				return resolve(this.players);
-			}, time);
-		});
-    }
     
     generateSpaces() {
         const winNumber = Math.floor(Math.random() * 37);
