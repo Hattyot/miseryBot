@@ -15,8 +15,8 @@ module.exports.run = async (bot, message, args) => {
         *Odd/Even* - 2x
         *Colors* - 2x
         **Examples:**
-        \`roulette 300 2nd\`
-        \`roulette 200 odd\`
+        \`%roulette 300 2nd\`
+        \`%roulette 200 odd\`
         `)
         .setImage(`https://user-images.githubusercontent.com/39061940/55289925-3abb3e80-53d5-11e9-8146-295fe7660e0c.png`)
     message.channel.send(embed)
@@ -32,5 +32,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: ["bj"]
+    aliases: []
 };
