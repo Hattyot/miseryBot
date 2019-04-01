@@ -132,5 +132,5 @@ module.exports.help = {
 
 module.exports.conf = {
     enabled: true,
-    aliases: ["bj"]
+    aliases: []
 };
