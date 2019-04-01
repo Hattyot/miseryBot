@@ -117,6 +117,8 @@ module.exports.run = async (bot, message, args) => {
 
             } else if (decision === "stand") {
                 return dealerMachine()
+            }else {
+                return hitStand()
             }
         }
         function dealerMachine() {
