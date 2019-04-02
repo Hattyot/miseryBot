@@ -12,7 +12,8 @@ module.exports.run = async (bot, message, args) => {
         for(let i = 0; i < mainObject.length; i++) {
             urls[i + 1] = mainObject[i].data.url;
         }
-
+        let url = urls[randomImageNumber]
+        if(/youtu/i.test(url)) return message.channel.send(url)
         let embed = new Discord.RichEmbed()
             .setColor(bot.config[message.guild.id].colors.default)
             .setImage(urls[randomImageNumber]);
