@@ -23,13 +23,14 @@ module.exports.run = async (bot, message, args) => {
 
         if(robtime > Date.now()) return embedMaker.message(message, `You can rob people again in **${ms(robtime - Date.now(), {long: true})}**`)
 
-        money.findOne({user_ID: member.user.id}, (err, data) => {
+        money.findOne({user_ID: member.user.id}, (err, data2) => {
+            if(!data) {
+                let data = { onHand: 0, inBank: 200, user_ID: member.user.id }
+                let newMoney = new money(data)
+                newMoney.save()
+            }
+            
             function fineFunction(data) {
-                if(!data) {
-                    let data = { onHand: 0, inBank: 200, user_ID: member.user.id }
-                    let newMoney = new money(data)
-                    newMoney.save()
-                }
                 let fine = Math.floor(Math.random()*(250-100+1)+100)
                 let hand = Math.floor(data.onHand)
 
