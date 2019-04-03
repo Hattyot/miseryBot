@@ -90,7 +90,8 @@ module.exports.run = async (bot, message, args) => {
             blackjackGame.embedMessage.edit(newEmbed)
         }
 
-        function hitStand() {
+        async function hitStand() {
+            await displayHands()
             let filter = msg => msg.author.id === userID && msg.channel.id === message.channel.id;
             message.channel.awaitMessages(filter, {max: 1, time: 120000, errors: ['time']})
                 .then(messages => {
