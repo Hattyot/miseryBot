@@ -68,19 +68,23 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send({embed, files: ['https://user-images.githubusercontent.com/39061940/55289925-3abb3e80-53d5-11e9-8146-295fe7660e0c.png']}).then(async _msg => {
             rouletteGame.setEmbedMessage(_msg)
             await countdown.then(() => {
-                setTimeout(() => {
+                setTimeout(async () => {
                     let players = rouletteGame.bets
                     let winners = []
                     let losers = []
                     for(let i = 0; i < players.length; i++) {
                         if(players[i].winnings > 0) {
                             winners.push(players[i])
+                            await money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(players[i].winnings - bet)}}, (err, data) => {
+                                if (err) return console.log(err)
+                            })
                         }else {
                             losers.push(players[i])
+                            await money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(bet)}}, (err, data) => {
+                                if (err) return console.log(err)
+                            })
                         }
-                        money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(players[i].winnings - bet)}}, (err, data) => {
-                            if (err) return console.log(err)
-                        })
+                        
                     }
                     let oldEmbed = rouletteGame.embedMessage.embeds[0]
                     oldEmbed.fields[0].name = "Winners"
