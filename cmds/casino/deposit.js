@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
             }
         })
     }else {
-        if(!bet) return embedMaker.command(message, "[amount]");
+        if(!amount) return embedMaker.command(message, "[amount]");
     }
 
 };
