@@ -72,11 +72,12 @@ module.exports.run = async (bot, message, args) => {
             hitStand()
         }
 
-        function displayHands() {
+        async function displayHands() {
             let oldEmbed = blackjackGame.embedMessage.embeds[0];
             let playerHandString = [];
             let dealerHandString = [];
 
+            
             for (let i = 0; i < blackjackGame.playerHand.length; i++) {
                 playerHandString.push(`${blackjackGame.playerHand[i].rank.shortName}${unicodeString(blackjackGame.playerHand[i].suit.name)}`);
             }
