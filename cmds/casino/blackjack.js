@@ -61,14 +61,14 @@ module.exports.run = async (bot, message, args) => {
         });
 
         async function startGame() {
-            blackjackGame.deal();
+            await blackjackGame.deal();
             if (blackjackGame.playerTotal === "Blackjack" || bet === 1537) {
                 payout(1.5);
                 await displayHands()
                 return result("Blackjack!", `${currency}${Math.round(bet * 1.5)}`, "win");
                 
             }
-            displayHands();
+            await displayHands();
             hitStand()
         }
 
