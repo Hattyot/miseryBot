@@ -45,6 +45,10 @@ module.exports.run = async (bot, message, args) => {
         }
         if (bet > data.onHand) return embedMaker.message(message, `You don't have enough money on hand for this bet.\nYou have **${currency}${data.onHand}** on hand`);
 
+        money.findOneAndUpdate({user_ID: message.author.id}, {$inc: {onHand: -bet}}, (err, data) => {
+            if (err) return console.log(err)
+        })
+
         let rouletteGame = rouletteMachine.findGame(message.guild.id)
         if(!rouletteGame) {
             rouletteGame = new rouletteMachine(message.guild.id, redBlack, spaces)
@@ -77,12 +81,7 @@ module.exports.run = async (bot, message, args) => {
                     }
 
                     winners.forEach((winner) => {
-                        money.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {onHand: Math.floor(winner.winnings - bet)}}, (err, data) => {
-                            if (err) return console.log(err)
-                        })
-                    })
-                    losers.forEach((loser) => {
-                        money.findOneAndUpdate({user_ID: loser.user.id}, {$inc: {onHand: -bet}}, (err, data) => {
+                        money.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {onHand: Math.floor(winner.winnings)}}, (err, data) => {
                             if (err) return console.log(err)
                         })
                     })
