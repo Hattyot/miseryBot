@@ -73,19 +73,19 @@ module.exports.run = async (bot, message, args) => {
                     let winners = []
                     let losers = []
                     for(let i = 0; i < players.length; i++) {
-                        if(players[i].winnings > 0) {
-                            winners.push(players[i])
-                            await money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(players[i].winnings - bet)}}, (err, data) => {
-                                if (err) return console.log(err)
-                            })
-                        }else {
-                            losers.push(players[i])
-                            await money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(bet)}}, (err, data) => {
-                                if (err) return console.log(err)
-                            })
-                        }
-                        
+                        players[i].winnings > 0 ? winners.push(players[i]) : losers.push(players[i])
                     }
+
+                    winners.forEach(() => {
+                        money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(players[i].winnings - bet)}}, (err, data) => {
+                            if (err) return console.log(err)
+                        })
+                    })
+                    losers.forEach(() => {
+                        money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: -bet}}, (err, data) => {
+                            if (err) return console.log(err)
+                        })
+                    })
                     let oldEmbed = rouletteGame.embedMessage.embeds[0]
                     oldEmbed.fields[0].name = "Winners"
                     oldEmbed.fields[0].value = winners.sort((a, b) => parseFloat(a.winnings) - parseFloat(b.winnings)).map(w => `<@${w.user.id}> **+${currency}${w.winnings}**`).join("\n") || "None"
@@ -135,6 +135,6 @@ module.exports.help = {
 };
 
 module.exports.conf = {
-    enabled: false,
+    enabled: true,
     aliases: []
 };
