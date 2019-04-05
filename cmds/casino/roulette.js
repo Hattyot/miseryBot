@@ -76,13 +76,13 @@ module.exports.run = async (bot, message, args) => {
                         players[i].winnings > 0 ? winners.push(players[i]) : losers.push(players[i])
                     }
 
-                    winners.forEach(() => {
-                        money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: Math.floor(players[i].winnings - bet)}}, (err, data) => {
+                    winners.forEach((winner) => {
+                        money.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {onHand: Math.floor(winner.winnings - bet)}}, (err, data) => {
                             if (err) return console.log(err)
                         })
                     })
                     losers.forEach(() => {
-                        money.findOneAndUpdate({user_ID: players[i].user.id}, {$inc: {onHand: -bet}}, (err, data) => {
+                        money.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {onHand: -bet}}, (err, data) => {
                             if (err) return console.log(err)
                         })
                     })
