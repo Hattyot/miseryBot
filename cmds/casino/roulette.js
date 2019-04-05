@@ -81,8 +81,8 @@ module.exports.run = async (bot, message, args) => {
                             if (err) return console.log(err)
                         })
                     })
-                    losers.forEach(() => {
-                        money.findOneAndUpdate({user_ID: winner.user.id}, {$inc: {onHand: -bet}}, (err, data) => {
+                    losers.forEach((loser) => {
+                        money.findOneAndUpdate({user_ID: loser.user.id}, {$inc: {onHand: -bet}}, (err, data) => {
                             if (err) return console.log(err)
                         })
                     })
