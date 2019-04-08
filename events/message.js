@@ -27,7 +27,7 @@ module.exports = async (bot, message) => {
         }
 
         function sendMsg(pre) {
-            message.channel.send(`Hi ${args2[0].replace(pre, "")}, I'm dad.`)
+            message.channel.send(`Hi ${args2[0].replace(`${pre} `, "")}, I'm dad.`)
             imcooldown.add(message.author.id)
             setTimeout(() => {
                 imcooldown.delete(message.author.id)
