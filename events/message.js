@@ -1,3 +1,4 @@
+let imcooldown = new Set()
 module.exports = async (bot, message) => {
     if(message.channel.type === "dm") return
     if(message.author.bot) return;
@@ -15,13 +16,22 @@ module.exports = async (bot, message) => {
 
         if(message.content.startsWith(prefix)) return cmd.run(bot, message, args);
     }else {
+        if (imcooldown.has(message.author.id)) return
         let args2 = message.content.toLowerCase().split(".")
         if(args2[0].startsWith("i'm")) {
-            message.channel.send(`Hi ${args2[0].replace("i'm ", "")}, I'm dad.`)
+            sendMsg("i'm")
         }else if(args2[0].startsWith("im")) {
-            message.channel.send(`Hi ${args2[0].replace("im ", "")}, I'm dad.`)
+            sendMsg("im")
         }else if(args2[0].startsWith("i am")) {
-            message.channel.send(`Hi ${args2[0].replace("i am ", "")}, I'm dad.`)
+            sendMsg("i am")
+        }
+
+        function sendMsg(pre) {
+            message.channel.send(`Hi ${args2[0].replace(pre, "")}, I'm dad.`)
+            imcooldown.add(message.author.id)
+            setTimeout(() => {
+                imcooldown.delete(message.author.id)
+            }, 60000) 
         }
     }
 };
