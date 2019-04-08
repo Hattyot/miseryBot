@@ -16,22 +16,22 @@ module.exports = async (bot, message) => {
 
         if(message.content.startsWith(prefix)) return cmd.run(bot, message, args);
     }else {
-        // if (imcooldown.has(message.author.id)) return
-        // let args2 = message.content.toLowerCase().split(".")
-        // if(args2[0].startsWith("i'm")) {
-        //     sendMsg("i'm")
-        // }else if(args2[0].startsWith("im")) {
-        //     sendMsg("im")
-        // }else if(args2[0].startsWith("i am")) {
-        //     sendMsg("i am")
-        // }
+        if (imcooldown.has("0")) return
+        let args2 = message.content.toLowerCase().split(".")
+        if(args2[0].startsWith("i'm")) {
+            sendMsg("i'm")
+        }else if(args2[0].startsWith("im")) {
+            sendMsg("im")
+        }else if(args2[0].startsWith("i am")) {
+            sendMsg("i am")
+        }
 
-        // function sendMsg(pre) {
-        //     message.channel.send(`Hi ${args2[0].replace(`${pre} `, "")}, I'm dad.`)
-        //     imcooldown.add(message.author.id)
-        //     setTimeout(() => {
-        //         imcooldown.delete(message.author.id)
-        //     }, 60000) 
-        // }
+        function sendMsg(pre) {
+            message.channel.send(`Hi ${args2[0].replace(`${pre} `, "")}, I'm dad.`)
+            imcooldown.add("0")
+            setTimeout(() => {
+                imcooldown.delete("0")
+            }, 1800000) 
+        }
     }
 };
