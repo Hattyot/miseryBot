@@ -15,7 +15,7 @@ module.exports = async (bot, message) => {
 
         if(message.content.startsWith(prefix)) return cmd.run(bot, message, args);
     }else {
-        let args2 = message.toLowerCase().split(".")
+        let args2 = message.content.toLowerCase().split(".")
         if(args2[0].startsWith("i'm")) {
             message.channel.send(`Hi ${args2[0].replace("i'm ", "")}, I'm dad.`)
         }else if(args2[0].startsWith("im")) {
