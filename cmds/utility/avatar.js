@@ -1,7 +1,11 @@
 const embedMaker = require('../../modules/embed.js')
 module.exports.run = async (bot, message, args) => {
-    let user = message.mentions.members.first().user || message.guild.members.get(args[0]).user
-    if(!user) user = message.author
+    let member = message.mentions.members.first() || message.guild.members.get(args[0])
+    if(!member) {
+        user = message.author
+    }else {
+        user = member.user
+    }
 
     embedMaker.image(message, user.displayAvatarURL)
 }
