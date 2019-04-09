@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
     linkRegex.exec(args[0]) ? imageURL = args[0] : imageURL = user.displayAvatarURL
 
     Jimp.read(imageURL).then((image) => {
-        image.resize(768, 768).greyscale();
+        image.resize(768, 768).greyscale().brightness(0.15).contrast(1);
         image.getBuffer(Jimp.MIME_PNG, (error, buffer) => {
             message.channel.send({files: [{ name: 'monochrome.png', attachment: buffer }] });
         });
