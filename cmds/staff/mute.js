@@ -4,7 +4,13 @@ const embedMaker = require("../../modules/embed.js")
 const { punishments, mute } = require("../../modules/data.js")
 const { punishmentsTools } = require("../../modules/tools.js")
 module.exports.run = async (bot, message, args) => {
-    if(!message.member.hasPermission("MANAGE_ROLES")) return
+    if(!message.member.hasPermission("MANAGE_ROLES")) {
+        return
+       
+   
+            
+
+    }
     if(!args[0]) return embedMaker.command(message)
 
     let muteMember = getmuteMember()
@@ -17,11 +23,11 @@ module.exports.run = async (bot, message, args) => {
     if(!time) return embedMaker.command(message, "[time]")
     if(!reason) return embedMaker.command(message, "[reason]")
 
+    if(message.member.highestRole.position <= mm.highestRole.position) {
+            return embedMaker.message(message, `You can't mute a user who has a higher or the same role as you`)
+        }
+    
     time = ms(time)
-
-    if(message.member.highestRole.position <= muteMember.highestRole.position) {
-        return embedMaker.message(message, `You can't mute a user who has a higher or the same role as you`)
-    }
     
     mute.findOne({user_ID: muteMember.user.id}, (err, data) => {
         if (err) return console.trace(err)

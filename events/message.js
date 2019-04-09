@@ -18,11 +18,11 @@ module.exports = async (bot, message) => {
     }else {
         if (imcooldown.has("0")) return
         let args2 = message.content.toLowerCase().split(".")
-        if(args2[0].startsWith("i'm")) {
+        if(args2[0].startsWith("i'm ")) {
             sendMsg("i'm")
-        }else if(args2[0].startsWith("im")) {
+        }else if(args2[0].startsWith("im ")) {
             sendMsg("im")
-        }else if(args2[0].startsWith("i am")) {
+        }else if(args2[0].startsWith("i am ")) {
             sendMsg("i am")
         }
 
