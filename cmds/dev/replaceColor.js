@@ -6,11 +6,17 @@ module.exports.run = async (bot, message, args) => {
     let url = member.user.displayAvatarURL
     }else {
       let url
+      if(args[3]) {
+        if(/http/i.test(args[3])) url = args[3]
+      }else {
+        url = message.author.displayAvatarURL
+      }
 args[3] ? /http/i.test(args[3]) ? url = args[3] : url = message.author.displayAvatarURL : url = message.author.displayAvatarURL
     }
  
 let targetColor = args[0]
 let replaceColorHex = args[1]
+
 replaceColor({
   image: url,
   colors: {
