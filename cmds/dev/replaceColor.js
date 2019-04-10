@@ -4,14 +4,14 @@ module.exports.run = async (bot, message, args) => {
   let member = message.mentions.members.first()
   let url
   if(member) {
-    url = member.user.displayAvatarURL
+      url = member.user.displayAvatarURL
   }else {
       if(args[3]) {
-        if(/http/i.test(args[3])) url = args[3]
+          if(/http/i.test(args[3])) url = args[3]
       }else {
-        url = message.author.displayAvatarURL
+          url = message.author.displayAvatarURL
       }
-    }
+  }
  
 let targetColor = args[0]
 let replaceColorHex = args[1]
@@ -36,9 +36,9 @@ replaceColor({
 module.exports.help = {
   name: "replaceColor",
   cat: "Dev",
-  description: "Applies gay pride flag filter over image",
-  usage: `gaymagik (source)`,
-  examples: [`gay`, `gay https://i.imgur.com/UdZQHBJ.jpg`, `gay @Hattyot`]
+  description: "Replace any color on any image",
+  usage: `replaceColor (source)`,
+  examples: [`replaceColor`, `replaceColor https://i.imgur.com/UdZQHBJ.jpg`, `replaceColor @Hattyot`]
 }
 
 module.exports.conf = {
