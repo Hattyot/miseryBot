@@ -2,13 +2,13 @@ const Jimp = require('jimp');
 module.exports.run = async (bot, message, args) => {
     const replaceColor = require('replace-color')
 let targetColor = args[0]
-let replaceColor = args[1]
+let replaceColorHex = args[1]
 replaceColor({
   image: message.author.displayAvatarURL,
   colors: {
     type: 'hex',
     targetColor: targetColor,
-    replaceColor: replaceColor
+    replaceColor: replaceColorHex
   },
   deltaE: 10
 })
