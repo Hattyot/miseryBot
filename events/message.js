@@ -12,7 +12,6 @@ module.exports = async (bot, message) => {
     
     if(cmd) {
         if(!cmd.conf.enabled) return
-        if(/Staff/i.test(cmd.help.cat) && !message.member.roles.has("530728428975161344")) return
 
         if(message.content.startsWith(prefix)) return cmd.run(bot, message, args);
     }else {
