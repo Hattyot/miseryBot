@@ -1,6 +1,5 @@
 let imcooldown = new Set()
 module.exports = async (bot, message) => {
-    if(message.channel.type === "dm") return
     if(message.author.bot) return;
     if(message.type === `PINS_ADD`) return message.delete()
 
