@@ -1,7 +1,6 @@
 const Discord = require("discord.js")
 const embedMaker = require("../../modules/embed.js")
 module.exports.run = async (bot, message, args) => {
-    if(!message.member.hasPermission("BAN_MEMBERS")) return
     if(!args[0]) return embedMaker.command(message)
 
     let banMember = getBanMember()
@@ -9,10 +8,6 @@ module.exports.run = async (bot, message, args) => {
 
     if(!banMember) return embedMaker.command(message, "[user]")
     if(!reason) return embedMaker.command(message, "[reason]")
-
-    if(message.member.highestRole.position <= banMember.highestRole.position) {
-        return embedMaker.message(message, `You can't ban a user who has a higher or the same role as you`)
-    }
 
     let embed = new Discord.RichEmbed()
         .setColor(bot.config[message.guild.id].colors.red)
