@@ -16,6 +16,8 @@ module.exports = async (bot, message) => {
 
         if(message.content.startsWith(prefix)) return cmd.run(bot, message, args);
     }else {
+        if(message.channel.id === "557271522394505247") return
+        if(message.channel.id === "524023670507569152") return
         if (imcooldown.has("0")) return
         let args2 = message.content.toLowerCase().split(".")
         if(args2[0].startsWith("i'm ")) {
