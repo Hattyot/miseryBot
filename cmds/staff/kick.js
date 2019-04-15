@@ -6,12 +6,11 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission("KICK_MEMBERS")) return
     if(!args[0]) return embedMaker.command(message)
     
-    let kickMember = getKickMember()
+    let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
     let reason = args.slice(1).join(" ")
 
     if(!kickMember) return embedMaker.command(message, "[user]")
     if(!reason) reason = "not given"
-
     if(message.member.highestRole.position <= kickMember.highestRole.position) {
         return embedMaker.message(message, `You can't kick a user who has a higher or the same role as you`)
     }
@@ -22,22 +21,15 @@ module.exports.run = async (bot, message, args) => {
         .setDescription(`**Server:** ${message.guild.name}\n**Kicked By:** <@${message.author.id}>\n**Reason:** ${reason}`)
         .setFooter(`Kicked At:`)
         .setTimestamp();
+
     kickMember.send(embed)
         .then(() => {
-
-            punishments.find({user_ID: kickMember.user.id, type: `Warning`}, (err, data) => {
+            punishments.find({user_ID: kickMember.user.id, type: `Kick`}, (err, data) => {
                 embedMaker.message(message, `<@${kickMember.user.id}> has been kicked. Reason: **${reason}**\n\nThis user has been kicked **${data.length}** time(s) before.`)
                 punishmentsTools.add(message.guild, kickMember.id, `Kick`, reason)
             })
             return kickMember.kick(`${reason}`)
         })
-
-
-    function getKickMember() {
-        let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
-        return kickMember
-    }
-
 }
 
 module.exports.help = {
