@@ -58,6 +58,11 @@ module.exports.run = async (bot, message, args) => {
                 bot.cooldownTimes.rob[robber.user.id] = Date.now() + 7200000
                 return embedMaker.message(message, `You were caught robbing <@${member.user.id}>, you have been fined **${currency}${fine}**`)    
             }
+            if(bot.playing[member.user.id]) {
+                let fine = fineFunction(data)
+                bot.cooldownTimes.rob[robber.user.id] = Date.now() + 7200000
+                return embedMaker.message(message, `You were caught robbing a player in a casino, you have been fined **${currency}${fine}**`) 
+            }
 
             money.findOneAndUpdate({user_ID: robber.user.id}, {$inc: {onHand: stolen}}, (err, data) => {
                 if(err) return console.log(err)

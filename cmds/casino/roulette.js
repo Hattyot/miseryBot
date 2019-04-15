@@ -51,9 +51,11 @@ module.exports.run = async (bot, message, args) => {
 
         let rouletteGame = rouletteMachine.findGame(message.guild.id)
         if(!rouletteGame) {
+            bot.playing[message.author.id] = true
             rouletteGame = new rouletteMachine(message.guild.id, redBlack, spaces)
             rouletteGame.addBet(message.author, bet, space)
         }else {
+            bot.playing[message.author.id] = true
             rouletteGame.addBet(message.author, bet, space)
             let oldEmbed = rouletteGame.embedMessage.embeds[0]
             oldEmbed.fields[1].value += `\n<@${message.author.id}> - \`${space}\` - **${currency}${bet}**`
@@ -78,6 +80,7 @@ module.exports.run = async (bot, message, args) => {
                     let losers = []
                     for(let i = 0; i < players.length; i++) {
                         players[i].winnings > 0 ? winners.push(players[i]) : losers.push(players[i])
+                        bot.playing[players[i].user.id] = false
                     }
 
                     winners.forEach((winner) => {
@@ -87,11 +90,11 @@ module.exports.run = async (bot, message, args) => {
                     })
                     let oldEmbed = rouletteGame.embedMessage.embeds[0]
                     oldEmbed.fields[0].name = "Winners"
-                    oldEmbed.fields[0].value = winners.sort((a, b) => parseFloat(a.winnings) - parseFloat(b.winnings)).map(w => `<@${w.user.id}> **+${currency}${w.winnings}**`).join("\n") || "None"
+                    oldEmbed.fields[0].value = winners.map(w => `<@${w.user.id}> **+${currency}${w.winnings}**`).join("\n") || "None"
                     oldEmbed.fields[0].inline = true
     
                     oldEmbed.fields[1].name = "Losers"
-                    oldEmbed.fields[1].value = losers.sort((a, b) => parseFloat(a.winnings) - parseFloat(b.winnings)).map(w => `<@${w.user.id}> **-${currency}${bet}**`).join("\n") || "None"
+                    oldEmbed.fields[1].value = losers.map(w => `<@${w.user.id}> **-${currency}${w.bet}**`).join("\n") || "None"
                     oldEmbed.fields[1].inline = true
     
                     oldEmbed.description = `Winning Number: **${rouletteGame.winSpaces[0]} ${rouletteGame.winSpaces[1]}**`

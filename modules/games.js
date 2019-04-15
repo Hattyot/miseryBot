@@ -72,6 +72,7 @@ let roulette = class Roulette {
             : 0;
         this.bets.push({
             user: user,
+            bet: bet,
             winnings: bet * multiplier
         })
 
