@@ -84,7 +84,7 @@ module.exports.help = {
 }
 
 module.exports.conf = {
-    enabled: true,
+    enabled: false,
     aliases: [],
     cooldown: "3 Seconds",
 };

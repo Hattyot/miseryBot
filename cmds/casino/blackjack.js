@@ -54,8 +54,7 @@ module.exports.run = async (bot, message, args) => {
             
         
         message.channel.send(embed).then(async _msg => {
-            
-            
+            bot.playing[message.author.id] = true
             blackjackGame.setEmbedMessage(_msg);
             startGame()
         });
@@ -167,6 +166,7 @@ module.exports.run = async (bot, message, args) => {
                     break;
             }
             blackjackGame.embedMessage.edit(newEmbed)
+            bot.playing[message.author.id] = false
             
         }
 

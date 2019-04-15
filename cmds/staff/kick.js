@@ -3,7 +3,6 @@ const embedMaker = require("../../modules/embed.js")
 const { punishments } = require("../../modules/data.js")
 const { punishmentsTools } = require("../../modules/tools.js")
 module.exports.run = async (bot, message, args) => {
-    if(!message.member.hasPermission("KICK_MEMBERS")) return
     if(!args[0]) return embedMaker.command(message)
     
     let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]);
@@ -11,9 +10,12 @@ module.exports.run = async (bot, message, args) => {
 
     if(!kickMember) return embedMaker.command(message, "[user]")
     if(!reason) reason = "not given"
+<<<<<<< HEAD
     if(message.member.highestRole.position <= kickMember.highestRole.position) {
         return embedMaker.message(message, `You can't kick a user who has a higher or the same role as you`)
     }
+=======
+>>>>>>> 98afb6d4e6206efc1f77718850c6f6c723ec7e5b
 
     let embed = new Discord.RichEmbed()
         .setColor(bot.config[message.guild.id].colors.orange)

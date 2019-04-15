@@ -16,6 +16,7 @@ bot.cooldownTimes = {
     work: {},
     rob: {}
 }
+bot.playing = {}
 
 mongoose.connect(`mongodb://0I1n83q42L:tdAF9o68x1x8@ds213255.mlab.com:13255/heroku_6ml2f2jr`, {
     useNewUrlParser: true
